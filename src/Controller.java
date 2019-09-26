@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -24,8 +25,23 @@ public class Controller implements Initializable {
 
     public void initialize(URL url, ResourceBundle rb) {
         initializeButtons();
+        initializeList();
     }
 
+    private void initializeList() {
+        eventListView.setItems(Model.getModel().getEventObservableList());
+        eventListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        eventListView.getSelectionModel().selectedIndexProperty().addListener(((obsValue, oldValue, newValue) -> {
+            int newIndex = (int) newValue;
+            if (!eventListView.getSelectionModel().isEmpty()) {
+                Model.getModel().setCurrentEvent(Model.getModel().getCurrentEventByIndex(newIndex));
+            }
+        }));
+    }
+
+    /**
+     *
+     */
     private void initializeButtons() {
         Event tempEvent = Model.getModel().getCurrentEvent();
         openSummary.setOnAction((ActionEvent e) -> {
@@ -51,7 +67,7 @@ public class Controller implements Initializable {
     private void editSummary(Summary summary) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("SummerEditor.fxml"));
+            fxmlLoader.setLocation(getClass().getResource("SummaryEditor.fxml"));
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root, 350, 400);
             Stage stage = new Stage();
@@ -72,4 +88,5 @@ public class Controller implements Initializable {
             e.printStackTrace();
         }
     }
+
 }

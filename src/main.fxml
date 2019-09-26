@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
   <children>
     <AnchorPane maxHeight="1.0" maxWidth="1.0" prefHeight="413.0" prefWidth="640.0">
       <children>
@@ -17,13 +17,13 @@
             <Font size="18.0" />
           </font>
         </Label>
-            <Button layoutX="155.0" layoutY="360.0" mnemonicParsing="false" text="Button" />
-            <Button layoutX="435.0" layoutY="360.0" mnemonicParsing="false" text="Button" />
+            <Button fx:id="openSummary" layoutX="155.0" layoutY="360.0" mnemonicParsing="false" text="Open" />
+            <Button fx:id="generateSummary" layoutX="435.0" layoutY="360.0" mnemonicParsing="false" text="Generate" />
             <SplitPane dividerPositions="0.3" layoutY="5.0" prefHeight="347.0" prefWidth="640.0">
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0">
                      <children>
-                        <ListView fx:id="eventList"/>
+                        <ListView fx:id="eventListView"/>
                      </children>
                   </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0"/>
