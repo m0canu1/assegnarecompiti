@@ -1,4 +1,4 @@
-public class Event.java{
+public class Event {
     
     private int id;
     private String name;
