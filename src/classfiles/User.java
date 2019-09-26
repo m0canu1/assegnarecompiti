@@ -1,3 +1,5 @@
+package classfiles;
+
 public class User {
 
     private String name, surname;

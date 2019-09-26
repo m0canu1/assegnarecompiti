@@ -1,3 +1,5 @@
+package classfiles;
+
 public class Event {
     
     private int id;
@@ -20,8 +22,10 @@ public class Event {
 
     public void addTask(Recipe r) {summary.addTask(r);}
 
-    public boolean hasTask(Recipe r) {summary.hasTask(r)};
+    public boolean hasTask(Recipe r) {
+        return summary.hasTask(r);
+    }
 
-    public void deleteTask(Recipe r) {summary.deleteTask(r)};
+    public void deleteTask(Recipe r) {summary.deleteTask(r);}
 
 }

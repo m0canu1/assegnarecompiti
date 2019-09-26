@@ -1,3 +1,5 @@
+package classfiles;
+
 public class Recipe{
     
     private String name;

@@ -1,3 +1,7 @@
+package classfiles;
+
+import classfiles.Recipe;
+
 import java.util.ArrayList;
 
 public class Section {

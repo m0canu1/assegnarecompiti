@@ -1,3 +1,5 @@
+package classfiles;
+
 public class MenuManager {
 
     private User currentUser;

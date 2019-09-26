@@ -1,3 +1,5 @@
+package classfiles;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -50,5 +52,9 @@ public class Summary {
 
     public void deleteAssignement(Task t) {
         t.setTurn(null);
+    }
+
+    public boolean hasTask(Recipe r) {
+        return true; //TODO modificare
     }
 }
