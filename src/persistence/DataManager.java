@@ -278,45 +278,45 @@ public class DataManager {
         }
     }
 
-    private void removeMenu(Menu m) {
-        int mId = menuObjects.get(m);
-        String sqlItems = "DELETE FROM MenuItems WHERE menu=?";
-        String sqlSections = "DELETE FROM Sections WHERE menu=?";
-        String sqlMenu = "DELETE FROM Menus WHERE id=?";
-        PreparedStatement pstItems = null;
-        PreparedStatement pstSections = null;
-        PreparedStatement pstMenu = null;
-        try {
-            connection.setAutoCommit(false);
-            pstItems = connection.prepareStatement(sqlItems);
-            pstSections = connection.prepareStatement(sqlSections);
-            pstMenu = connection.prepareStatement(sqlMenu);
-            pstItems.setInt(1, mId);
-            pstSections.setInt(1, mId);
-            pstMenu.setInt(1, mId);
-            pstItems.executeUpdate();
-            pstSections.executeUpdate();
-            pstMenu.executeUpdate();
-            connection.commit();
-        } catch (SQLException exc) {
-            exc.printStackTrace();
-            try {
-                connection.rollback();
-            } catch (SQLException exc2) {
-                exc2.printStackTrace();
-            }
-        } finally {
-            try {
-                connection.setAutoCommit(true);
-                if (pstItems != null) pstItems.close();
-                if (pstSections != null) pstSections.close();
-                if (pstMenu != null) pstMenu.close();
-            } catch (SQLException exc2) {
-                exc2.printStackTrace();
-            }
-
-        }
-    }
+//    private void removeMenu(Menu m) {
+//        int mId = menuObjects.get(m);
+//        String sqlItems = "DELETE FROM MenuItems WHERE menu=?";
+//        String sqlSections = "DELETE FROM Sections WHERE menu=?";
+//        String sqlMenu = "DELETE FROM Menus WHERE id=?";
+//        PreparedStatement pstItems = null;
+//        PreparedStatement pstSections = null;
+//        PreparedStatement pstMenu = null;
+//        try {
+//            connection.setAutoCommit(false);
+//            pstItems = connection.prepareStatement(sqlItems);
+//            pstSections = connection.prepareStatement(sqlSections);
+//            pstMenu = connection.prepareStatement(sqlMenu);
+//            pstItems.setInt(1, mId);
+//            pstSections.setInt(1, mId);
+//            pstMenu.setInt(1, mId);
+//            pstItems.executeUpdate();
+//            pstSections.executeUpdate();
+//            pstMenu.executeUpdate();
+//            connection.commit();
+//        } catch (SQLException exc) {
+//            exc.printStackTrace();
+//            try {
+//                connection.rollback();
+//            } catch (SQLException exc2) {
+//                exc2.printStackTrace();
+//            }
+//        } finally {
+//            try {
+//                connection.setAutoCommit(true);
+//                if (pstItems != null) pstItems.close();
+//                if (pstSections != null) pstSections.close();
+//                if (pstMenu != null) pstMenu.close();
+//            } catch (SQLException exc2) {
+//                exc2.printStackTrace();
+//            }
+//
+//        }
+//    }
 
 
     private int writeNewSection(int menuId, int position, Section sec) {
@@ -352,29 +352,29 @@ public class DataManager {
         return id;
     }
 
-    private void writeSectionChanges(int menuId, int position, Section sec) {
-        int sId = sectionObjects.get(sec);
-        String sql = "UPDATE Sections SET menu=?, name=?, position=? WHERE id=" + sId;
-        PreparedStatement pstmt = null;
-        try {
-            pstmt = this.connection.prepareStatement(sql,
-                    Statement.RETURN_GENERATED_KEYS);
-            pstmt.setInt(1, menuId);
-            pstmt.setString(2, sec.getName());
-            pstmt.setInt(3, position);
-
-            pstmt.executeUpdate();
-
-        } catch (SQLException exc) {
-            exc.printStackTrace();
-        } finally {
-            try {
-                if (pstmt != null) pstmt.close();
-            } catch (SQLException exc2) {
-                exc2.printStackTrace();
-            }
-        }
-    }
+//    private void writeSectionChanges(int menuId, int position, Section sec) {
+//        int sId = sectionObjects.get(sec);
+//        String sql = "UPDATE Sections SET menu=?, name=?, position=? WHERE id=" + sId;
+//        PreparedStatement pstmt = null;
+//        try {
+//            pstmt = this.connection.prepareStatement(sql,
+//                    Statement.RETURN_GENERATED_KEYS);
+//            pstmt.setInt(1, menuId);
+//            pstmt.setString(2, sec.getName());
+//            pstmt.setInt(3, position);
+//
+//            pstmt.executeUpdate();
+//
+//        } catch (SQLException exc) {
+//            exc.printStackTrace();
+//        } finally {
+//            try {
+//                if (pstmt != null) pstmt.close();
+//            } catch (SQLException exc2) {
+//                exc2.printStackTrace();
+//            }
+//        }
+//    }
 
     private void removeSection(Section s) {
         int sId = sectionObjects.get(s);
