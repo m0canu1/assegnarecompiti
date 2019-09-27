@@ -23,6 +23,7 @@ public class Controller implements Initializable {
     @FXML
     private ListView<Event> eventListView;
 
+    @Override
     public void initialize(URL url, ResourceBundle rb) {
         initializeButtons();
         initializeList();
@@ -46,6 +47,7 @@ public class Controller implements Initializable {
         Event tempEvent = Model.getModel().getCurrentEvent();
         openSummary.setOnAction((ActionEvent e) -> {
                     if (tempEvent.hasSummary()) {
+
                         editSummary(tempEvent.getSummary());
                     } else {
                         //TODO da saltare
@@ -73,7 +75,6 @@ public class Controller implements Initializable {
             Stage stage = new Stage();
             SummaryEditorController summaryEditorController = fxmlLoader.getController();
             summaryEditorController.setStage(stage);
-
             if (summary != null) {
                 stage.setTitle("Modifica Compiti");
                 summaryEditorController.setCurrentSummary(summary);

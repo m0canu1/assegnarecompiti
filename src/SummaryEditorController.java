@@ -1,5 +1,8 @@
 import classfiles.*;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -10,8 +13,21 @@ public class SummaryEditorController implements Initializable {
     private Stage stage;
     private Summary currentSummary;
 
+    @FXML
+    private VBox staffBox, recipeBox, turnBox;
+
+    @FXML
+    private Button bindTask, removeTask, addNewTask;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        bindTask = new Button("Assegna compito");
+        removeTask = new Button("Togli compito");
+        addNewTask = new Button("Crea compito");
+
+        staffBox = new VBox();
+        turnBox = new VBox();
+        recipeBox = new VBox();
 
     }
 

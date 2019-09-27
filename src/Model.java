@@ -15,7 +15,12 @@ public class Model {
     }
 
     private Model() {
-        currentEvent = null;
+        
+        // solo un test
+        for(int i = 0; i < 10; i++){
+            eventObservableList.add(new Event("gigi"));
+        }
+        currentEvent = getCurrentEventByIndex(0);
 //        currentSummary = null;
     }
 
