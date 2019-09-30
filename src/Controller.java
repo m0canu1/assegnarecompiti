@@ -21,7 +21,7 @@ public class Controller implements Initializable {
     private Button openSummary, generateSummary;
 
     @FXML
-    private ListView<Event> eventListView;
+    private ListView<String> eventListView;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {

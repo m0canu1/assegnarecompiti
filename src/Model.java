@@ -10,15 +10,18 @@ public class Model {
     //    private Summary currentSummary;
     private final ObservableList<Event> eventObservableList = FXCollections.observableArrayList();
 
-    public ObservableList<Event> getEventObservableList() {
-        return eventObservableList;
+    public ObservableList<String> getEventObservableList() {
+        ObservableList<String> eventListName=FXCollections.observableArrayList();
+        for (Event e: eventObservableList) {
+            eventListName.add(e.getName());
+        }
+        return eventListName;
     }
 
     private Model() {
-        
         // solo un test
         for(int i = 0; i < 10; i++){
-            eventObservableList.add(new Event("gigi"));
+            eventObservableList.add(new Event("gigi" + i));
         }
         currentEvent = getCurrentEventByIndex(0);
 //        currentSummary = null;
