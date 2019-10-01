@@ -2,10 +2,15 @@ import classfiles.Event;
 import classfiles.Summary;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import persistence.DataManager;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Model {
     private static final Model model = new Model();
     private Event currentEvent;
+    private DataManager dataManager = new DataManager();
 
     //    private Summary currentSummary;
     private final ObservableList<Event> eventObservableList = FXCollections.observableArrayList();
@@ -19,6 +24,19 @@ public class Model {
     }
 
     private Model() {
+        try {
+            dataManager.initialize();
+        } catch (SQLException exc) {
+            // Rimando l'eccezione a terminale
+            exc.printStackTrace();
+        }
+//        dataManager.loadEvents();
+
+//        for (Event e: dataManager.loadEvents()){
+//            eventObservableList.add(e);
+//        }
+
+
         // solo un test
         for(int i = 0; i < 10; i++){
             eventObservableList.add(new Event("gigi" + i));
@@ -40,7 +58,7 @@ public class Model {
     }
 
     public Summary getCurrentSummary() {
-        return currentEvent.getSummary();
+        return currentEvent.getSummarySheet();
     }
 
     public Event getCurrentEventByIndex(int i) {

@@ -20,8 +20,8 @@ public class DataManager {
     private Map<User, Integer> userObjects;
     private Map<Integer, User> idToUserObject;
 
-    private Map<Recipe, Integer> recipeObjects;
-    private Map<Integer, Recipe> idToRecipeObject;
+    private Map<Event, Integer> eventObject;
+    private Map<Integer, Event> idToEventObject;
 
     private Map<Menu, Integer> menuObjects;
     private Map<Integer, Menu> idToMenuObject;
@@ -34,10 +34,11 @@ public class DataManager {
 
     public DataManager() {
 
+        this.eventObject = new HashMap<>();
+        this.idToEventObject = new HashMap<>();
+
         this.userObjects = new HashMap<>();
         this.idToUserObject = new HashMap<>();
-        this.recipeObjects = new HashMap<>();
-        this.idToRecipeObject = new HashMap<>();
         this.menuObjects = new HashMap<>();
         this.idToMenuObject = new HashMap<>();
         this.sectionObjects = new HashMap<>();
@@ -46,6 +47,48 @@ public class DataManager {
         this.idToItemObject = new HashMap<>();
 
 
+    }
+
+    /**
+     * @return all the events of the database
+     */
+    public List<Event> loadEvents() {
+        Statement st = null;
+        String query = "SELECT * FROM Events";
+        List<Event> ret = new ArrayList<>();
+
+        try {
+            st = this.connection.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()) {
+                String name = rs.getString("Name");
+                System.out.println(name);
+                int id = rs.getInt("id");
+
+                // Verifica se per caso l'ha già caricata
+                Event event = this.idToEventObject.get(id);
+
+
+                if (event == null) {
+                    event = new Event(name);
+
+                    if (event != null) {
+                        ret.add(event);
+                        this.eventObject.put(event, id);
+                        this.idToEventObject.put(id, event);
+                    }
+                }
+            }
+        } catch (SQLException exc) {
+            exc.printStackTrace();
+        } finally {
+            try {
+                if (st != null) st.close();
+            } catch (SQLException exc2) {
+                exc2.printStackTrace();
+            }
+        }
+        return ret;
     }
 
     public void initialize() throws SQLException {
@@ -208,43 +251,6 @@ public class DataManager {
 //        });
     }
 
-    public List<Event> loadEvents() {
-    Statement st = null;
-    String query = "SELECT * FROM Events";
-    List<Event> ret = new ArrayList<>();
-
-    try {
-        st = this.connection.createStatement();
-        ResultSet rs = st.executeQuery(query);
-        while (rs.next()) {
-            String name = rs.getString("name");
-            char type = rs.getString("type").charAt(0);
-            int id = rs.getInt("id");
-
-            // Verifica se per caso l'ha già caricata
-//            Event event = this.idToEventObject.get(id);
-
-//            if (event == null) {
-//                event = createRecipeWithType(name, type);
-//
-//                if (rec != null) {
-//                    ret.add(rec);
-//                    this.recipeObjects.put(rec, id);
-//                    this.idToRecipeObject.put(id, rec);
-//                }
-//            }
-        }
-    } catch (SQLException exc) {
-        exc.printStackTrace();
-    } finally {
-        try {
-            if (st != null) st.close();
-        } catch (SQLException exc2) {
-            exc2.printStackTrace();
-        }
-    }
-    return ret;
-}
 
 //    private int writeNewMenu(Menu m) {
 //

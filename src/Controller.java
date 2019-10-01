@@ -46,11 +46,11 @@ public class Controller implements Initializable {
     private void initializeButtons() {
         Event tempEvent = Model.getModel().getCurrentEvent();
         openSummary.setOnAction((ActionEvent e) -> {
-                    if (tempEvent.hasSummary()) {
-                        editSummary(tempEvent.getSummary());
+                    if (tempEvent.hasSummarySheet()) {
+                        editSummary(tempEvent.getSummarySheet());
                     } else {
-                        tempEvent.setSummary(new Summary());
-                        editSummary(tempEvent.getSummary());
+                        tempEvent.setSummarySheet(new Summary());
+                        editSummary(tempEvent.getSummarySheet());
                     }
         });
     }

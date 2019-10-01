@@ -5,7 +5,7 @@ public class Event {
     private int id;
     private String name;
     private Menu menu_selected;
-    private Summary summary;
+    private Summary summarySheet;
 
     public Event(String name) {this.name = name;}
 
@@ -13,19 +13,19 @@ public class Event {
 
     public Menu getMenu() {return this.menu_selected;}
 
-    public Summary getSummary() {return this.summary;}
+    public Summary getSummarySheet() {return this.summarySheet;}
 
     public void setMenu(Menu m) {this.menu_selected = m;}
-    public void setSummary(Summary s) {this.summary = s;}
+    public void setSummarySheet(Summary s) {this.summarySheet = s;}
 
-    public boolean hasSummary() {return this.summary != null;}
+    public boolean hasSummarySheet() {return this.summarySheet != null;}
 
-    public void addTask(Recipe r) {summary.addTask(r);}
+    public void addTask(Recipe r) {summarySheet.addTask(r);}
 
     public boolean hasTask(Recipe r) {
-        return summary.hasTask(r);
+        return summarySheet.hasTask(r);
     }
 
-    public void deleteTask(Recipe r) {summary.deleteTask(r);}
+    public void deleteTask(Recipe r) {summarySheet.deleteTask(r);}
 
 }
