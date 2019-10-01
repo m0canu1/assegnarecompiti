@@ -1,5 +1,9 @@
 package classfiles;
 
+import javafx.beans.Observable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -29,6 +33,14 @@ public class Summary {
             }
         }
         return false;
+    }
+
+    public ObservableList<String> getObservableTask(){
+        ObservableList<String> task_list = FXCollections.observableArrayList();
+        for(Task t: this.tasks){
+            task_list.add(t.getCook() + "; " + t.getTurn() + "; " + t.getRecipe() + ".");
+        }
+        return task_list;
     }
 
     public void deleteTask(Recipe r) {

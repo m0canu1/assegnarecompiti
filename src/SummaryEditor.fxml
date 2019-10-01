@@ -6,11 +6,16 @@
 <?import javafx.scene.layout.VBox?>
 
 
+<?import javafx.scene.layout.AnchorPane?>
 <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="749.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SummaryEditorController">
    <children>
-      <VBox prefHeight="400.0" prefWidth="371.0">
+       <VBox prefHeight="400.0" prefWidth="371.0">
+        <children>
+               <ListView fx:id="taskListView" prefHeight="291.0" prefWidth="640.0"/>
+        </children>
+       </VBox>
+       <VBox prefHeight="400.0" prefWidth="371.0">
          <children>
-            <ListView />
             <HBox>
                <children>
                   <Button fx:id="addNewTask" mnemonicParsing="false" text="Crea Compito" />
