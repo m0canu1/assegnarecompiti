@@ -18,7 +18,7 @@ public class Controller implements Initializable {
     private Stage stage;
 
     @FXML
-    private Button openSummary, generateSummary;
+    private Button openSummary;
 
     @FXML
     private ListView<String> eventListView;
@@ -47,18 +47,11 @@ public class Controller implements Initializable {
         Event tempEvent = Model.getModel().getCurrentEvent();
         openSummary.setOnAction((ActionEvent e) -> {
                     if (tempEvent.hasSummary()) {
-
                         editSummary(tempEvent.getSummary());
                     } else {
-                        //TODO da saltare
+                        tempEvent.setSummary(new Summary());
+                        editSummary(tempEvent.getSummary());
                     }
-        });
-        generateSummary.setOnAction((ActionEvent e) -> {
-            if (!tempEvent.hasSummary()) {
-                editSummary(null);
-            } else {
-                //TODO errore
-            }
         });
     }
 
@@ -75,14 +68,8 @@ public class Controller implements Initializable {
             Stage stage = new Stage();
             SummaryEditorController summaryEditorController = fxmlLoader.getController();
             summaryEditorController.setStage(stage);
-            if (summary != null) {
-                stage.setTitle("Modifica Compiti");
-                summaryEditorController.setCurrentSummary(summary);
-            } else {
-                stage.setTitle("Nuovi Compiti");
-                summaryEditorController.setCurrentSummary(null);
-            }
-
+            stage.setTitle("Summary Sheet Home");
+            summaryEditorController.setCurrentSummary(summary);
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {

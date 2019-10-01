@@ -24,8 +24,6 @@
                     </children>
                 </AnchorPane>
                 <Button fx:id="openSummary" layoutX="155.0" layoutY="360.0" mnemonicParsing="false" text="Open" />
-                <Button fx:id="generateSummary" layoutX="435.0" layoutY="360.0" mnemonicParsing="false" text="Generate" />
-
             </children>
         </AnchorPane>
     </children>

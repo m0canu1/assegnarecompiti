@@ -14,7 +14,7 @@ public class SummaryEditorController implements Initializable {
     private Summary currentSummary;
 
     @FXML
-    private VBox staffBox, recipeBox, turnBox;
+    private VBox staffBox, turnBox;
 
     @FXML
     private Button bindTask, removeTask, addNewTask;
@@ -27,8 +27,6 @@ public class SummaryEditorController implements Initializable {
 
         staffBox = new VBox();
         turnBox = new VBox();
-        recipeBox = new VBox();
-
     }
 
     void setStage(Stage stage) {
