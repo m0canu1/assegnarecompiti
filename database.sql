@@ -1,70 +1,349 @@
-INSERT INTO catering.Cooks (id, name) VALUES (1, 'Paolo Paolini');
-INSERT INTO catering.Cooks (id, name) VALUES (2, 'Gianfranco Gianfranchini');
-INSERT INTO catering.Cooks (id, name) VALUES (3, 'Giulio Giulini');
-INSERT INTO catering.Events (id, menu, name, summary_id) VALUES (1, 1, 'Matrimonio', 1);
-INSERT INTO catering.Events (id, menu, name, summary_id) VALUES (2, 1, 'Compleanno', null);
-INSERT INTO catering.Events (id, menu, name, summary_id) VALUES (3, 1, 'Nubilato', null);
-INSERT INTO catering.MenuItems (id, menu, section, description, recipe, position) VALUES (1, 3, 1, 'Voce 1', 1, 0);
-INSERT INTO catering.MenuItems (id, menu, section, description, recipe, position) VALUES (2, 3, 1, 'Voce 2', 1, 1);
-INSERT INTO catering.MenuItems (id, menu, section, description, recipe, position) VALUES (3, 3, 2, 'Voce 3', 1, 0);
-INSERT INTO catering.MenuItems (id, menu, section, description, recipe, position) VALUES (4, 3, 2, 'Voce 4', 1, 2);
-INSERT INTO catering.MenuItems (id, menu, section, description, recipe, position) VALUES (5, 3, 0, 'Voce 0', 1, 0);
-INSERT INTO catering.MenuItems (id, menu, section, description, recipe, position) VALUES (6, 3, 1, 'Voce 1.5', 1, 2);
-INSERT INTO catering.MenuItems (id, menu, section, description, recipe, position) VALUES (7, 3, 2, 'Voce 3.5', 1, 1);
-INSERT INTO catering.MenuItems (id, menu, section, description, recipe, position) VALUES (8, 3, 0, 'Voce 0.2', 1, 1);
-INSERT INTO catering.MenuItems (id, menu, section, description, recipe, position) VALUES (9, 3, 0, 'Voce 0.8', 1, 2);
-INSERT INTO catering.MenuItems (id, menu, section, description, recipe, position) VALUES (10, 3, 3, 'Voce 5', 1, 0);
-INSERT INTO catering.MenuItems (id, menu, section, description, recipe, position) VALUES (11, 3, 3, 'Voce 6', 1, 1);
-INSERT INTO catering.MenuItems (id, menu, section, description, recipe, position) VALUES (12, 3, 3, 'Voce 7', 1, 2);
-INSERT INTO catering.Menus (id, title, menuowner, published, fingerFood, cookRequired, hotDishes, kitchenRequired, buffet) VALUES (1, 'prova in uso', 3, 1, 1, 0, 0, 0, 1);
-INSERT INTO catering.Menus (id, title, menuowner, published, fingerFood, cookRequired, hotDishes, kitchenRequired, buffet) VALUES (2, 'prova non in uso', 2, 0, 0, 1, 1, 1, 0);
-INSERT INTO catering.Menus (id, title, menuowner, published, fingerFood, cookRequired, hotDishes, kitchenRequired, buffet) VALUES (3, 'prova struttura', 3, 0, 0, 0, 0, 0, 1);
-INSERT INTO catering.Menus (id, title, menuowner, published, fingerFood, cookRequired, hotDishes, kitchenRequired, buffet) VALUES (4, 'Ciao', 3, 0, 0, 0, 0, 0, 0);
-INSERT INTO catering.Menus (id, title, menuowner, published, fingerFood, cookRequired, hotDishes, kitchenRequired, buffet) VALUES (7, 'prova struttura', 3, 0, 0, 0, 0, 0, 1);
-INSERT INTO catering.Recipes (id, name, type) VALUES (1, 'Salsa Tonnata', 'p');
-INSERT INTO catering.Recipes (id, name, type) VALUES (2, 'Vitello Tonnato', 'r');
-INSERT INTO catering.Recipes (id, name, type) VALUES (3, 'Vitello Tonnato all''Antica', 'r');
-INSERT INTO catering.Recipes (id, name, type) VALUES (4, 'Brodo di Manzo Ristretto', 'p');
-INSERT INTO catering.Recipes (id, name, type) VALUES (5, 'Risotto alla Milanese', 'r');
-INSERT INTO catering.Recipes (id, name, type) VALUES (6, 'Pesto Ligure', 'p');
-INSERT INTO catering.Recipes (id, name, type) VALUES (7, 'Trofie avvantaggiate al pesto', 'r');
-INSERT INTO catering.Recipes (id, name, type) VALUES (8, 'Orata al forno con olive', 'r');
-INSERT INTO catering.Recipes (id, name, type) VALUES (9, 'Insalata russa', 'r');
-INSERT INTO catering.Recipes (id, name, type) VALUES (10, 'Bagnet vert', 'p');
-INSERT INTO catering.Recipes (id, name, type) VALUES (11, 'Acciughe al verde', 'r');
-INSERT INTO catering.Recipes (id, name, type) VALUES (12, 'Agnolotti del plin', 'p');
-INSERT INTO catering.Recipes (id, name, type) VALUES (13, 'Agnolotti al sugo d''arrosto', 'r');
-INSERT INTO catering.Recipes (id, name, type) VALUES (14, 'Agnolotti burro e salvia', 'r');
-INSERT INTO catering.Recipes (id, name, type) VALUES (15, 'Brasato al barolo', 'r');
-INSERT INTO catering.Recipes (id, name, type) VALUES (16, 'Panna cotta', 'r');
-INSERT INTO catering.Recipes (id, name, type) VALUES (17, 'Tarte tatin', 'r');
-INSERT INTO catering.Roles (id, role) VALUES ('c', 'Cuoco');
-INSERT INTO catering.Roles (id, role) VALUES ('h', 'Chef');
-INSERT INTO catering.Roles (id, role) VALUES ('o', 'Organizzatore');
-INSERT INTO catering.Roles (id, role) VALUES ('s', 'Servizio');
-INSERT INTO catering.Sections (menu, id, name, position) VALUES (3, 1, 'Primi', null);
-INSERT INTO catering.Sections (menu, id, name, position) VALUES (3, 2, 'Secondi', null);
-INSERT INTO catering.Sections (menu, id, name, position) VALUES (3, 3, 'Dessert', null);
-INSERT INTO catering.Summary (id, task_id) VALUES (1, 1);
-INSERT INTO catering.Tasks (id, recipe_id, assigned, cook_id, turn_id, estimaedTime, doses) VALUES (1, 1, 1, 1, 1, null, null);
-INSERT INTO catering.Tasks (id, recipe_id, assigned, cook_id, turn_id, estimaedTime, doses) VALUES (3, 4, 1, 2, 1, null, null);
-INSERT INTO catering.Turn (id, starttime) VALUES (1, '2019-11-01 14:43:52');
-INSERT INTO catering.UserRoles (user, role) VALUES (1, 'o');
-INSERT INTO catering.UserRoles (user, role) VALUES (2, 'h');
-INSERT INTO catering.UserRoles (user, role) VALUES (2, 'c');
-INSERT INTO catering.UserRoles (user, role) VALUES (3, 'h');
-INSERT INTO catering.UserRoles (user, role) VALUES (4, 'o');
-INSERT INTO catering.UserRoles (user, role) VALUES (4, 'h');
-INSERT INTO catering.UserRoles (user, role) VALUES (5, 'c');
-INSERT INTO catering.UserRoles (user, role) VALUES (1, 'o');
-INSERT INTO catering.UserRoles (user, role) VALUES (2, 'h');
-INSERT INTO catering.UserRoles (user, role) VALUES (2, 'c');
-INSERT INTO catering.UserRoles (user, role) VALUES (3, 'h');
-INSERT INTO catering.UserRoles (user, role) VALUES (4, 'o');
-INSERT INTO catering.UserRoles (user, role) VALUES (4, 'h');
-INSERT INTO catering.UserRoles (user, role) VALUES (5, 'c');
-INSERT INTO catering.Users (id, name) VALUES (1, 'Marco');
-INSERT INTO catering.Users (id, name) VALUES (2, 'Tony');
-INSERT INTO catering.Users (id, name) VALUES (3, 'Viola');
-INSERT INTO catering.Users (id, name) VALUES (4, 'Anna');
-INSERT INTO catering.Users (id, name) VALUES (5, 'Giovanni');
+-- MariaDB dump 10.17  Distrib 10.4.7-MariaDB, for Linux (x86_64)
+--
+-- Host: 127.0.0.1    Database: catering
+-- ------------------------------------------------------
+-- Server version	10.4.7-MariaDB
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `Cooks`
+--
+
+DROP TABLE IF EXISTS `Cooks`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Cooks` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Cooks`
+--
+
+LOCK TABLES `Cooks` WRITE;
+/*!40000 ALTER TABLE `Cooks` DISABLE KEYS */;
+INSERT INTO `Cooks` VALUES (1,'Paolo Paolini'),(2,'Gianfranco Gianfranchini'),(3,'Giulio Giulini');
+/*!40000 ALTER TABLE `Cooks` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Events`
+--
+
+DROP TABLE IF EXISTS `Events`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Events` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `menu` int(11) DEFAULT NULL,
+  `name` varchar(50) DEFAULT NULL,
+  `summary_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `Events_Summary_id_fk` (`summary_id`),
+  CONSTRAINT `Events_Summary_id_fk` FOREIGN KEY (`summary_id`) REFERENCES `Summary` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Events`
+--
+
+LOCK TABLES `Events` WRITE;
+/*!40000 ALTER TABLE `Events` DISABLE KEYS */;
+INSERT INTO `Events` VALUES (1,1,'Matrimonio',1),(2,1,'Compleanno',NULL),(3,1,'Nubilato',NULL);
+/*!40000 ALTER TABLE `Events` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MenuItems`
+--
+
+DROP TABLE IF EXISTS `MenuItems`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MenuItems` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `menu` int(11) DEFAULT NULL,
+  `section` int(11) DEFAULT 0,
+  `description` tinytext DEFAULT NULL,
+  `recipe` int(11) NOT NULL,
+  `position` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MenuItems`
+--
+
+LOCK TABLES `MenuItems` WRITE;
+/*!40000 ALTER TABLE `MenuItems` DISABLE KEYS */;
+INSERT INTO `MenuItems` VALUES (1,3,1,'Voce 1',1,0),(2,3,1,'Voce 2',1,1),(3,3,2,'Voce 3',1,0),(4,3,2,'Voce 4',1,2),(5,3,0,'Voce 0',1,0),(6,3,1,'Voce 1.5',1,2),(7,3,2,'Voce 3.5',1,1),(8,3,0,'Voce 0.2',1,1),(9,3,0,'Voce 0.8',1,2),(10,3,3,'Voce 5',1,0),(11,3,3,'Voce 6',1,1),(12,3,3,'Voce 7',1,2);
+/*!40000 ALTER TABLE `MenuItems` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Menus`
+--
+
+DROP TABLE IF EXISTS `Menus`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Menus` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` tinytext NOT NULL,
+  `menuowner` int(11) NOT NULL,
+  `published` tinyint(1) DEFAULT NULL,
+  `fingerFood` tinyint(1) DEFAULT NULL,
+  `cookRequired` tinyint(1) DEFAULT NULL,
+  `hotDishes` tinyint(1) DEFAULT NULL,
+  `kitchenRequired` tinyint(1) DEFAULT NULL,
+  `buffet` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Menus`
+--
+
+LOCK TABLES `Menus` WRITE;
+/*!40000 ALTER TABLE `Menus` DISABLE KEYS */;
+INSERT INTO `Menus` VALUES (1,'prova in uso',3,1,1,0,0,0,1),(2,'prova non in uso',2,0,0,1,1,1,0),(3,'prova struttura',3,0,0,0,0,0,1),(4,'Ciao',3,0,0,0,0,0,0),(7,'prova struttura',3,0,0,0,0,0,1);
+/*!40000 ALTER TABLE `Menus` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Recipes`
+--
+
+DROP TABLE IF EXISTS `Recipes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Recipes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(128) DEFAULT NULL,
+  `type` varchar(1) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Recipes`
+--
+
+LOCK TABLES `Recipes` WRITE;
+/*!40000 ALTER TABLE `Recipes` DISABLE KEYS */;
+INSERT INTO `Recipes` VALUES (1,'Salsa Tonnata','p'),(2,'Vitello Tonnato','r'),(3,'Vitello Tonnato all\'Antica','r'),(4,'Brodo di Manzo Ristretto','p'),(5,'Risotto alla Milanese','r'),(6,'Pesto Ligure','p'),(7,'Trofie avvantaggiate al pesto','r'),(8,'Orata al forno con olive','r'),(9,'Insalata russa','r'),(10,'Bagnet vert','p'),(11,'Acciughe al verde','r'),(12,'Agnolotti del plin','p'),(13,'Agnolotti al sugo d\'arrosto','r'),(14,'Agnolotti burro e salvia','r'),(15,'Brasato al barolo','r'),(16,'Panna cotta','r'),(17,'Tarte tatin','r');
+/*!40000 ALTER TABLE `Recipes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Roles`
+--
+
+DROP TABLE IF EXISTS `Roles`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Roles` (
+  `id` varchar(1) NOT NULL,
+  `role` varchar(32) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Roles`
+--
+
+LOCK TABLES `Roles` WRITE;
+/*!40000 ALTER TABLE `Roles` DISABLE KEYS */;
+INSERT INTO `Roles` VALUES ('c','Cuoco'),('h','Chef'),('o','Organizzatore'),('s','Servizio');
+/*!40000 ALTER TABLE `Roles` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Sections`
+--
+
+DROP TABLE IF EXISTS `Sections`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Sections` (
+  `menu` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` tinytext DEFAULT NULL,
+  `position` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `Sections_Menu_id_fk` (`menu`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Sections`
+--
+
+LOCK TABLES `Sections` WRITE;
+/*!40000 ALTER TABLE `Sections` DISABLE KEYS */;
+INSERT INTO `Sections` VALUES (3,1,'Primi',NULL),(3,2,'Secondi',NULL),(3,3,'Dessert',NULL);
+/*!40000 ALTER TABLE `Sections` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Summary`
+--
+
+DROP TABLE IF EXISTS `Summary`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Summary` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `task_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `task_id` (`task_id`),
+  CONSTRAINT `task_id` FOREIGN KEY (`task_id`) REFERENCES `Tasks` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Summary`
+--
+
+LOCK TABLES `Summary` WRITE;
+/*!40000 ALTER TABLE `Summary` DISABLE KEYS */;
+INSERT INTO `Summary` VALUES (1,1);
+/*!40000 ALTER TABLE `Summary` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Tasks`
+--
+
+DROP TABLE IF EXISTS `Tasks`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Tasks` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `recipe_id` int(11) DEFAULT NULL,
+  `assigned` tinyint(1) DEFAULT 0,
+  `cook_id` int(11) DEFAULT NULL,
+  `turn_id` int(11) DEFAULT NULL,
+  `estimaedTime` time DEFAULT NULL,
+  `doses` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `recipe_id` (`recipe_id`),
+  KEY `cook_id` (`cook_id`),
+  KEY `turn_id` (`turn_id`),
+  CONSTRAINT `cook_id` FOREIGN KEY (`cook_id`) REFERENCES `Cooks` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `recipe_id` FOREIGN KEY (`recipe_id`) REFERENCES `Recipes` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `turn_id` FOREIGN KEY (`turn_id`) REFERENCES `Turn` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Tasks`
+--
+
+LOCK TABLES `Tasks` WRITE;
+/*!40000 ALTER TABLE `Tasks` DISABLE KEYS */;
+INSERT INTO `Tasks` VALUES (1,1,1,1,1,NULL,NULL),(3,4,1,2,1,NULL,NULL);
+/*!40000 ALTER TABLE `Tasks` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Turn`
+--
+
+DROP TABLE IF EXISTS `Turn`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Turn` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `starttime` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Turn`
+--
+
+LOCK TABLES `Turn` WRITE;
+/*!40000 ALTER TABLE `Turn` DISABLE KEYS */;
+INSERT INTO `Turn` VALUES (1,'2019-11-01 14:43:52');
+/*!40000 ALTER TABLE `Turn` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `UserRoles`
+--
+
+DROP TABLE IF EXISTS `UserRoles`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `UserRoles` (
+  `user` int(11) NOT NULL,
+  `role` varchar(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `UserRoles`
+--
+
+LOCK TABLES `UserRoles` WRITE;
+/*!40000 ALTER TABLE `UserRoles` DISABLE KEYS */;
+INSERT INTO `UserRoles` VALUES (1,'o'),(2,'h'),(2,'c'),(3,'h'),(4,'o'),(4,'h'),(5,'c'),(1,'o'),(2,'h'),(2,'c'),(3,'h'),(4,'o'),(4,'h'),(5,'c');
+/*!40000 ALTER TABLE `UserRoles` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Users`
+--
+
+DROP TABLE IF EXISTS `Users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(128) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Users`
+--
+
+LOCK TABLES `Users` WRITE;
+/*!40000 ALTER TABLE `Users` DISABLE KEYS */;
+INSERT INTO `Users` VALUES (1,'Marco'),(2,'Tony'),(3,'Viola'),(4,'Anna'),(5,'Giovanni');
+/*!40000 ALTER TABLE `Users` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2019-10-01 15:05:42
