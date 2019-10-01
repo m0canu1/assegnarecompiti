@@ -13,6 +13,19 @@ public class Task {
         this.recipe = recipe;
     }
 
+    public Task(Recipe recipe, Cook cook) {
+        this.recipe = recipe;
+        this.cook = cook;
+        this.assigned = true;
+    }
+
+    public Task(Recipe recipe, Cook cook, Turn turn) {
+        this.recipe = recipe;
+        this.cook = cook;
+        this.turn = turn;
+        this.assigned = true;
+    }
+
     public Recipe getRecipe() {
         return recipe;
     }
