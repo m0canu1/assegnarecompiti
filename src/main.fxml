@@ -11,7 +11,6 @@
             <children>
                 <Button fx:id="openSummary" layoutX="250.0" layoutY="299.0" mnemonicParsing="false" text="Open Summary" AnchorPane.bottomAnchor="5.0" />
                   <ListView fx:id="eventListView" prefHeight="291.0" prefWidth="640.0" AnchorPane.bottomAnchor="35.0" />
-
             </children>
         </AnchorPane>
     </children>
