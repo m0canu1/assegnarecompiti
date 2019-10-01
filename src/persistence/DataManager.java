@@ -61,13 +61,12 @@ public class DataManager {
             st = this.connection.createStatement();
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
-                String name = rs.getString("Name");
+                String name = rs.getString("nome");
                 System.out.println(name);
                 int id = rs.getInt("id");
 
                 // Verifica se per caso l'ha già caricata
                 Event event = this.idToEventObject.get(id);
-
 
                 if (event == null) {
                     event = new Event(name);
@@ -104,7 +103,7 @@ public class DataManager {
         conn = DriverManager.getConnection(
                 "jdbc:mysql://" +
                         this.serverName +
-                        ":" + this.portNumber + "/assegnarecompiti",
+                        ":" + this.portNumber + "/catering",
                 connectionProps);
 
         System.out.println("Connected to database");

@@ -32,15 +32,15 @@ public class Model {
         }
 //        dataManager.loadEvents();
 
-//        for (Event e: dataManager.loadEvents()){
-//            eventObservableList.add(e);
-//        }
+        for (Event e: dataManager.loadEvents()){
+            eventObservableList.add(e);
+        }
 
 
         // solo un test
-        for(int i = 0; i < 10; i++){
-            eventObservableList.add(new Event("gigi" + i));
-        }
+//        for(int i = 0; i < 10; i++){
+//            eventObservableList.add(new Event("gigi" + i));
+//        }
         currentEvent = getCurrentEventByIndex(0);
 //        currentSummary = null;
     }
