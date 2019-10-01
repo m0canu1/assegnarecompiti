@@ -1,29 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
 <VBox prefHeight="200.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
     <children>
-        <AnchorPane maxHeight="1.0" maxWidth="1.0" prefHeight="413.0" prefWidth="640.0">
+        <AnchorPane maxHeight="223.0" maxWidth="640.0" prefHeight="223.0" prefWidth="640.0">
             <children>
-                <Label alignment="CENTER" layoutX="155.0" layoutY="177.0" style="&#10;"  textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
-                    <font>
-                        <Font size="18.0" />
-                    </font>
-                </Label>
-
-                <AnchorPane minHeight="0.0" minWidth="0.0">
-                    <children>
-                        <ListView fx:id="eventListView"/>
-                    </children>
-                </AnchorPane>
-                <Button fx:id="openSummary" layoutX="155.0" layoutY="360.0" mnemonicParsing="false" text="Open" />
+                <Button fx:id="openSummary" layoutX="250.0" layoutY="299.0" mnemonicParsing="false" text="Open Summary" AnchorPane.bottomAnchor="5.0" />
+                  <ListView fx:id="eventListView" prefHeight="291.0" prefWidth="640.0" AnchorPane.bottomAnchor="35.0" />
             </children>
         </AnchorPane>
     </children>
