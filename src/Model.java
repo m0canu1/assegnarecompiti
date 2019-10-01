@@ -28,7 +28,7 @@ public class Model {
         //caricamento lista eventi
         for (Event e: dataManager.loadEvents()){
             eventObservableList.add(e);
-//            dataManager.loadTasks(e);
+            dataManager.loadTasks(e);
         }
 
         //caricamento lista task
@@ -63,6 +63,7 @@ public class Model {
         }
         return taskListName;
     }
+
 
     public ObservableList<String> getCookObservableList() {
         ObservableList<String> cookListName=FXCollections.observableArrayList();

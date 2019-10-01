@@ -260,28 +260,22 @@ public class DataManager {
     public List<Task> loadTasks(Event event) {
         int eventId = eventObjects.get(event);
         Statement st = null;
-        String query = "select C.name as \"Cuoco\", R.name as \"Ricetta\", T2.starttime as \"Turno\" from Events " +
-                "inner join Summary S on Events.id = S.event_id " +
-                "inner join Tasks T on S.task_id = T.id " +
-                "inner join Recipes R on T.recipe_id = R.id " +
-                "inner join Turn T2 on T.turn_id = T2.id " +
-                "inner join Cooks C on T.cook_id = C.id " +
-                "where Events.name=?\'" + event.getName() + "\'";
+        String query = "select T.id, C.name as \"Cuoco\", R.name as \"Ricetta\", T2.starttime as \"Turno\" from Events inner join Summary S on Events.id = S.event_id inner join Tasks T on S.task_id = T.id inner join Recipes R on T.recipe_id = R.id inner join Turn T2 on T.turn_id = T2.id inner join Cooks C on T.cook_id = C.id where Events.name=\'" + event.getName() + "\'";
         PreparedStatement preparedStatement = null;
         List<Task> ret = new ArrayList<>();
 
         try {
             preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, event.getName());
+//            preparedStatement.setString(1, event.getName());
             ResultSet rs = preparedStatement.executeQuery(query);
             //TODO non entra nel while
             while (rs.next()) {
-                String cuoco = rs.getString(1); //l'informazione si trova nella posizione 1
-                String ricetta = rs.getString(2); //nella posizione 2
-                String turno = rs.getString(3); //nella posizione 3
-                System.out.println(cuoco);
-                System.out.println(ricetta);
-                System.out.println(turno);
+                String cuoco = rs.getString(2); //l'informazione si trova nella posizione 1
+                String ricetta = rs.getString(3); //nella posizione 2
+                String turno = rs.getString(4); //nella posizione 3
+                System.out.println("Cuoco " + cuoco);
+                System.out.println("Ricetta " + ricetta);
+                System.out.println("Inizio del turno " + turno);
                 int id = rs.getInt("id");
 
                 // Verifica se per caso l'ha già caricata
