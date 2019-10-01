@@ -24,12 +24,12 @@ public class Model {
     }
 
     private Model() {
-        try {
-            dataManager.initialize();
-        } catch (SQLException exc) {
+        //try {
+            //dataManager.initialize();
+        //} catch (SQLException exc) {
             // Rimando l'eccezione a terminale
-            exc.printStackTrace();
-        }
+            //exc.printStackTrace();
+        //}
 //        dataManager.loadEvents();
 
         for (Event e: dataManager.loadEvents()){
