@@ -3,50 +3,50 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import persistence.DataManager;
 
+import java.sql.SQLException;
+
 public class Model {
     private static final Model model = new Model();
     private DataManager dataManager = new DataManager();
     //private Summary currentSummary;
-
-    static Model getModel() {
-        return model;
-    }
-
-    public Summary getCurrentSummary() {
-        return currentEvent.getSummarySheet();
-    }
-
-    private Model() {
-        //try {
-        //dataManager.initialize();
-        //} catch (SQLException exc) {
-        // Rimando l'eccezione a terminale
-        //exc.printStackTrace();
-        //}
-//        dataManager.loadEvents();
-    /*
-        for (Event e: dataManager.loadEvents()){
-            eventObservableList.add(e);
-        }
-    */
-
-        //solo un test
-        for(int i = 0; i < 10; i++){
-            eventObservableList.add(new Event("gigi" + i));
-            taskObservableList.add(new Task(new Recipe("banana")));
-            cookObservableList.add(new Cook("Paulino Dybala"));
-        }
-        currentEvent = getCurrentEventByIndex(0);
-        currentTask = getCurrentTaskByIndex(0);
-//        currentSummary = null;
-    }
-
     private final ObservableList<Event> eventObservableList = FXCollections.observableArrayList();
     private final ObservableList<Task> taskObservableList = FXCollections.observableArrayList();
     private final ObservableList<Cook> cookObservableList = FXCollections.observableArrayList();
     private Event currentEvent;
     private Task currentTask;
     private Cook currentCook;
+
+
+    private Model() {
+        try {
+            dataManager.initialize();
+        } catch (SQLException exc) {
+//         Rimando l'eccezione a terminale
+            exc.printStackTrace();
+        }
+
+        //caricamento lista eventi
+        for (Event e: dataManager.loadEvents()){
+            eventObservableList.add(e);
+//            dataManager.loadTasks(e);
+        }
+
+        //caricamento lista task
+//        for (Task t : dataManager.loadTasks()) {
+//            taskObservableList.add(t);
+//        }
+
+        //solo un test
+        for(int i = 0; i < 10; i++){
+//            eventObservableList.add(new Event("gigi" + i));
+            taskObservableList.add(new Task(new Recipe("banana")));
+            cookObservableList.add(new Cook("Paulino Dybala"));
+        }
+
+//        currentEvent = getCurrentEventByIndex(0);
+//        currentTask = getCurrentTaskByIndex(0);
+//        currentSummary = null;
+    }
 
     public ObservableList<String> getEventObservableList() {
         ObservableList<String> eventListName=FXCollections.observableArrayList();
@@ -106,6 +106,14 @@ public class Model {
 
     public Cook getCurrentCookByIndex(int newIndex) {
         return cookObservableList.get(newIndex);
+    }
+
+    static Model getModel() {
+        return model;
+    }
+
+    public Summary getCurrentSummary() {
+        return currentEvent.getSummarySheet();
     }
 
 }

@@ -17,13 +17,14 @@ public class DataManager {
     // Il DataManager deve tener traccia di quali oggetti in memoria
     // corrispondono a quali record del DB. Per questo usa una doppia
     // mappa per ciascun tipo di oggetto caricato
-    private Map<User, Integer> userObjects;
-    private Map<Integer, User> idToUserObject;
+    private Map<Task, Integer> taskObjects;
+    private Map<Integer, Task> idToTaskObject;
 
-    private Map<Event, Integer> eventObject;
+    private Map<Event, Integer> eventObjects;
     private Map<Integer, Event> idToEventObject;
 
     private Map<Menu, Integer> menuObjects;
+
     private Map<Integer, Menu> idToMenuObject;
 
     private Map<Section, Integer> sectionObjects;
@@ -34,11 +35,11 @@ public class DataManager {
 
     public DataManager() {
 
-        this.eventObject = new HashMap<>();
+        this.eventObjects = new HashMap<>();
         this.idToEventObject = new HashMap<>();
 
-        this.userObjects = new HashMap<>();
-        this.idToUserObject = new HashMap<>();
+        this.taskObjects = new HashMap<>();
+        this.idToTaskObject = new HashMap<>();
         this.menuObjects = new HashMap<>();
         this.idToMenuObject = new HashMap<>();
         this.sectionObjects = new HashMap<>();
@@ -47,47 +48,6 @@ public class DataManager {
         this.idToItemObject = new HashMap<>();
 
 
-    }
-
-    /**
-     * @return all the events of the database
-     */
-    public List<Event> loadEvents() {
-        Statement st = null;
-        String query = "SELECT * FROM Events";
-        List<Event> ret = new ArrayList<>();
-
-        try {
-            st = this.connection.createStatement();
-            ResultSet rs = st.executeQuery(query);
-            while (rs.next()) {
-                String name = rs.getString("nome");
-                System.out.println(name);
-                int id = rs.getInt("id");
-
-                // Verifica se per caso l'ha già caricata
-                Event event = this.idToEventObject.get(id);
-
-                if (event == null) {
-                    event = new Event(name);
-
-                    if (event != null) {
-                        ret.add(event);
-                        this.eventObject.put(event, id);
-                        this.idToEventObject.put(id, event);
-                    }
-                }
-            }
-        } catch (SQLException exc) {
-            exc.printStackTrace();
-        } finally {
-            try {
-                if (st != null) st.close();
-            } catch (SQLException exc2) {
-                exc2.printStackTrace();
-            }
-        }
-        return ret;
     }
 
     public void initialize() throws SQLException {
@@ -250,6 +210,125 @@ public class DataManager {
 //        });
     }
 
+    /**
+     * @return all the events of the database
+     */
+    public List<Event> loadEvents() {
+        Statement st = null;
+        String query = "SELECT * FROM Events";
+        List<Event> ret = new ArrayList<>();
+
+        try {
+            st = this.connection.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()) {
+                String name = rs.getString("name");
+                System.out.println(name);
+                int id = rs.getInt("id");
+
+                // Verifica se per caso l'ha già caricata
+                Event event = this.idToEventObject.get(id);
+
+                if (event == null) {
+                    event = new Event(name);
+
+                    if (event != null) {
+                        ret.add(event);
+                        this.eventObjects.put(event, id);
+                        this.idToEventObject.put(id, event);
+                    }
+                }
+            }
+        } catch (SQLException exc) {
+            exc.printStackTrace();
+        } finally {
+            try {
+                if (st != null) st.close();
+            } catch (SQLException exc2) {
+                exc2.printStackTrace();
+            }
+        }
+        return ret;
+    }
+
+
+    /**
+     *
+     * @param event è l'evento da cui prendere i task
+     * @return ritorna una lista di task dell'evento
+     */
+    public List<Task> loadTasks(Event event) {
+        int eventId = eventObjects.get(event);
+        Statement st = null;
+        String query = "select C.name as \"Cuoco\", R.name as \"Ricetta\", T2.starttime as \"Turno\" from Events " +
+                "inner join Summary S on Events.id = S.event_id " +
+                "inner join Tasks T on S.task_id = T.id " +
+                "inner join Recipes R on T.recipe_id = R.id " +
+                "inner join Turn T2 on T.turn_id = T2.id " +
+                "inner join Cooks C on T.cook_id = C.id " +
+                "where Events.name=?\'" + event.getName() + "\'";
+        PreparedStatement preparedStatement = null;
+        List<Task> ret = new ArrayList<>();
+
+        try {
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, event.getName());
+            ResultSet rs = preparedStatement.executeQuery(query);
+            //TODO non entra nel while
+            while (rs.next()) {
+                String cuoco = rs.getString(1); //l'informazione si trova nella posizione 1
+                String ricetta = rs.getString(2); //nella posizione 2
+                String turno = rs.getString(3); //nella posizione 3
+                System.out.println(cuoco);
+                System.out.println(ricetta);
+                System.out.println(turno);
+                int id = rs.getInt("id");
+
+                // Verifica se per caso l'ha già caricata
+                Task task = this.idToTaskObject.get(id);
+
+                if (task == null) {
+                    task = new Task(new Recipe(ricetta), new Cook(cuoco));
+
+                    if (task != null) {
+                        ret.add(task);
+                        this.taskObjects.put(task, id);
+                        this.idToTaskObject.put(id, task);
+                    }
+                }
+            }
+        } catch (SQLException exc) {
+            exc.printStackTrace();
+        } finally {
+            try {
+                if (st != null) st.close();
+            } catch (SQLException exc2) {
+                exc2.printStackTrace();
+            }
+        }
+        return ret;
+    }
+
+    private void removeItem(MenuItem it) {
+        int iId = itemObjects.get(it);
+        String sqlItems = "DELETE FROM MenuItems WHERE id=?";
+        PreparedStatement pstItems = null;
+        try {
+            pstItems = connection.prepareStatement(sqlItems);
+            pstItems.setInt(1, iId);
+            pstItems.executeUpdate();
+        } catch (SQLException exc) {
+            exc.printStackTrace();
+
+        } finally {
+            try {
+                if (pstItems != null) pstItems.close();
+            } catch (SQLException exc2) {
+                exc2.printStackTrace();
+            }
+
+        }
+    }
 
 //    private int writeNewMenu(Menu m) {
 //
@@ -288,8 +367,8 @@ public class DataManager {
 //            }
 //        }
 //        return id;
-//    }
 
+//    }
 //    private void writeMenuChanges(Menu m) {
 //        int mid = menuObjects.get(m);
 //        int uid = userObjects.get(m.getOwner());
@@ -319,6 +398,7 @@ public class DataManager {
 //                exc2.printStackTrace();
 //            }
 //        }
+
 //    }
 
     private void removeMenu(Menu m) {
@@ -361,7 +441,6 @@ public class DataManager {
         }
     }
 
-
 //    private int writeNewSection(int menuId, int position, Section sec) {
 //
 //        String sql = "INSERT INTO Sections(menu, name, position) VALUES(?,?,?)";
@@ -393,8 +472,8 @@ public class DataManager {
 //        }
 //
 //        return id;
-//    }
 
+//    }
 //    private void writeSectionChanges(int menuId, int position, Section sec) {
 //        int sId = sectionObjects.get(sec);
 //        String sql = "UPDATE Sections SET menu=?, name=?, position=? WHERE id=" + sId;
@@ -417,6 +496,7 @@ public class DataManager {
 //                exc2.printStackTrace();
 //            }
 //        }
+
 //    }
 
     private void removeSection(Section s) {
@@ -452,7 +532,6 @@ public class DataManager {
 
         }
     }
-
 //    private int writeNewItem(int menuId, int secId, int position, MenuItem item) {
 //
 //        String sql = "INSERT INTO MenuItems(menu, section, description, recipe, position) " +
@@ -488,8 +567,8 @@ public class DataManager {
 //        }
 //
 //        return id;
-//    }
 
+//    }
 //    private void writeItemChanges(int menuId, int secId, int position, MenuItem item) {
 //        int itId = itemObjects.get(item);
 //        String sql = "UPDATE MenuItems SET menu=?, section=?, description=?, recipe=?, position=? WHERE " +
@@ -516,28 +595,8 @@ public class DataManager {
 //                exc2.printStackTrace();
 //            }
 //        }
+
 //    }
-
-    private void removeItem(MenuItem it) {
-        int iId = itemObjects.get(it);
-        String sqlItems = "DELETE FROM MenuItems WHERE id=?";
-        PreparedStatement pstItems = null;
-        try {
-            pstItems = connection.prepareStatement(sqlItems);
-            pstItems.setInt(1, iId);
-            pstItems.executeUpdate();
-        } catch (SQLException exc) {
-            exc.printStackTrace();
-
-        } finally {
-            try {
-                if (pstItems != null) pstItems.close();
-            } catch (SQLException exc2) {
-                exc2.printStackTrace();
-            }
-
-        }
-    }
 
 //    public User loadUser(String userName) {
 //        PreparedStatement pst = null;
@@ -783,6 +842,8 @@ public class DataManager {
         }
 
     }
+
+
 
 //    private User innerLoadUser(int userId) {
 //        // verifico se l'ho già caricato in precedenza
