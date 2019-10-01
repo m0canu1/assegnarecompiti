@@ -14,5 +14,4 @@
             <Button fx:id="removeTask" text="REMOVE"></Button>
         </HBox>
     </children>
-
 </VBox>

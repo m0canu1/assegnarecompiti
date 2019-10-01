@@ -52,4 +52,8 @@ public class Task {
     public void setDoses(int doses) {
         this.doses = doses;
     }
+
+    public String getName() {
+        return this.recipe.getName();
+    }
 }
