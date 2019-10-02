@@ -1,6 +1,4 @@
-import classfiles.Summary;
 import classfiles.Task;
-import com.sun.webkit.Timer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,7 +17,6 @@ import java.util.ResourceBundle;
 public class SummaryEditorController implements Initializable {
 
     private Stage stage;
-    private Summary currentSummary;
     Task tempTask;
 
 
@@ -32,6 +29,7 @@ public class SummaryEditorController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initializeButtons();
+//        Model.getModel().updateTaskObservableList();
         initializeList();
     }
 
@@ -40,6 +38,7 @@ public class SummaryEditorController implements Initializable {
     }
 
     private void initializeList() {
+//        Model.getModel().updateTaskObservableList();
         taskListView.setItems(Model.getModel().getTaskObservableList());
         taskListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         taskListView.getSelectionModel().selectedIndexProperty().addListener(((obsValue, oldValue, newValue) -> {
@@ -107,13 +106,5 @@ public class SummaryEditorController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public Summary getCurrentSummary() {
-        return currentSummary;
-    }
-
-    void setCurrentSummary(Summary currentSummary) {
-        this.currentSummary = currentSummary;
     }
 }
