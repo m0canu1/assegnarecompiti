@@ -67,6 +67,7 @@ public class Task {
         return this.recipe.getName();
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
