@@ -12,9 +12,11 @@ public class Model {
     private ObservableList<Event> eventObservableList = FXCollections.observableArrayList();
     private ObservableList<Task> taskObservableList = FXCollections.observableArrayList();
     private ObservableList<Cook> cookObservableList = FXCollections.observableArrayList();
+    private ObservableList<Recipe> recipeObservableList = FXCollections.observableArrayList();
     private Event currentEvent;
     private Task currentTask;
     private Cook currentCook;
+    private Recipe currentRecipe;
 
 
     private Model() {
@@ -41,10 +43,12 @@ public class Model {
             eventObservableList.add(new Event("gigi" + i));
             taskObservableList.add(new Task(new Recipe("banana" + i)));
             cookObservableList.add(new Cook("Paulino Dybala"));
+            recipeObservableList.add(new Recipe("picca"));
         }
 
-       currentEvent = getCurrentEventByIndex(0);
+        currentEvent = getCurrentEventByIndex(0);
         currentTask = getCurrentTaskByIndex(0);
+        currentRecipe = getCurrentRecipeByIndex(0);
 //        currentSummary = null;
     }
 
@@ -64,7 +68,6 @@ public class Model {
         return taskListName;
     }
 
-
     public ObservableList<String> getCookObservableList() {
         ObservableList<String> cookListName=FXCollections.observableArrayList();
         for (Cook c: cookObservableList) {
@@ -72,6 +75,15 @@ public class Model {
         }
         return cookListName;
     }
+
+    public ObservableList<String> getRecipeObservableList() {
+        ObservableList<String> recipeListName=FXCollections.observableArrayList();
+        for (Cook c: cookObservableList) {
+            recipeListName.add(c.getName());
+        }
+        return recipeListName;
+    }
+
 
     Event getCurrentEvent() {
         return currentEvent;
@@ -85,6 +97,8 @@ public class Model {
         return currentCook;
     }
 
+    Recipe getCurrentRecipe() { return currentRecipe; }
+
     public void setCurrentTask(Task currentTask) {
         this.currentTask = currentTask;
     }
@@ -97,6 +111,8 @@ public class Model {
         this.currentCook = currentCook;
     }
 
+    public void setCurrentRecipe(Recipe currentRecipe ) { this.currentRecipe = currentRecipe; }
+
     public Event getCurrentEventByIndex(int newIndex) {
         return eventObservableList.get(newIndex);
     }
@@ -108,6 +124,8 @@ public class Model {
     public Cook getCurrentCookByIndex(int newIndex) {
         return cookObservableList.get(newIndex);
     }
+
+    public Recipe getCurrentRecipeByIndex(int newIndex) { return recipeObservableList.get(newIndex); }
 
     static Model getModel() {
         return model;
