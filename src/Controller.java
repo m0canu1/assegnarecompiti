@@ -18,6 +18,9 @@ import java.util.ResourceBundle;
 public class Controller implements Initializable {
     private Stage stage;
 
+    private Event tempEvent;
+
+
     @FXML
     private Button openSummary;
 
@@ -45,8 +48,8 @@ public class Controller implements Initializable {
      *
      */
     private void initializeButtons() {
-        Event tempEvent = Model.getModel().getCurrentEvent();
         openSummary.setOnAction((ActionEvent e) -> {
+                    tempEvent = Model.getModel().getCurrentEvent();
                     if (tempEvent.hasSummarySheet()) {
                         editSummary(tempEvent.getSummarySheet());
                     } else {
@@ -69,7 +72,7 @@ public class Controller implements Initializable {
             Stage stage = new Stage();
             SummaryEditorController summaryEditorController = fxmlLoader.getController();
             summaryEditorController.setStage(stage);
-            stage.setTitle("Summary Sheet Home");
+            stage.setTitle("Summary Sheet Home: " + tempEvent);
             summaryEditorController.setCurrentSummary(summary);
             stage.setScene(scene);
             stage.show();
