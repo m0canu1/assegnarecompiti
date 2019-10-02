@@ -2,6 +2,7 @@ import classfiles.Recipe;
 import classfiles.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
@@ -14,6 +15,8 @@ import java.util.ResourceBundle;
 public class TaskAdderController implements Initializable {
 
     public Stage stage;
+
+    private Recipe tempRecipe;
 
     @FXML
     private ListView<String> recipeListView;
@@ -38,17 +41,24 @@ public class TaskAdderController implements Initializable {
         recipeListView.getSelectionModel().selectedIndexProperty().addListener(((obsValue, oldValue, newValue) -> {
             int newIndex = (int) newValue;
             if (!recipeListView.getSelectionModel().isEmpty()) {
+                System.out.println("Selected recipe");
                 Model.getModel().setCurrentRecipe(Model.getModel().getCurrentRecipeByIndex(newIndex));
             }
         }));
     }
 
     private void initializeButtons() {
-        Recipe tempRecipe = Model.getModel().getCurrentRecipe();
+
         selectRecipe.setOnAction((ActionEvent e) -> {
+            tempRecipe = Model.getModel().getCurrentRecipe();
+            Task newTask = new Task(tempRecipe);
+            Model.getModel().addNewTask(newTask);
             System.out.println("Add a new task with selected recipe");
+            Stage stage = (Stage) selectRecipe.getScene().getWindow();
+            stage.close();
         });
         bindToCook.setOnAction((ActionEvent e) -> {
+            tempRecipe = Model.getModel().getCurrentRecipe();
             System.out.println("Add new task and then open binder");
         });
     }

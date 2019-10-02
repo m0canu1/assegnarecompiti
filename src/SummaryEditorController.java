@@ -24,7 +24,7 @@ public class SummaryEditorController implements Initializable {
 
 
     @FXML
-    private ListView<String> taskListView;
+    public ListView<String> taskListView;
 
     @FXML
     private Button bindTask, removeTask, addNewTask;
@@ -48,6 +48,8 @@ public class SummaryEditorController implements Initializable {
                 System.out.println("New task selected" + newIndex);
                 Model.getModel().setCurrentTask(Model.getModel().getCurrentTaskByIndex(newIndex));
                 System.out.println("Current task: " + Model.getModel().getCurrentTaskByIndex(newIndex).getName());
+             //   taskListView.setItems(Model.getModel().getTaskObservableList());
+
             }
         }));
     }
@@ -104,6 +106,9 @@ public class SummaryEditorController implements Initializable {
             stage.setTitle("Add New Task");
             stage.setScene(scene);
             stage.show();
+            //Stage thisstage = (Stage) addNewTask.getScene().getWindow();
+            //thisstage.getOnHiding();
+            //taskListView.setItems(Model.getModel().getTaskObservableList());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -115,5 +120,9 @@ public class SummaryEditorController implements Initializable {
 
     void setCurrentSummary(Summary currentSummary) {
         this.currentSummary = currentSummary;
+    }
+
+    public void updateListView(){
+        taskListView.setItems(Model.getModel().getTaskObservableList());
     }
 }
