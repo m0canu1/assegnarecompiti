@@ -251,7 +251,6 @@ public class DataManager {
         return ret;
     }
 
-
     /**
      *
      * @param event è l'evento da cui prendere i task

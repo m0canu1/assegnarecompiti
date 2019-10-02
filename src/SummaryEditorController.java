@@ -28,8 +28,8 @@ public class SummaryEditorController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        initializeButtons();
 //        Model.getModel().updateTaskObservableList();
+        initializeButtons();
         initializeList();
     }
 
@@ -37,31 +37,31 @@ public class SummaryEditorController implements Initializable {
         this.stage = stage;
     }
 
+
     private void initializeList() {
-//        Model.getModel().updateTaskObservableList();
-        taskListView.setItems(Model.getModel().getTaskObservableList());
+        taskListView.setItems(Model.getModel().getCurrentEvent().getTaskListAsString());
         taskListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         taskListView.getSelectionModel().selectedIndexProperty().addListener(((obsValue, oldValue, newValue) -> {
             int newIndex = (int) newValue;
             if (!taskListView.getSelectionModel().isEmpty()) {
                 System.out.println("New task selected" + newIndex);
-                Model.getModel().setCurrentTask(Model.getModel().getCurrentTaskByIndex(newIndex));
-                System.out.println("Current task: " + Model.getModel().getCurrentTaskByIndex(newIndex).getName());
+                Model.getModel().getCurrentEvent().setCurrentTask(Model.getModel().getCurrentEvent().getCurrentTaskByIndex(newIndex));
+                System.out.println("Current task: " + Model.getModel().getCurrentEvent().getCurrentTaskByIndex(newIndex).getName());
             }
         }));
     }
 
     private void initializeButtons() {
         bindTask.setOnAction((ActionEvent e) -> {
-            tempTask = Model.getModel().getCurrentTask();
+            tempTask = Model.getModel().getCurrentEvent().getCurrentTask();
             taskBinder(tempTask);
         });
         removeTask.setOnAction((ActionEvent e) -> {
-            tempTask = Model.getModel().getCurrentTask();
+            tempTask = Model.getModel().getCurrentEvent().getCurrentTask();
             taskRemover(tempTask);
         });
         addNewTask.setOnAction((ActionEvent e) -> {
-            tempTask = Model.getModel().getCurrentTask();
+            tempTask = Model.getModel().getCurrentEvent().getCurrentTask();
             taskAdder();
         });
         System.out.print("Initialized SEC Buttons!");
@@ -86,8 +86,10 @@ public class SummaryEditorController implements Initializable {
     }
 
     private void taskRemover(Task task) {
-        Model.getModel().removeTaskFromView(task);
-        taskListView.setItems(Model.getModel().getTaskObservableList());
+//        Model.getModel().removeTaskFromView(task);
+        Model.getModel().getCurrentEvent().deleteTask(task);
+//        taskListView.setItems(Model.getModel().getTaskObservableList());
+        taskListView.setItems(Model.getModel().getCurrentEvent().getTaskListAsString());
         System.out.println("remove that task" + task.getName());
     }
 
@@ -107,4 +109,15 @@ public class SummaryEditorController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    public void shutdown() {
+        // cleanup code here...
+        System.out.println("\n\nCHIUSO SUMMARY EDIT");
+//        Model.getModel().updateTaskObservableList();
+//        taskListView.getItems().clear();
+        // note that typically (i.e. if Platform.isImplicitExit() is true, which is the default)
+        // closing the last open window will invoke Platform.exit() anyway
+//        Platform.exit();
+    }
+
 }
