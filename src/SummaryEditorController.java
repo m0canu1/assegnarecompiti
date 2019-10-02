@@ -1,5 +1,6 @@
 import classfiles.Summary;
 import classfiles.Task;
+import com.sun.webkit.Timer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +20,8 @@ public class SummaryEditorController implements Initializable {
 
     private Stage stage;
     private Summary currentSummary;
+    Task tempTask;
+
 
     @FXML
     private ListView<String> taskListView;
@@ -42,20 +45,24 @@ public class SummaryEditorController implements Initializable {
         taskListView.getSelectionModel().selectedIndexProperty().addListener(((obsValue, oldValue, newValue) -> {
             int newIndex = (int) newValue;
             if (!taskListView.getSelectionModel().isEmpty()) {
+                System.out.println("New task selected" + newIndex);
                 Model.getModel().setCurrentTask(Model.getModel().getCurrentTaskByIndex(newIndex));
+                System.out.println("Current task: " + Model.getModel().getCurrentTaskByIndex(newIndex).getName());
             }
         }));
     }
 
     private void initializeButtons() {
-        Task tempTask = Model.getModel().getCurrentTask();
         bindTask.setOnAction((ActionEvent e) -> {
+            tempTask = Model.getModel().getCurrentTask();
             taskBinder(tempTask);
         });
         removeTask.setOnAction((ActionEvent e) -> {
+            tempTask = Model.getModel().getCurrentTask();
             taskRemover(tempTask);
         });
         addNewTask.setOnAction((ActionEvent e) -> {
+            tempTask = Model.getModel().getCurrentTask();
             taskAdder();
         });
         System.out.print("Initialized SEC Buttons!");
@@ -80,7 +87,9 @@ public class SummaryEditorController implements Initializable {
     }
 
     private void taskRemover(Task task) {
-        System.out.println("remove that task");
+        Model.getModel().removeTaskFromView(task);
+        taskListView.setItems(Model.getModel().getTaskObservableList());
+        System.out.println("remove that task" + task.getName());
     }
 
     private void taskAdder() {

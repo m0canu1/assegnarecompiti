@@ -9,16 +9,16 @@ public class Model {
     private static final Model model = new Model();
     private DataManager dataManager = new DataManager();
     //private Summary currentSummary;
-    private final ObservableList<Event> eventObservableList = FXCollections.observableArrayList();
-    private final ObservableList<Task> taskObservableList = FXCollections.observableArrayList();
-    private final ObservableList<Cook> cookObservableList = FXCollections.observableArrayList();
+    private ObservableList<Event> eventObservableList = FXCollections.observableArrayList();
+    private ObservableList<Task> taskObservableList = FXCollections.observableArrayList();
+    private ObservableList<Cook> cookObservableList = FXCollections.observableArrayList();
     private Event currentEvent;
     private Task currentTask;
     private Cook currentCook;
 
 
     private Model() {
-        try {
+ /*       try {
             dataManager.initialize();
         } catch (SQLException exc) {
 //         Rimando l'eccezione a terminale
@@ -30,7 +30,7 @@ public class Model {
             eventObservableList.add(e);
             dataManager.loadTasks(e);
         }
-
+*/
         //caricamento lista task
 //        for (Task t : dataManager.loadTasks()) {
 //            taskObservableList.add(t);
@@ -38,13 +38,13 @@ public class Model {
 
         //solo un test
         for(int i = 0; i < 10; i++){
-//            eventObservableList.add(new Event("gigi" + i));
-            taskObservableList.add(new Task(new Recipe("banana")));
+            eventObservableList.add(new Event("gigi" + i));
+            taskObservableList.add(new Task(new Recipe("banana" + i)));
             cookObservableList.add(new Cook("Paulino Dybala"));
         }
 
-//        currentEvent = getCurrentEventByIndex(0);
-//        currentTask = getCurrentTaskByIndex(0);
+       currentEvent = getCurrentEventByIndex(0);
+        currentTask = getCurrentTaskByIndex(0);
 //        currentSummary = null;
     }
 
@@ -115,6 +115,11 @@ public class Model {
 
     public Summary getCurrentSummary() {
         return currentEvent.getSummarySheet();
+    }
+
+    public void removeTaskFromView(Task t){
+        taskObservableList.remove(t);
+        setCurrentTask(null);
     }
 
 }

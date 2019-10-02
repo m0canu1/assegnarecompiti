@@ -1,5 +1,7 @@
 package classfiles;
 
+import java.util.Objects;
+
 public class Task {
 
     private Recipe recipe;
@@ -68,5 +70,21 @@ public class Task {
 
     public String getName() {
         return this.recipe.getName();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Task)) return false;
+        Task task = (Task) o;
+        return isAssigned() == task.isAssigned() &&
+                getRecipe().equals(task.getRecipe()) &&
+                Objects.equals(getCook(), task.getCook()) &&
+                Objects.equals(getTurn(), task.getTurn());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getRecipe(), isAssigned(), getCook(), getTurn());
     }
 }
