@@ -5,15 +5,28 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import java.net.URL?>
 
 <VBox xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="TaskAdderController"
-            prefHeight="400.0" prefWidth="600.0">
-    <Label>Select a new task:</Label>
-    <ListView fx:id="recipeListView"></ListView>
-    <HBox>
-        <Button fx:id="selectRecipe" text="ADD"></Button>
-        <Button fx:id="bindToCook" text="BIND"></Button>
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="TaskAdderController"
+      prefHeight="400.0" prefWidth="600.0"
+      alignment="CENTER">
+    <stylesheets>
+        <URL value="@design.css" />
+    </stylesheets>
+    <Label text="TASK ADDER" styleClass="header-section"></Label>
+    <Label text="Select a task to add" styleClass="description-section"></Label>
+    <Label styleClass="separator"></Label>
+    <HBox alignment="CENTER">
+        <Label styleClass="hsep"></Label>
+        <ListView fx:id="recipeListView" styleClass="list-section"></ListView>
+        <Label styleClass="hsep"></Label>
     </HBox>
+    <Label styleClass="separator"></Label>
+    <HBox alignment="CENTER">
+        <Button fx:id="selectRecipe" text="ADD" styleClass="button"></Button>
+        <Button fx:id="bindToCook" text="BIND" styleClass="button"></Button>
+    </HBox>
+    <Label styleClass="separator"></Label>
 </VBox>

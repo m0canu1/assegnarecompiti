@@ -4,11 +4,25 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.Label?>
+<?import java.net.URL?>
 
-<VBox prefHeight="800" prefWidth="400" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
-    <children>
-        <Label alignment="CENTER">HOME</Label>
-        <ListView fx:id="eventListView"/>
-        <Button fx:id="openSummary" alignment="CENTER_RIGHT" text="Open Summary"/>
-    </children>
+<?import javafx.scene.layout.HBox?>
+<VBox prefHeight="800" prefWidth="400" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller"
+      alignment="CENTER">
+    <stylesheets>
+        <URL value="@design.css" />
+    </stylesheets>
+
+    <Label text="Select your event" styleClass="description-section"></Label>
+    <Label text="HOME" styleClass="header-section"></Label>
+    <Label styleClass="separator"></Label>
+    <HBox alignment="CENTER">
+        <Label styleClass="hsep"></Label>
+        <ListView fx:id="eventListView" styleClass="list-section"/>
+        <Label styleClass="hsep"></Label>
+    </HBox>
+    <Label styleClass="separator"></Label>
+    <Button fx:id="openSummary" text="Open Summary" styleClass="button"/>
+    <Label styleClass="separator"></Label>
+
 </VBox>
