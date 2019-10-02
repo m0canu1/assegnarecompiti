@@ -7,7 +7,11 @@
 <VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="SummaryEditorController">
     <children>
         <Label>TASKS</Label>
-        <ListView fx:id="taskListView"></ListView>
+        <HBox>
+            <children>
+                <ListView fx:id="taskListView"></ListView>
+            </children>
+        </HBox>
         <HBox>
             <Button fx:id="addNewTask" text="ADD"></Button>
             <Button fx:id="bindTask" text="BIND"></Button>

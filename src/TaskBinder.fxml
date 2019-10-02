@@ -11,6 +11,16 @@
             fx:controller="TaskBinderController"
             prefHeight="400.0" prefWidth="600.0">
     <Label>Select the cook you would like to assign:</Label>
-    <ListView fx:id="cookListView"></ListView>
+    <HBox>
+
+        <ListView fx:id="cookListView"></ListView>
+        <VBox>
+            <Label>Select start of shift: </Label>
+            <ChoiceBox fx:id="startShiftHour"></ChoiceBox>
+            <Label>Select end of shift: </Label>
+            <ChoiceBox fx:id="endShiftHour"></ChoiceBox>
+        </VBox>
+
+    </HBox>
     <Button fx:id="assignCook" text="ASSIGN TO TASK"></Button>
 </VBox>
