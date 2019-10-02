@@ -19,6 +19,7 @@ public class TaskBinderController implements Initializable {
 
     private Stage stage;
     private Task currentTask;
+    private Cook tempCook;
 
     @FXML
     private ListView<String> cookListView;
@@ -58,8 +59,8 @@ public class TaskBinderController implements Initializable {
     }
 
     private void initializeButtons() {
-        Cook tempCook = Model.getModel().getCurrentCook();
         assignCook.setOnAction((ActionEvent e) -> {
+            tempCook = Model.getModel().getCurrentCook();
             System.out.println("Assign the cook to the turn");
         });
     }
