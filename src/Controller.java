@@ -1,4 +1,4 @@
-import classfiles.*;
+import classfiles.Event;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,7 +9,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.stage.Stage;
-import persistence.DataManager;
 
 import java.io.IOException;
 import java.net.URL;
@@ -39,7 +38,9 @@ public class Controller implements Initializable {
         eventListView.getSelectionModel().selectedIndexProperty().addListener(((obsValue, oldValue, newValue) -> {
             int newIndex = (int) newValue;
             if (!eventListView.getSelectionModel().isEmpty()) {
+                System.out.println("New event selected" + newIndex);
                 Model.getModel().setCurrentEvent(Model.getModel().getCurrentEventByIndex(newIndex));
+                System.out.println("Current selected event: " + Model.getModel().getCurrentEventByIndex(newIndex).getName());
             }
         }));
     }
@@ -47,23 +48,18 @@ public class Controller implements Initializable {
     /**
      *
      */
+    //TODO quando clicco su openSummary devo sapere qual era l'evento selezionato
     private void initializeButtons() {
         openSummary.setOnAction((ActionEvent e) -> {
-                    tempEvent = Model.getModel().getCurrentEvent();
-                    if (tempEvent.hasSummarySheet()) {
-                        editSummary(tempEvent.getSummarySheet());
-                    } else {
-                        tempEvent.setSummarySheet(new Summary());
-                        editSummary(tempEvent.getSummarySheet());
-                    }
+            openSummary();
         });
     }
 
     /**
      *
-     * @param summary
+     * @param
      */
-    private void editSummary(Summary summary) {
+    private void openSummary() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("SummaryEditor.fxml"));
@@ -72,9 +68,10 @@ public class Controller implements Initializable {
             Stage stage = new Stage();
             SummaryEditorController summaryEditorController = fxmlLoader.getController();
             summaryEditorController.setStage(stage);
+//            summaryEditorController.ini;
             stage.setTitle("Summary Sheet Home: " + tempEvent);
-            summaryEditorController.setCurrentSummary(summary);
             stage.setScene(scene);
+            stage.setOnHidden(e -> summaryEditorController.shutdown());
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

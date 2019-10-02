@@ -25,6 +25,7 @@ public class Model {
     private HashMap<Event, List<Task>> eventTaskHashMap = new HashMap<>();
 
     private Model() {
+
         try {
             dataManager.initialize();
         } catch (SQLException exc) {
@@ -99,9 +100,25 @@ public class Model {
     }
 
     public void updateTaskObservableList() {
+        if (taskObservableList.isEmpty())
+            System.out.println("\n1. taskObservableList VUOTA");
+        else
+            System.out.println("1. taskObservableList PIENA");
 
         taskObservableList.removeAll();
-        taskObservableList.addAll(currentEvent.getTaskList());
+
+        if (taskObservableList.isEmpty())
+            System.out.println("2. taskObservableList VUOTA");
+        else
+            System.out.println("2. taskObservableList PIENA");
+//        taskObservableList.notify();
+        if (!currentEvent.getTaskListAsString().isEmpty())
+            taskObservableList.addAll((Task) currentEvent.getTaskListAsString());
+
+        if (taskObservableList.isEmpty())
+            System.out.println("3. taskObservableList VUOTA");
+        else
+            System.out.println("3. taskObservableList PIENA");
 
 
     }
@@ -123,13 +140,14 @@ public class Model {
     }
 
     public void setCurrentTask(Task currentTask) {
-        this.currentTask = currentTask;
+        currentTask = currentTask;
     }
 
     public void setCurrentEvent(Event event) {
-        this.currentEvent = event;
+        currentEvent = event;
 //        updateTaskObservableList(); //TODO per evitare di contattare il database ad ogni cambio scelta
     }
+
 
     public void setCurrentCook(Cook currentCook) {
         this.currentCook = currentCook;
