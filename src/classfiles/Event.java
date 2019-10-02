@@ -1,14 +1,23 @@
 package classfiles;
 
-import java.util.ArrayList;
-import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class Event {
     
     private int id;
     private String name;
     private Menu menu_selected;
-    private List<Task> taskList = new ArrayList<>();
+    private ObservableList<Task> taskObservableList = FXCollections.observableArrayList();
+    private Task currentTask;
+
+    public Task getCurrentTask() {
+        return currentTask;
+    }
+
+    public void setCurrentTask(Task currentTask) {
+        this.currentTask = currentTask;
+    }
 
     public Event(String name) {this.name = name;}
 
@@ -18,15 +27,27 @@ public class Event {
 
     public void setMenu(Menu m) {this.menu_selected = m;}
 
-    public void addTask(Task task) {this.taskList.add(task);}
+    public void addTask(Task task) {this.taskObservableList.add(task);}
 
     public boolean hasTask(Task task) {
-        return this.taskList.contains(task);
+        return this.taskObservableList.contains(task);
     }
 
-    public void deleteTask(Task task) {this.taskList.remove(task);}
+    public Task getCurrentTaskByIndex(int newIndex) {
+        return taskObservableList.get(newIndex);
+    }
 
-    public List<Task> getTaskList() {
-        return taskList;
+    public void deleteTask(Task task) {
+        System.out.println("Provo ad eliminare il task");
+        this.taskObservableList.remove(task);
+    }
+
+    public ObservableList<String> getTaskListAsString() {
+        ObservableList<String> observableList = FXCollections.observableArrayList();
+        for (Task e : taskObservableList) {
+            observableList.add(e.getName());
+        }
+
+        return observableList;
     }
 }
