@@ -7,7 +7,8 @@ public class Task {
     private Recipe recipe;
     private boolean assigned;
     private Cook cook; //TODO maybe more cooks?
-    private Turn turn;
+    private String startTime;
+    private String endTime;
     private int estimatedTime;
     private int doses;
 
@@ -21,10 +22,11 @@ public class Task {
         this.assigned = true;
     }
 
-    public Task(Recipe recipe, Cook cook, Turn turn) {
+    public Task(Recipe recipe, Cook cook, String startTime, String endTime) {
         this.recipe = recipe;
         this.cook = cook;
-        this.turn = turn;
+        this.startTime = startTime;
+        this.endTime = endTime;
         this.assigned = true;
     }
 
@@ -32,16 +34,9 @@ public class Task {
         return recipe;
     }
 
-    public Turn getTurn() {
-        return turn;
-    }
-
-    public void setTurn(Turn turn) {
-        this.turn = turn;
-    }
 
     public boolean isAssigned() {
-        return turn != null;
+        return this.assigned;
     }
 
     public Cook getCook() {
@@ -72,6 +67,7 @@ public class Task {
         return this.recipe.getName();
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -79,12 +75,11 @@ public class Task {
         Task task = (Task) o;
         return isAssigned() == task.isAssigned() &&
                 getRecipe().equals(task.getRecipe()) &&
-                Objects.equals(getCook(), task.getCook()) &&
-                Objects.equals(getTurn(), task.getTurn());
+                Objects.equals(getCook(), task.getCook());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getRecipe(), isAssigned(), getCook(), getTurn());
+        return Objects.hash(getRecipe(), isAssigned(), getCook());
     }
 }

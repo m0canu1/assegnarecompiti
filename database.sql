@@ -52,8 +52,7 @@ CREATE TABLE `Events` (
   `name` varchar(50) DEFAULT NULL,
   `summary_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `Events_Summary_id_fk` (`summary_id`),
-  CONSTRAINT `Events_Summary_id_fk` FOREIGN KEY (`summary_id`) REFERENCES `Summary` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+  KEY `Events_Summary_id_fk` (`summary_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -205,32 +204,6 @@ INSERT INTO `Sections` VALUES (3,1,'Primi',NULL),(3,2,'Secondi',NULL),(3,3,'Dess
 UNLOCK TABLES;
 
 --
--- Table structure for table `Summary`
---
-
-DROP TABLE IF EXISTS `Summary`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Summary` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `task_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `task_id` (`task_id`),
-  CONSTRAINT `task_id` FOREIGN KEY (`task_id`) REFERENCES `Tasks` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Summary`
---
-
-LOCK TABLES `Summary` WRITE;
-/*!40000 ALTER TABLE `Summary` DISABLE KEYS */;
-INSERT INTO `Summary` VALUES (1,1);
-/*!40000 ALTER TABLE `Summary` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `Tasks`
 --
 
@@ -245,10 +218,13 @@ CREATE TABLE `Tasks` (
   `turn_id` int(11) DEFAULT NULL,
   `estimaedTime` time DEFAULT NULL,
   `doses` int(11) DEFAULT NULL,
+  `event_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `recipe_id` (`recipe_id`),
   KEY `cook_id` (`cook_id`),
   KEY `turn_id` (`turn_id`),
+  KEY `Tasks_Events_id_fk` (`event_id`),
+  CONSTRAINT `Tasks_Events_id_fk` FOREIGN KEY (`event_id`) REFERENCES `Events` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `cook_id` FOREIGN KEY (`cook_id`) REFERENCES `Cooks` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `recipe_id` FOREIGN KEY (`recipe_id`) REFERENCES `Recipes` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `turn_id` FOREIGN KEY (`turn_id`) REFERENCES `Turn` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
@@ -261,7 +237,7 @@ CREATE TABLE `Tasks` (
 
 LOCK TABLES `Tasks` WRITE;
 /*!40000 ALTER TABLE `Tasks` DISABLE KEYS */;
-INSERT INTO `Tasks` VALUES (1,1,1,1,1,NULL,NULL),(3,4,1,2,1,NULL,NULL);
+INSERT INTO `Tasks` VALUES (1,1,1,1,1,NULL,NULL,1),(3,4,1,2,1,NULL,NULL,1);
 /*!40000 ALTER TABLE `Tasks` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -346,4 +322,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-01 15:05:42
+-- Dump completed on 2019-10-02 10:08:51

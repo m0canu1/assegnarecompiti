@@ -223,7 +223,7 @@ public class DataManager {
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
                 String name = rs.getString("name");
-                System.out.println(name);
+//                System.out.println(name);
                 int id = rs.getInt("id");
 
                 // Verifica se per caso l'ha già caricata
@@ -251,7 +251,6 @@ public class DataManager {
         return ret;
     }
 
-
     /**
      *
      * @param event è l'evento da cui prendere i task
@@ -260,7 +259,7 @@ public class DataManager {
     public List<Task> loadTasks(Event event) {
         int eventId = eventObjects.get(event);
         Statement st = null;
-        String query = "select T.id, C.name as \"Cuoco\", R.name as \"Ricetta\", T2.starttime as \"Turno\" from Events inner join Summary S on Events.id = S.event_id inner join Tasks T on S.task_id = T.id inner join Recipes R on T.recipe_id = R.id inner join Turn T2 on T.turn_id = T2.id inner join Cooks C on T.cook_id = C.id where Events.name=\'" + event.getName() + "\'";
+        java.lang.String query = "SELECT T.id, Recipes.name, C.name, T.start_time, T.end_time from Recipes right join Tasks T on Recipes.id = T.ricetta right join Cooks C on T.cuoco = C.id right join Events E on T.evento = E.id where E.name =\'" + event.getName() + "\'";
         PreparedStatement preparedStatement = null;
         List<Task> ret = new ArrayList<>();
 
@@ -268,21 +267,23 @@ public class DataManager {
             preparedStatement = connection.prepareStatement(query);
 //            preparedStatement.setString(1, event.getName());
             ResultSet rs = preparedStatement.executeQuery(query);
-            //TODO non entra nel while
             while (rs.next()) {
-                String cuoco = rs.getString(2); //l'informazione si trova nella posizione 1
-                String ricetta = rs.getString(3); //nella posizione 2
-                String turno = rs.getString(4); //nella posizione 3
-                System.out.println("Cuoco " + cuoco);
-                System.out.println("Ricetta " + ricetta);
-                System.out.println("Inizio del turno " + turno);
+                String ricetta = rs.getString(2);
+                String cuoco = rs.getString(3);
+                String startTime = rs.getString(4);
+                String endTime = rs.getString(5);
+//                System.out.println("\n\n" + event.getName());
+//                System.out.println("Ricetta: " + ricetta);
+//                System.out.println("Cuoco: " + cuoco);
+//                System.out.println("Inizio del turno: " + startTime);
+//                System.out.println("Fine del turno: " + endTime);
                 int id = rs.getInt("id");
 
                 // Verifica se per caso l'ha già caricata
                 Task task = this.idToTaskObject.get(id);
 
                 if (task == null) {
-                    task = new Task(new Recipe(ricetta), new Cook(cuoco));
+                    task = new Task(new Recipe(ricetta), new Cook(cuoco), startTime, endTime);
 
                     if (task != null) {
                         ret.add(task);
