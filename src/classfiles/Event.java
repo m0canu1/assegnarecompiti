@@ -44,8 +44,14 @@ public class Event {
 
     public ObservableList<String> getTaskListAsString() {
         ObservableList<String> observableList = FXCollections.observableArrayList();
-        for (Task e : taskObservableList) {
-            observableList.add(e.getName());
+        if(taskObservableList != null) {
+            for (Task e : taskObservableList) {
+                if (e.getCook() != null) {
+                    observableList.add(e.getName() + "; Assigned to: " + e.getCook().getName());
+                } else {
+                    observableList.add(e.getName() + "; Not assigned.");
+                }
+            }
         }
 
         return observableList;

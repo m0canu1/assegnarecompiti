@@ -28,7 +28,7 @@ public class TaskAdderController implements Initializable {
     private Button selectRecipe;
 
     @FXML
-    private Button bindToCook;
+ //   private Button bindToCook;
     
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -60,7 +60,7 @@ public class TaskAdderController implements Initializable {
         selectRecipe.setOnAction((ActionEvent e) -> {
             tempRecipe = Model.getModel().getCurrentRecipe();
             Task newTask = new Task(tempRecipe);
-            Model.getModel().addNewTask(newTask);
+            Model.getModel().getCurrentEvent().addTask(newTask);
             System.out.println("Added a new task with selected recipe");
             Stage stage = (Stage) selectRecipe.getScene().getWindow();
             System.out.println(stage);
@@ -68,9 +68,9 @@ public class TaskAdderController implements Initializable {
           //  getStage().fireEvent();
             stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
         });
-        bindToCook.setOnAction((ActionEvent e) -> {
+        /*bindToCook.setOnAction((ActionEvent e) -> {
             tempRecipe = Model.getModel().getCurrentRecipe();
             System.out.println("Add new task and then open binder");
-        });
+        });*/
     }
 }

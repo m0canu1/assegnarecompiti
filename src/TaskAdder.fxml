@@ -26,7 +26,7 @@
     <Label styleClass="separator"></Label>
     <HBox alignment="CENTER">
         <Button fx:id="selectRecipe" text="ADD" styleClass="button"></Button>
-        <Button fx:id="bindToCook" text="BIND" styleClass="button"></Button>
+      <!--  <Button fx:id="bindToCook" text="BIND" styleClass="button"></Button> -->
     </HBox>
     <Label styleClass="separator"></Label>
 </VBox>

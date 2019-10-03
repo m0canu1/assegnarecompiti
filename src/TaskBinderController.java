@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 import java.net.URL;
@@ -53,7 +54,7 @@ public class TaskBinderController implements Initializable {
         cookListView.getSelectionModel().selectedIndexProperty().addListener(((obsValue, oldValue, newValue) -> {
             int newIndex = (int) newValue;
             if (!cookListView.getSelectionModel().isEmpty()) {
-                Model.getModel().setCurrentTask(Model.getModel().getCurrentTaskByIndex(newIndex));
+                Model.getModel().setCurrentCook(Model.getModel().getCurrentCookByIndex(newIndex));
             }
         }));
     }
@@ -62,6 +63,19 @@ public class TaskBinderController implements Initializable {
         assignCook.setOnAction((ActionEvent e) -> {
             tempCook = Model.getModel().getCurrentCook();
             System.out.println("Assign the cook to the turn");
+            if(tempCook != null) {
+                if(Model.getModel().getCurrentEvent().getCurrentTask() != null){
+                    System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAA\n");
+                    Model.getModel().getCurrentEvent().getCurrentTask().setCook(tempCook);
+
+                }else{
+                    System.out.println("BBBBBBBBBBBBBBBBBBBBBBBBBBBB\n");
+                }
+               // Model.getModel().getCurrentTask().setCook(tempCook);
+            }
+            Stage stage = (Stage) assignCook.getScene().getWindow();
+            stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
+
         });
     }
 

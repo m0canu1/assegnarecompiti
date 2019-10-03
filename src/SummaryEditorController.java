@@ -80,6 +80,8 @@ public class SummaryEditorController implements Initializable {
             taskBinderController.setCurrentTask(task);
             stage.setScene(scene);
             stage.show();
+            stage.setOnCloseRequest(windowEvent -> taskListView.setItems(Model.getModel().getCurrentEvent().getTaskListAsString()));
+
         } catch (IOException e) {
             e.printStackTrace();
         }
