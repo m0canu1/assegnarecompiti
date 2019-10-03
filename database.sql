@@ -50,9 +50,7 @@ CREATE TABLE `Events` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `menu` int(11) DEFAULT NULL,
   `name` varchar(50) DEFAULT NULL,
-  `summary_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `Events_Summary_id_fk` (`summary_id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -62,7 +60,7 @@ CREATE TABLE `Events` (
 
 LOCK TABLES `Events` WRITE;
 /*!40000 ALTER TABLE `Events` DISABLE KEYS */;
-INSERT INTO `Events` VALUES (1,1,'Matrimonio',1),(2,1,'Compleanno',NULL),(3,1,'Nubilato',NULL);
+INSERT INTO `Events` VALUES (1,1,'Matrimonio'),(2,1,'Compleanno'),(3,1,'Nubilato');
 /*!40000 ALTER TABLE `Events` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -212,23 +210,21 @@ DROP TABLE IF EXISTS `Tasks`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Tasks` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `recipe_id` int(11) DEFAULT NULL,
-  `assigned` tinyint(1) DEFAULT 0,
-  `cook_id` int(11) DEFAULT NULL,
-  `turn_id` int(11) DEFAULT NULL,
-  `estimaedTime` time DEFAULT NULL,
+  `ricetta` int(11) DEFAULT NULL,
+  `cuoco` int(11) DEFAULT NULL,
+  `evento` int(11) DEFAULT NULL,
   `doses` int(11) DEFAULT NULL,
-  `event_id` int(11) DEFAULT NULL,
+  `start_time` time DEFAULT NULL,
+  `end_time` time DEFAULT NULL,
+  `estimaedTime` time DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `recipe_id` (`recipe_id`),
-  KEY `cook_id` (`cook_id`),
-  KEY `turn_id` (`turn_id`),
-  KEY `Tasks_Events_id_fk` (`event_id`),
-  CONSTRAINT `Tasks_Events_id_fk` FOREIGN KEY (`event_id`) REFERENCES `Events` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  CONSTRAINT `cook_id` FOREIGN KEY (`cook_id`) REFERENCES `Cooks` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  CONSTRAINT `recipe_id` FOREIGN KEY (`recipe_id`) REFERENCES `Recipes` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  CONSTRAINT `turn_id` FOREIGN KEY (`turn_id`) REFERENCES `Turn` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  KEY `recipe_id` (`ricetta`),
+  KEY `cook_id` (`cuoco`),
+  KEY `Tasks_Events_id_fk` (`evento`),
+  CONSTRAINT `Tasks_Events_id_fk` FOREIGN KEY (`evento`) REFERENCES `Events` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `cook_id` FOREIGN KEY (`cuoco`) REFERENCES `Cooks` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `recipe_id` FOREIGN KEY (`ricetta`) REFERENCES `Recipes` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -237,32 +233,8 @@ CREATE TABLE `Tasks` (
 
 LOCK TABLES `Tasks` WRITE;
 /*!40000 ALTER TABLE `Tasks` DISABLE KEYS */;
-INSERT INTO `Tasks` VALUES (1,1,1,1,1,NULL,NULL,1),(3,4,1,2,1,NULL,NULL,1);
+INSERT INTO `Tasks` VALUES (1,1,1,1,NULL,'08:00:00','10:00:00',NULL),(2,3,NULL,1,NULL,NULL,NULL,NULL),(3,4,2,1,NULL,'08:00:00','10:00:00',NULL),(4,5,NULL,2,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `Tasks` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `Turn`
---
-
-DROP TABLE IF EXISTS `Turn`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Turn` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `starttime` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Turn`
---
-
-LOCK TABLES `Turn` WRITE;
-/*!40000 ALTER TABLE `Turn` DISABLE KEYS */;
-INSERT INTO `Turn` VALUES (1,'2019-11-01 14:43:52');
-/*!40000 ALTER TABLE `Turn` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -322,4 +294,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-02 10:08:51
+-- Dump completed on 2019-10-03  0:36:14
