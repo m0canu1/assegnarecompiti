@@ -254,20 +254,17 @@ public class DataManager {
      * @param task
      */
     public void bindCookToTask(Cook cook, Task task) {
-        System.out.println("\nTask Passato: \n" + task.toString());
-        System.out.println("\nTask tra cui cercare: \n" + taskObjects.toString());
-//        System.out.println(tId);
         System.out.println("\n");
-        int cId = cookObjects.get(cook);
         int tId = taskObjects.get(task);
+        int cId = cookObjects.get(cook);
         System.out.println(tId);
         String sql = "UPDATE Tasks SET cuoco = ? where id = ?";
         PreparedStatement pstmt = null;
 
         try {
             pstmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            pstmt.setInt(1, tId);
-            pstmt.setInt(2, cId);
+            pstmt.setInt(1, cId);
+            pstmt.setInt(2, tId);
 
             pstmt.executeUpdate();
 
