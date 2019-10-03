@@ -63,7 +63,7 @@ public class TaskBinderController implements Initializable {
             if(tempCook != null) {
                 if(Model.getModel().getCurrentEvent().getCurrentTask() != null){
                     System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAA\n");
-                    Model.getModel().getCurrentEvent().getCurrentTask().setCook(tempCook);
+//                    Model.getModel().getCurrentEvent().getCurrentTask().setCook(tempCook);
                     Model.getModel().bindCookToTask(tempCook);
 
                 }else{
