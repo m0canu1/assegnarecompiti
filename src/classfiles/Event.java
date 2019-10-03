@@ -7,7 +7,6 @@ public class Event {
     
     private int id;
     private String name;
-    private Menu menu_selected;
     private ObservableList<Task> taskObservableList = FXCollections.observableArrayList();
     private Task currentTask;
 
@@ -22,10 +21,6 @@ public class Event {
     public Event(String name) {this.name = name;}
 
     public String getName() {return this.name;}
-
-    public Menu getMenu() {return this.menu_selected;}
-
-    public void setMenu(Menu m) {this.menu_selected = m;}
 
     public void addTask(Task task) {this.taskObservableList.add(task);}
 

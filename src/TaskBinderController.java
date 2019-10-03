@@ -1,5 +1,4 @@
 import classfiles.Cook;
-import classfiles.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -19,8 +18,6 @@ import java.util.ResourceBundle;
 public class TaskBinderController implements Initializable {
 
     private Stage stage;
-    private Task currentTask;
-    private Cook tempCook;
 
     @FXML
     private ListView<String> cookListView;
@@ -72,14 +69,12 @@ public class TaskBinderController implements Initializable {
     }
 
     private void initializeButtons() {
-        assignCook.setOnAction((ActionEvent e) -> {
-            assignCook();
-        });
+        assignCook.setOnAction((ActionEvent e) -> assignCook());
     }
 
     private void assignCook() {
         if ((endShiftHour.getValue() == null && startShiftHour.getValue() == null) || ((endShiftHour.getValue() != null && startShiftHour.getValue() != null) && endShiftHour.getValue().compareTo(startShiftHour.getValue()) > 0)) {
-            tempCook = Model.getModel().getCurrentCook();
+            Cook tempCook = Model.getModel().getCurrentCook();
 //                System.out.println("Assign the cook to the turn");
             if (tempCook != null) {
                 if (Model.getModel().getCurrentEvent().getCurrentTask() != null) {
@@ -89,7 +84,7 @@ public class TaskBinderController implements Initializable {
                 }
                 // Model.getModel().getCurrentTask().setCook(tempCook);
             }
-            Stage stage = (Stage) assignCook.getScene().getWindow();
+            stage = (Stage) assignCook.getScene().getWindow();
             stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
         } else {
             System.out.println("MARIA SALVADOR ORARI SBALLATI");
@@ -97,11 +92,8 @@ public class TaskBinderController implements Initializable {
 
     }
 
-    public void setStage(Stage stage) {
+    void setStage(Stage stage) {
         this.stage = stage;
     }
 
-    public void setCurrentTask(Task task) {
-        this.currentTask = task;
-    }
 }

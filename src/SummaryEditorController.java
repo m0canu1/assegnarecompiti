@@ -1,6 +1,5 @@
 import classfiles.Task;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -10,7 +9,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -20,7 +18,7 @@ import java.util.ResourceBundle;
 public class SummaryEditorController implements Initializable {
 
     private Stage stage;
-    Task tempTask;
+    private Task tempTask;
 
 
     @FXML
@@ -31,7 +29,6 @@ public class SummaryEditorController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-//        Model.getModel().updateTaskObservableList();
         initializeButtons();
         initializeList();
     }
@@ -39,7 +36,6 @@ public class SummaryEditorController implements Initializable {
     void setStage(Stage stage) {
         this.stage = stage;
     }
-
 
     private void initializeList() {
         taskListView.setItems(Model.getModel().getCurrentEvent().getTaskListAsString());
@@ -52,18 +48,17 @@ public class SummaryEditorController implements Initializable {
 //                System.out.println("Current task: " + Model.getModel().getCurrentEvent().getCurrentTaskByIndex(newIndex).getName());
             }
         }));
+
         taskListView.setMinWidth(500);
-        taskListView.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent keyEvent) {
-                if (keyEvent.getCode() == KeyCode.DELETE) {
-                    taskRemover(Model.getModel().getCurrentEvent().getCurrentTask());
-                } else if (keyEvent.getCode() == KeyCode.ENTER) {
-                    if (!taskListView.getSelectionModel().isEmpty())
-                        taskBinder(Model.getModel().getCurrentEvent().getCurrentTask());
-                    else
-                        taskAdder();
-                }
+
+        taskListView.setOnKeyPressed(keyEvent -> {
+            if (keyEvent.getCode() == KeyCode.DELETE) {
+                taskRemover(Model.getModel().getCurrentEvent().getCurrentTask());
+            } else if (keyEvent.getCode() == KeyCode.ENTER) {
+                if (!taskListView.getSelectionModel().isEmpty())
+                    taskBinder();
+                else
+                    taskAdder();
             }
         });
     }
@@ -71,7 +66,7 @@ public class SummaryEditorController implements Initializable {
     private void initializeButtons() {
         bindTask.setOnAction((ActionEvent e) -> {
             tempTask = Model.getModel().getCurrentEvent().getCurrentTask();
-            taskBinder(tempTask);
+            taskBinder();
         });
         removeTask.setOnAction((ActionEvent e) -> {
             tempTask = Model.getModel().getCurrentEvent().getCurrentTask();
@@ -84,7 +79,7 @@ public class SummaryEditorController implements Initializable {
 //        System.out.print("Initialized SEC Buttons!");
     }
 
-    private void taskBinder(Task task) {
+    private void taskBinder() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("TaskBinder.fxml"));
@@ -93,8 +88,7 @@ public class SummaryEditorController implements Initializable {
             Stage stage = new Stage();
             TaskBinderController taskBinderController = fxmlLoader.getController();
             taskBinderController.setStage(stage);
-            stage.setTitle("Task Binder");
-            taskBinderController.setCurrentTask(task);
+            stage.setTitle("Task Binder per " + Model.getModel().getCurrentEvent().getCurrentTask().getName());
             stage.setScene(scene);
             stage.show();
             stage.setOnCloseRequest(windowEvent -> taskListView.setItems(Model.getModel().getCurrentEvent().getTaskListAsString()));
@@ -119,7 +113,7 @@ public class SummaryEditorController implements Initializable {
             fxmlLoader.setLocation(getClass().getResource("TaskAdder.fxml"));
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root, 350, 400);
-            Stage stage = new Stage();
+            stage = new Stage();
             TaskAdderController taskAdderController = fxmlLoader.getController();
             taskAdderController.setStage(stage);
             stage.setTitle("Add New Task");
