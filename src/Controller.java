@@ -49,6 +49,8 @@ public class Controller implements Initializable {
             }
         });*/
 
+        eventListView.setMinWidth(500);
+
         eventListView.setOnKeyPressed(keyEvent -> {
             if (keyEvent.getCode() == KeyCode.ENTER) {
                 openSummary();
