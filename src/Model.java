@@ -7,22 +7,18 @@ import javafx.collections.ObservableList;
 import persistence.DataManager;
 
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.List;
 
 public class Model {
     private static final Model model = new Model();
     private DataManager dataManager = new DataManager();
     private ObservableList<Event> eventObservableList = FXCollections.observableArrayList();
-    private ObservableList<Task> taskObservableList = FXCollections.observableArrayList();
+//    private ObservableList<Task> taskObservableList = FXCollections.observableArrayList();
     private ObservableList<Cook> cookObservableList = FXCollections.observableArrayList();
     private ObservableList<Recipe> recipeObservableList = FXCollections.observableArrayList();
     private Event currentEvent;
-    private Task currentTask;
+//    private Task currentTask;
     private Cook currentCook;
     private Recipe currentRecipe;
-
-    private HashMap<Event, List<Task>> eventTaskHashMap = new HashMap<>();
 
     private Model() {
 
@@ -61,19 +57,19 @@ public class Model {
         return eventListName;
     }
 
-    public ObservableList<String> getTaskObservableList() {
-//        if (!taskObservableList.isEmpty()){
-//        taskObservableList.removeAll();
-//        updateTaskObservableList();
-            ObservableList<String> taskListName = FXCollections.observableArrayList();
-            for (Task t : taskObservableList) {
-                taskListName.add(t.getName());
-                currentEvent.addTask(t);
-            }
-            return taskListName;
-//        }
-//        else return null;
-    }
+//    public ObservableList<String> getTaskObservableList() {
+////        if (!taskObservableList.isEmpty()){
+////        taskObservableList.removeAll();
+////        updateTaskObservableList();
+//            ObservableList<String> taskListName = FXCollections.observableArrayList();
+//            for (Task t : taskObservableList) {
+//                taskListName.add(t.getName());
+//                currentEvent.addTask(t);
+//            }
+//            return taskListName;
+////        }
+////        else return null;
+//    }
 
     public ObservableList<String> getCookObservableList() {
         ObservableList<String> cookListName = FXCollections.observableArrayList();
@@ -91,37 +87,37 @@ public class Model {
         return recipeListName;
     }
 
-    public void updateTaskObservableList() {
-        if (taskObservableList.isEmpty())
-            System.out.println("\n1. taskObservableList VUOTA");
-        else
-            System.out.println("1. taskObservableList PIENA");
-
-        taskObservableList.removeAll();
-
-        if (taskObservableList.isEmpty())
-            System.out.println("2. taskObservableList VUOTA");
-        else
-            System.out.println("2. taskObservableList PIENA");
-//        taskObservableList.notify();
-        if (!currentEvent.getTaskListAsString().isEmpty())
-            taskObservableList.addAll((Task) currentEvent.getTaskListAsString());
-
-        if (taskObservableList.isEmpty())
-            System.out.println("3. taskObservableList VUOTA");
-        else
-            System.out.println("3. taskObservableList PIENA");
-
-
-    }
+//    public void updateTaskObservableList() {
+//        if (taskObservableList.isEmpty())
+//            System.out.println("\n1. taskObservableList VUOTA");
+//        else
+//            System.out.println("1. taskObservableList PIENA");
+//
+//        taskObservableList.removeAll();
+//
+//        if (taskObservableList.isEmpty())
+//            System.out.println("2. taskObservableList VUOTA");
+//        else
+//            System.out.println("2. taskObservableList PIENA");
+////        taskObservableList.notify();
+//        if (!currentEvent.getTaskListAsString().isEmpty())
+//            taskObservableList.addAll((Task) currentEvent.getTaskListAsString());
+//
+//        if (taskObservableList.isEmpty())
+//            System.out.println("3. taskObservableList VUOTA");
+//        else
+//            System.out.println("3. taskObservableList PIENA");
+//
+//
+//    }
 
     Event getCurrentEvent() {
         return currentEvent;
     }
 
-    Task getCurrentTask() {
-        return currentTask;
-    }
+//    Task getCurrentTask() {
+//        return currentTask;
+//    }
 
     Cook getCurrentCook() {
         return currentCook;
@@ -153,10 +149,6 @@ public class Model {
         return eventObservableList.get(newIndex);
     }
 
-    public Task getCurrentTaskByIndex(int newIndex) {
-        return taskObservableList.get(newIndex);
-    }
-
     public Cook getCurrentCookByIndex(int newIndex) {
         return cookObservableList.get(newIndex);
     }
@@ -169,15 +161,6 @@ public class Model {
         return model;
     }
 
-    public void removeTaskFromView(Task t) {
-        taskObservableList.remove(t);
-        setCurrentTask(null);
-    }
-
-    public void addNewTask(Task t){
-        this.currentEvent.addTask(t);
-
-    }
 
     private void loadLists() {
         recipeObservableList.addAll(dataManager.loadRecipes());

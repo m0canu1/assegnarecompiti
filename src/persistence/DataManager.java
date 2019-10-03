@@ -6,10 +6,10 @@ import java.sql.*;
 import java.util.*;
 
 public class DataManager {
-    private String userName = "root";
-    private String password = "root";
-    private String serverName = "localhost";
-    private String portNumber = "3306";
+    private final String userName = "root";
+    private final String password = "root";
+    private final String serverName = "localhost";
+    private final String portNumber = "3306";
 
 
     private Connection connection;
