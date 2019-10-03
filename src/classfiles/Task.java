@@ -22,6 +22,12 @@ public class Task {
         this.assigned = true;
     }
 
+    public Task(Recipe recipe, String startTime, String endTime) {
+        this.recipe = recipe;
+        this.startTime = startTime;
+        this.endTime = endTime;
+    }
+
     public Task(Recipe recipe, Cook cook, String startTime, String endTime) {
         this.recipe = recipe;
         this.cook = cook;

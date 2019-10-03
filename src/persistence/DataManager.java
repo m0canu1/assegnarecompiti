@@ -305,8 +305,7 @@ public class DataManager {
     public List<Task> loadTasks(Event event) {
         int eventId = eventObjects.get(event);
         Statement st = null;
-        String query = "SELECT Tasks.id, Recipes.name, cuoco, start_time, end_time from Tasks inner join Events E on Tasks.evento = E.id inner join Recipes on Tasks.ricetta = Recipes.id where E.name=\'" + event.getName() + "\'";
-//        String query = "SELECT T.id, Recipes.name, C.name, T.start_time, T.end_time from Recipes right join Tasks T on Recipes.id = T.ricetta right join Cooks C on T.cuoco = C.id right join Events E on T.evento = E.id where E.name =\'" + event.getName() + "\'";
+        String query = "SELECT Tasks.id, Recipes.name as \"ricetta\", C.name, start_time, end_time from Tasks inner join Events E on Tasks.evento = E.id inner join Recipes on Tasks.ricetta = Recipes.id left outer join Cooks C on Tasks.cuoco = C.id where E.name=\'" + event.getName() + "\'";
         PreparedStatement preparedStatement = null;
         List<Task> ret = new ArrayList<>();
 
@@ -315,8 +314,10 @@ public class DataManager {
 //            preparedStatement.setString(1, event.getName());
             ResultSet rs = preparedStatement.executeQuery(query);
             while (rs.next()) {
+                int id = rs.getInt(1);
                 String ricetta = rs.getString(2);
                 String cuoco = rs.getString(3);
+                System.out.println(cuoco);
                 String startTime = rs.getString(4);
                 String endTime = rs.getString(5);
 //                System.out.println("\n\n" + event.getName());
@@ -324,13 +325,14 @@ public class DataManager {
 //                System.out.println("Cuoco: " + cuoco);
 //                System.out.println("Inizio del turno: " + startTime);
 //                System.out.println("Fine del turno: " + endTime);
-                int id = rs.getInt("id");
 
                 // Verifica se per caso l'ha già caricata
                 Task task = this.idToTaskObject.get(id);
 
                 if (task == null) {
-                    task = new Task(new Recipe(ricetta), new Cook(cuoco), startTime, endTime);
+
+                    if (cuoco == null) task = new Task(new Recipe(ricetta), startTime, endTime);
+                    else task = new Task(new Recipe(ricetta), new Cook(cuoco), startTime, endTime);
 
                     if (task != null) {
                         ret.add(task);

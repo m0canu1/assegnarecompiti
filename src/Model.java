@@ -40,16 +40,9 @@ public class Model {
 //            recipeObservableList.add(new Recipe("picca"));
 //        }
 
-//        currentEvent = getCurrentEventByIndex(0);
-//        currentTask = getCurrentTaskByIndex(0);
-//        currentRecipe = getCurrentRecipeByIndex(0);
-//        currentSummary = null;
-
-
-
     }
 
-    public ObservableList<String> getEventObservableList() {
+    ObservableList<String> getEventObservableList() {
         ObservableList<String> eventListName = FXCollections.observableArrayList();
         for (Event e : eventObservableList) {
             eventListName.add(e.getName());
