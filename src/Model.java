@@ -41,16 +41,18 @@ public class Model {
                 e.addTask(t);
             }
             System.out.println(e.getName());
+
+            // INSERIRE QUERY PER LOAD RECIPE E LOAD COOKS
         }
 
 
         //solo un test
-//        for(int i = 0; i < 10; i++){
+        for(int i = 0; i < 10; i++){
 //            eventObservableList.add(new Event("gigi" + i));
 //            taskObservableList.add(new Task(new Recipe("banana" + i)));
-//            cookObservableList.add(new Cook("Paulino Dybala"));
-//            recipeObservableList.add(new Recipe("picca"));
-//        }
+            cookObservableList.add(new Cook("Paulino Dybala"));
+            recipeObservableList.add(new Recipe("picca"));
+        }
 
 //        currentEvent = getCurrentEventByIndex(0);
 //        currentTask = getCurrentTaskByIndex(0);
@@ -93,8 +95,8 @@ public class Model {
 
     public ObservableList<String> getRecipeObservableList() {
         ObservableList<String> recipeListName = FXCollections.observableArrayList();
-        for (Cook c : cookObservableList) {
-            recipeListName.add(c.getName());
+        for (Recipe r : recipeObservableList) {
+            recipeListName.add(r.getName());
         }
         return recipeListName;
     }
@@ -180,6 +182,11 @@ public class Model {
     public void removeTaskFromView(Task t) {
         taskObservableList.remove(t);
         setCurrentTask(null);
+    }
+
+    public void addNewTask(Task t){
+        this.currentEvent.addTask(t);
+
     }
 
 }

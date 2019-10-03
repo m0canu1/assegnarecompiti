@@ -1,6 +1,7 @@
 import classfiles.Recipe;
 import classfiles.Task;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -8,6 +9,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.stage.Stage;
+import javafx.stage.Window;
+import javafx.stage.WindowEvent;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -33,7 +36,12 @@ public class TaskAdderController implements Initializable {
         initializeButtons();
     }
 
-    public void setStage(Stage stage) { this.stage = stage; }
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+    public Stage getStage(){
+        return this.stage;
+    }
 
     private void initializeList() {
         recipeListView.setItems(Model.getModel().getRecipeObservableList());
@@ -55,7 +63,9 @@ public class TaskAdderController implements Initializable {
             Model.getModel().addNewTask(newTask);
             System.out.println("Add a new task with selected recipe");
             Stage stage = (Stage) selectRecipe.getScene().getWindow();
-            stage.close();
+          //  stage.addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, this::closeWindowEvent);
+          //  getStage().fireEvent();
+         //   stage.close();
         });
         bindToCook.setOnAction((ActionEvent e) -> {
             tempRecipe = Model.getModel().getCurrentRecipe();
