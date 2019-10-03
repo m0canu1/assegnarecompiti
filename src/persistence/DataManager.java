@@ -6,10 +6,10 @@ import java.sql.*;
 import java.util.*;
 
 public class DataManager {
-    private final String userName = "root";
-    private final String password = "root";
-    private final String serverName = "localhost";
-    private final String portNumber = "3306";
+    private final String userName;
+    private final String password;
+    private final String serverName;
+    private final String portNumber;
 
 
     private Connection connection;
@@ -30,13 +30,12 @@ public class DataManager {
     private Map<Integer, Cook> idToCookObject;
 
 
-    private Map<Section, Integer> sectionObjects;
-    private Map<Integer, Section> idToSectionObject;
-
-    private Map<MenuItem, Integer> itemObjects;
-    private Map<Integer, MenuItem> idToItemObject;
 
     public DataManager() {
+        serverName = "localhost";
+        portNumber = "3306";
+        password = "root";
+        userName = "root";
 
         this.eventObjects = new HashMap<>();
         this.idToEventObject = new HashMap<>();
@@ -47,11 +46,6 @@ public class DataManager {
         this.recipeObjects = new HashMap<>();
         this.idToRecipeObject = new HashMap<>();
 
-
-        this.sectionObjects = new HashMap<>();
-        this.idToSectionObject = new HashMap<>();
-        this.itemObjects = new HashMap<>();
-        this.idToItemObject = new HashMap<>();
     }
 
 
@@ -169,7 +163,6 @@ public class DataManager {
 
         try {
             preparedStatement = connection.prepareStatement(query);
-//            preparedStatement.setString(1, event.getName());
             ResultSet rs = preparedStatement.executeQuery(query);
             while (rs.next()) {
                 int id = rs.getInt(1);
@@ -178,11 +171,6 @@ public class DataManager {
                 System.out.println(cuoco);
                 String startTime = rs.getString(4);
                 String endTime = rs.getString(5);
-//                System.out.println("\n\n" + event.getName());
-//                System.out.println("Ricetta: " + ricetta);
-//                System.out.println("Cuoco: " + cuoco);
-//                System.out.println("Inizio del turno: " + startTime);
-//                System.out.println("Fine del turno: " + endTime);
 
                 // Verifica se per caso l'ha già caricata
                 Task task = this.idToTaskObject.get(id);
@@ -278,6 +266,8 @@ public class DataManager {
             }
         }
     }
+
+
     public void removeTask(Task t){
         int tId = taskObjects.get(t);
         String query = "DELETE FROM Tasks WHERE id=?";
@@ -324,9 +314,9 @@ public class DataManager {
             System.out.println("BARABBA BABBEO" + 1);
             if(rs.next()){
                 int newId = rs.getInt("id");
+                taskObjects.put(t, newId);
             }
 
-         //   taskObjects.put(t);o
 
 
         } catch (SQLException exc) {

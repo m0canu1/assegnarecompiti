@@ -460,7 +460,7 @@ public class DataManagerprofessori {
 //            pstSections.setInt(1, mId);
 //            pstMenu.setInt(1, mId);
 //            pstItems.executeUpdate();
-//            pstSections.executeUpdate();
+//            pstSections.executeUpdate();÷¨¿¿~
 //            pstMenu.executeUpdate();
 //            connection.commit();
 //        } catch (SQLException exc) {
