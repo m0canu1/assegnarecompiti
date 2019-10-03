@@ -1,12 +1,16 @@
+/*#1e88e5*/
+*{
+    background: #78909c;
+}
 .root {
     -fx-font-family: sans-serif;
-    -fx-background-color: darkgoldenrod;
+    -fx-background-color: background;
 }
 
 .description-section {
     -fx-font-size: 15px;
     -fx-font-family: "Times New Roman";
-    -fx-background-color: darkgoldenrod;
+    -fx-background-color: background;
 }
 
 .header-section {
@@ -14,22 +18,22 @@
     -fx-font-size: 30px;
     -fx-font-weight: bold;
     -fx-padding: 15px;
-    -fx-background-color: darkgoldenrod;
+    -fx-background-color: background;
     -fx-text-fill: antiquewhite;
 }
 
 .separator {
     -fx-min-height: 10;
     -fx-max-height: 20;
-    -fx-background-color: darkgoldenrod;
+    -fx-background-color: background;
 }
 
 .button {
     -fx-padding: 4px;
     -fx-font-size: 15px;
     -fx-background-color:
-            linear-gradient(#f0ff35, #a9ff00),
-            radial-gradient(center 50% -40%, radius 200%, #b8ee36 45%, #80c800 50%);
+            linear-gradient(#a7c0cd, #748f9c),
+            radial-gradient(center 50% -40%, radius 200%, #a7c0cd 45%, #a5becb 50%);
     -fx-background-radius: 6, 5;
     -fx-background-insets: 0, 1;
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 );

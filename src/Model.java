@@ -8,38 +8,24 @@ import persistence.DataManager;
 
 import java.sql.SQLException;
 
-public class Model {
+class Model {
     private static final Model model = new Model();
     private DataManager dataManager = new DataManager();
     private ObservableList<Event> eventObservableList = FXCollections.observableArrayList();
-//    private ObservableList<Task> taskObservableList = FXCollections.observableArrayList();
     private ObservableList<Cook> cookObservableList = FXCollections.observableArrayList();
     private ObservableList<Recipe> recipeObservableList = FXCollections.observableArrayList();
     private Event currentEvent;
-//    private Task currentTask;
     private Cook currentCook;
     private Recipe currentRecipe;
 
     private Model() {
-
         try {
             dataManager.initialize();
+            loadLists();
         } catch (SQLException exc) {
-//         Rimando l'eccezione a terminale
             exc.printStackTrace();
         }
-
         /*Carica tutte le liste*/
-        loadLists();
-
-        //solo un test
-//        for(int i = 0; i < 10; i++){
-////            eventObservableList.add(new Event("gigi" + i));
-////            taskObservableList.add(new Task(new Recipe("banana" + i)));
-//            cookObservableList.add(new Cook("Paulino Dybala"));
-//            recipeObservableList.add(new Recipe("picca"));
-//        }
-
     }
 
     ObservableList<String> getEventObservableList() {
@@ -64,7 +50,7 @@ public class Model {
 ////        else return null;
 //    }
 
-    public ObservableList<String> getCookObservableList() {
+    ObservableList<String> getCookObservableList() {
         ObservableList<String> cookListName = FXCollections.observableArrayList();
         for (Cook c : cookObservableList) {
             cookListName.add(c.getName());
@@ -72,7 +58,7 @@ public class Model {
         return cookListName;
     }
 
-    public ObservableList<String> getRecipeObservableList() {
+    ObservableList<String> getRecipeObservableList() {
         ObservableList<String> recipeListName = FXCollections.observableArrayList();
         for (Recipe r : recipeObservableList) {
             recipeListName.add(r.getName());
@@ -120,33 +106,29 @@ public class Model {
         return currentRecipe;
     }
 
-    public void setCurrentTask(Task currentTask) {
-        currentTask = currentTask;
-    }
 
-    public void setCurrentEvent(Event event) {
+    void setCurrentEvent(Event event) {
         currentEvent = event;
-//        updateTaskObservableList(); //TODO per evitare di contattare il database ad ogni cambio scelta
     }
 
 
-    public void setCurrentCook(Cook currentCook) {
+    void setCurrentCook(Cook currentCook) {
         this.currentCook = currentCook;
     }
 
-    public void setCurrentRecipe(Recipe currentRecipe) {
+    void setCurrentRecipe(Recipe currentRecipe) {
         this.currentRecipe = currentRecipe;
     }
 
-    public Event getCurrentEventByIndex(int newIndex) {
+    Event getCurrentEventByIndex(int newIndex) {
         return eventObservableList.get(newIndex);
     }
 
-    public Cook getCurrentCookByIndex(int newIndex) {
+    Cook getCurrentCookByIndex(int newIndex) {
         return cookObservableList.get(newIndex);
     }
 
-    public Recipe getCurrentRecipeByIndex(int newIndex) {
+    Recipe getCurrentRecipeByIndex(int newIndex) {
         return recipeObservableList.get(newIndex);
     }
 
@@ -159,28 +141,28 @@ public class Model {
         recipeObservableList.addAll(dataManager.loadRecipes());
 
         /* CARICAMENTO DELLA LISTA EVENTI E DEI PROPRI TASK */
-        System.out.println("LISTA EVENTI:\n");
+//        System.out.println("LISTA EVENTI:\n");
         for (Event e : dataManager.loadEvents()) {
             eventObservableList.add(e);
             for (Task t : dataManager.loadTasks(e)) {
                 e.addTask(t);
             }
-            System.out.println(e.getName());
+//            System.out.println(e.getName());
         }
 
         cookObservableList.addAll(dataManager.loadCooks());
     }
 
-    public void bindCookToTask(Cook tempCook) {
+    void bindCookToTask(Cook tempCook) {
         currentEvent.getCurrentTask().setCook(tempCook);
         dataManager.bindCookToTask(tempCook, currentEvent.getCurrentTask());
     }
 
-    public void removeTask(Task task) {
+    void removeTask(Task task) {
         dataManager.removeTask(task);
     }
 
-    public void addTaskToEvent(Task t){
+    void addTaskToEvent(Task t){
         currentEvent.addTask(t);
         dataManager.addTask(t, currentEvent);
     }

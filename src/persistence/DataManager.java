@@ -168,7 +168,7 @@ public class DataManager {
                 int id = rs.getInt(1);
                 String ricetta = rs.getString(2);
                 String cuoco = rs.getString(3);
-                System.out.println(cuoco);
+//                System.out.println(cuoco);
                 String startTime = rs.getString(4);
                 String endTime = rs.getString(5);
 
@@ -242,10 +242,10 @@ public class DataManager {
      * @param task
      */
     public void bindCookToTask(Cook cook, Task task) {
-        System.out.println("\n");
+//        System.out.println("\n");
         int tId = taskObjects.get(task);
         int cId = cookObjects.get(cook);
-        System.out.println(tId);
+//        System.out.println(tId);
         String sql = "UPDATE Tasks SET cuoco = ? where id = ?";
         PreparedStatement pstmt = null;
 
@@ -311,7 +311,7 @@ public class DataManager {
             pstmt.executeUpdate();
             pstmt2 = connection.createStatement();
             ResultSet rs = pstmt2.executeQuery(querona);
-            System.out.println("BARABBA BABBEO" + 1);
+//            System.out.println("BARABBA BABBEO" + 1);
             if(rs.next()){
                 int newId = rs.getInt("id");
                 taskObjects.put(t, newId);

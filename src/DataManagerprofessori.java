@@ -309,7 +309,6 @@ public class DataManagerprofessori {
 
         try {
             preparedStatement = connection.prepareStatement(query);
-//            preparedStatement.setString(1, event.getName());
             ResultSet rs = preparedStatement.executeQuery(query);
             while (rs.next()) {
                 int id = rs.getInt(1);
@@ -318,11 +317,6 @@ public class DataManagerprofessori {
                 System.out.println(cuoco);
                 String startTime = rs.getString(4);
                 String endTime = rs.getString(5);
-//                System.out.println("\n\n" + event.getName());
-//                System.out.println("Ricetta: " + ricetta);
-//                System.out.println("Cuoco: " + cuoco);
-//                System.out.println("Inizio del turno: " + startTime);
-//                System.out.println("Fine del turno: " + endTime);
 
                 // Verifica se per caso l'ha già caricata
                 Task task = this.idToTaskObject.get(id);

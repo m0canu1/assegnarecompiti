@@ -1,5 +1,6 @@
 import classfiles.Task;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -8,6 +9,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -44,11 +47,25 @@ public class SummaryEditorController implements Initializable {
         taskListView.getSelectionModel().selectedIndexProperty().addListener(((obsValue, oldValue, newValue) -> {
             int newIndex = (int) newValue;
             if (!taskListView.getSelectionModel().isEmpty()) {
-                System.out.println("New task selected" + newIndex);
+//                System.out.println("New task selected" + newIndex);
                 Model.getModel().getCurrentEvent().setCurrentTask(Model.getModel().getCurrentEvent().getCurrentTaskByIndex(newIndex));
-                System.out.println("Current task: " + Model.getModel().getCurrentEvent().getCurrentTaskByIndex(newIndex).getName());
+//                System.out.println("Current task: " + Model.getModel().getCurrentEvent().getCurrentTaskByIndex(newIndex).getName());
             }
         }));
+        taskListView.setMinWidth(500);
+        taskListView.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                if (keyEvent.getCode() == KeyCode.DELETE) {
+                    taskRemover(Model.getModel().getCurrentEvent().getCurrentTask());
+                } else if (keyEvent.getCode() == KeyCode.ENTER) {
+                    if (!taskListView.getSelectionModel().isEmpty())
+                        taskBinder(Model.getModel().getCurrentEvent().getCurrentTask());
+                    else
+                        taskAdder();
+                }
+            }
+        });
     }
 
     private void initializeButtons() {
@@ -64,7 +81,7 @@ public class SummaryEditorController implements Initializable {
             tempTask = Model.getModel().getCurrentEvent().getCurrentTask();
             taskAdder();
         });
-        System.out.print("Initialized SEC Buttons!");
+//        System.out.print("Initialized SEC Buttons!");
     }
 
     private void taskBinder(Task task) {
@@ -93,7 +110,7 @@ public class SummaryEditorController implements Initializable {
 //        taskListView.setItems(Model.getModel().getTaskObservableList());
         taskListView.setItems(Model.getModel().getCurrentEvent().getTaskListAsString());
         Model.getModel().removeTask(task);
-        System.out.println("remove that task" + task.getName());
+//        System.out.println("remove that task" + task.getName());
     }
 
     private void taskAdder() {
@@ -113,16 +130,6 @@ public class SummaryEditorController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public void shutdown() {
-        // cleanup code here...
-        System.out.println("\n\nCHIUSO SUMMARY EDIT");
-//        Model.getModel().updateTaskObservableList();
-//        taskListView.getItems().clear();
-        // note that typically (i.e. if Platform.isImplicitExit() is true, which is the default)
-        // closing the last open window will invoke Platform.exit() anyway
-//        Platform.exit();
     }
 
 }
