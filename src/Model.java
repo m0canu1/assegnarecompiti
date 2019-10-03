@@ -33,26 +33,16 @@ public class Model {
             exc.printStackTrace();
         }
 
-        /* CARICAMENTO DELLA LISTA EVENTI E DEI PROPRI TASK */
-        System.out.println("LISTA EVENTI:\n");
-        for (Event e : dataManager.loadEvents()) {
-            eventObservableList.add(e);
-            for (Task t : dataManager.loadTasks(e)) {
-                e.addTask(t);
-            }
-            System.out.println(e.getName());
-
-            // INSERIRE QUERY PER LOAD RECIPE E LOAD COOKS
-        }
-
+        /*Carica tutte le liste*/
+        loadLists();
 
         //solo un test
-        for(int i = 0; i < 10; i++){
-//            eventObservableList.add(new Event("gigi" + i));
-//            taskObservableList.add(new Task(new Recipe("banana" + i)));
-            cookObservableList.add(new Cook("Paulino Dybala"));
-            recipeObservableList.add(new Recipe("picca"));
-        }
+//        for(int i = 0; i < 10; i++){
+////            eventObservableList.add(new Event("gigi" + i));
+////            taskObservableList.add(new Task(new Recipe("banana" + i)));
+//            cookObservableList.add(new Cook("Paulino Dybala"));
+//            recipeObservableList.add(new Recipe("picca"));
+//        }
 
 //        currentEvent = getCurrentEventByIndex(0);
 //        currentTask = getCurrentTaskByIndex(0);
@@ -189,4 +179,19 @@ public class Model {
 
     }
 
+    private void loadLists() {
+        recipeObservableList.addAll(dataManager.loadRecipes());
+
+        /* CARICAMENTO DELLA LISTA EVENTI E DEI PROPRI TASK */
+        System.out.println("LISTA EVENTI:\n");
+        for (Event e : dataManager.loadEvents()) {
+            eventObservableList.add(e);
+            for (Task t : dataManager.loadTasks(e)) {
+                e.addTask(t);
+            }
+            System.out.println(e.getName());
+        }
+
+        cookObservableList.addAll(dataManager.loadCooks());
+    }
 }
