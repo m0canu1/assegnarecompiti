@@ -74,6 +74,12 @@ public class Task {
         return this.recipe.getName();
     }
 
+    @Override
+    public String toString() {
+        return "Task{" +
+                "recipe=" + recipe.getName() +
+                '}';
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -85,8 +91,8 @@ public class Task {
                 Objects.equals(getCook(), task.getCook());
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(getRecipe(), isAssigned(), getCook());
-    }
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(getRecipe(), isAssigned());
+//    }
 }

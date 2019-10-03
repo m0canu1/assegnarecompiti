@@ -30,7 +30,6 @@ public class DataManager {
     private Map<Integer, Cook> idToCookObject;
 
 
-
     private Map<Section, Integer> sectionObjects;
     private Map<Integer, Section> idToSectionObject;
 
@@ -158,12 +157,11 @@ public class DataManager {
     }
 
     /**
-     *
+     * Carica tutti i task di un evento
      * @param event è l'evento da cui prendere i task
      * @return ritorna una lista di task dell'evento
      */
     public List<Task> loadTasks(Event event) {
-        int eventId = eventObjects.get(event);
         Statement st = null;
         String query = "SELECT Tasks.id, Recipes.name as \"ricetta\", C.name, start_time, end_time from Tasks inner join Events E on Tasks.evento = E.id inner join Recipes on Tasks.ricetta = Recipes.id left outer join Cooks C on Tasks.cuoco = C.id where E.name=\'" + event.getName() + "\'";
         PreparedStatement preparedStatement = null;
@@ -194,11 +192,9 @@ public class DataManager {
                     if (cuoco == null) task = new Task(new Recipe(ricetta), startTime, endTime);
                     else task = new Task(new Recipe(ricetta), new Cook(cuoco), startTime, endTime);
 
-                    if (task != null) {
-                        ret.add(task);
-                        this.taskObjects.put(task, id);
-                        this.idToTaskObject.put(id, task);
-                    }
+                    ret.add(task);
+                    this.taskObjects.put(task, id);
+                    this.idToTaskObject.put(id, task);
                 }
             }
         } catch (SQLException exc) {
@@ -214,8 +210,8 @@ public class DataManager {
     }
 
     /**
-     *
-     * @return
+     * Carica tutte le ricette del database
+     * @return List<Recipe>
      */
     public List<Recipe> loadRecipes() {
         Statement st = null;
@@ -258,8 +254,13 @@ public class DataManager {
      * @param task
      */
     public void bindCookToTask(Cook cook, Task task) {
+        System.out.println("\nTask Passato: \n" + task.toString());
+        System.out.println("\nTask tra cui cercare: \n" + taskObjects.toString());
+//        System.out.println(tId);
+        System.out.println("\n");
+        int cId = cookObjects.get(cook);
         int tId = taskObjects.get(task);
-        int cId = taskObjects.get(cook);
+        System.out.println(tId);
         String sql = "UPDATE Tasks SET cuoco = ? where id = ?";
         PreparedStatement pstmt = null;
 
@@ -281,4 +282,3 @@ public class DataManager {
         }
     }
 }
-
