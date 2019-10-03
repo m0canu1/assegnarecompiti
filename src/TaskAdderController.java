@@ -57,12 +57,11 @@ public class TaskAdderController implements Initializable {
         selectRecipe.setOnAction((ActionEvent e) -> {
             tempRecipe = Model.getModel().getCurrentRecipe();
             Task newTask = new Task(tempRecipe);
-            Model.getModel().getCurrentEvent().addTask(newTask);
+           // Model.getModel().getCurrentEvent().addTask(newTask);
             System.out.println("Added a new task with selected recipe");
             Stage stage = (Stage) selectRecipe.getScene().getWindow();
             System.out.println(stage);
-          //  stage.addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, this::closeWindowEvent);
-          //  getStage().fireEvent();
+            Model.getModel().addTaskToEvent(newTask);
             stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
         });
         /*bindToCook.setOnAction((ActionEvent e) -> {

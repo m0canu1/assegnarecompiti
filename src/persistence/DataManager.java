@@ -278,4 +278,64 @@ public class DataManager {
             }
         }
     }
+    public void removeTask(Task t){
+        int tId = taskObjects.get(t);
+        String query = "DELETE FROM Tasks WHERE id=?";
+        PreparedStatement pstmt = null;
+        try {
+            pstmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            pstmt.setInt(1, tId);
+
+            pstmt.executeUpdate();
+
+        } catch (SQLException exc) {
+            exc.printStackTrace();
+        } finally {
+            try {
+                if (pstmt != null) pstmt.close();
+            } catch (SQLException exc2) {
+                exc2.printStackTrace();
+            }
+        }
+    }
+    public void addTask(Task t, Event e){
+        Cook tempC = t.getCook();
+        Recipe tempR = t.getRecipe();
+        int eId = eventObjects.get(e);
+        int rId = recipeObjects.get(tempR);
+
+        String query = "INSERT INTO Tasks (ricetta,evento) VALUES (?, ?)";
+        PreparedStatement pstmt = null;
+        String querona = "SELECT MAX(id) as id FROM Tasks";
+        Statement pstmt2 = null;
+        try {
+            pstmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            pstmt.setInt(1, rId);
+         //   pstmt.setInt(2, cId);
+            pstmt.setInt(2, eId);
+          //  pstmt.setTime(3, Time.valueOf(t.getStartTime()));
+          //  pstmt.setTime(4, Time.valueOf(t.getEndTime()));
+          //  pstmt.setTime(5, Time.valueOf(t.getEstimatedTime()));
+
+
+            pstmt.executeUpdate();
+            pstmt2 = connection.createStatement();
+            ResultSet rs = pstmt2.executeQuery(querona);
+            System.out.println("BARABBA BABBEO" + 1);
+
+            int newId = rs.getInt("id");
+         //   taskObjects.put(t);o
+
+
+        } catch (SQLException exc) {
+            exc.printStackTrace();
+        } finally {
+            try {
+                if (pstmt != null) pstmt.close();
+                if (pstmt2 != null) pstmt2.close();
+            } catch (SQLException exc2) {
+                exc2.printStackTrace();
+            }
+        }
+    }
 }

@@ -9,23 +9,43 @@ public class Task {
     private Cook cook; //TODO maybe more cooks?
     private String startTime;
     private String endTime;
-    private int estimatedTime;
+    private String estimatedTime;
     private int doses;
 
     public Task(Recipe recipe) {
         this.recipe = recipe;
     }
 
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
+
     public Task(Recipe recipe, Cook cook) {
         this.recipe = recipe;
         this.cook = cook;
         this.assigned = true;
+        this.estimatedTime = "00:00";
+
     }
 
     public Task(Recipe recipe, String startTime, String endTime) {
         this.recipe = recipe;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.estimatedTime = "00:00";
+
     }
 
     public Task(Recipe recipe, Cook cook, String startTime, String endTime) {
@@ -34,6 +54,7 @@ public class Task {
         this.startTime = startTime;
         this.endTime = endTime;
         this.assigned = true;
+        this.estimatedTime = "00:00";
     }
 
     public Recipe getRecipe() {
@@ -54,11 +75,11 @@ public class Task {
 
     }
 
-    public int getEstimatedTime() {
+    public String getEstimatedTime() {
         return estimatedTime;
     }
 
-    public void setEstimatedTime(int time) {
+    public void setEstimatedTime(String time) {
         this.estimatedTime = time;
     }
 

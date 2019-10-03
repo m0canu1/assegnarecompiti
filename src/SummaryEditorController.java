@@ -92,6 +92,7 @@ public class SummaryEditorController implements Initializable {
         Model.getModel().getCurrentEvent().deleteTask(task);
 //        taskListView.setItems(Model.getModel().getTaskObservableList());
         taskListView.setItems(Model.getModel().getCurrentEvent().getTaskListAsString());
+        Model.getModel().removeTask(task);
         System.out.println("remove that task" + task.getName());
     }
 

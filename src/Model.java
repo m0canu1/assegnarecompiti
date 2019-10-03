@@ -175,4 +175,13 @@ public class Model {
         currentEvent.getCurrentTask().setCook(tempCook);
         dataManager.bindCookToTask(tempCook, currentEvent.getCurrentTask());
     }
+
+    public void removeTask(Task task) {
+        dataManager.removeTask(task);
+    }
+
+    public void addTaskToEvent(Task t){
+        currentEvent.addTask(t);
+        dataManager.addTask(t, currentEvent);
+    }
 }
