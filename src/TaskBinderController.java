@@ -1,18 +1,15 @@
-import classfiles.*;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import classfiles.Cook;
+import classfiles.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -67,6 +64,7 @@ public class TaskBinderController implements Initializable {
                 if(Model.getModel().getCurrentEvent().getCurrentTask() != null){
                     System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAA\n");
                     Model.getModel().getCurrentEvent().getCurrentTask().setCook(tempCook);
+                    Model.getModel().bindCookToTask(tempCook);
 
                 }else{
                     System.out.println("BBBBBBBBBBBBBBBBBBBBBBBBBBBB\n");

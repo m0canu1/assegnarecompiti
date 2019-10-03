@@ -51,6 +51,7 @@ public class Task {
 
     public void setCook(Cook cook) {
         this.cook = cook;
+
     }
 
     public int getEstimatedTime() {

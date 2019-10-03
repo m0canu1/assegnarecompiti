@@ -170,4 +170,9 @@ public class Model {
 
         cookObservableList.addAll(dataManager.loadCooks());
     }
+
+    public void bindCookToTask(Cook tempCook) {
+        currentEvent.getCurrentTask().setCook(tempCook);
+        dataManager.bindCookToTask(tempCook, currentEvent.getCurrentTask());
+    }
 }
