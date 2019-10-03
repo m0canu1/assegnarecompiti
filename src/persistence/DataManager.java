@@ -322,8 +322,10 @@ public class DataManager {
             pstmt2 = connection.createStatement();
             ResultSet rs = pstmt2.executeQuery(querona);
             System.out.println("BARABBA BABBEO" + 1);
+            if(rs.next()){
+                int newId = rs.getInt("id");
+            }
 
-            int newId = rs.getInt("id");
          //   taskObjects.put(t);o
 
 
