@@ -7,7 +7,7 @@ import java.util.*;
 
 public class DataManager {
     private String userName = "root";
-    private String password = "root";
+    private String password = "RedPanth3r!";
     private String serverName = "localhost";
     private String portNumber = "3306";
 
@@ -24,7 +24,6 @@ public class DataManager {
     private Map<Integer, Event> idToEventObject;
 
     private Map<Menu, Integer> menuObjects;
-
     private Map<Integer, Menu> idToMenuObject;
 
     private Map<Section, Integer> sectionObjects;
@@ -37,7 +36,6 @@ public class DataManager {
 
         this.eventObjects = new HashMap<>();
         this.idToEventObject = new HashMap<>();
-
         this.taskObjects = new HashMap<>();
         this.idToTaskObject = new HashMap<>();
         this.menuObjects = new HashMap<>();
@@ -46,7 +44,6 @@ public class DataManager {
         this.idToSectionObject = new HashMap<>();
         this.itemObjects = new HashMap<>();
         this.idToItemObject = new HashMap<>();
-
 
     }
 
@@ -222,21 +219,16 @@ public class DataManager {
             st = this.connection.createStatement();
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
-                String name = rs.getString("name");
-//                System.out.println(name);
-                int id = rs.getInt("id");
+                if (rs != null) {
+                    String name = rs.getString("name");
+                    int id = rs.getInt("id");
 
-                // Verifica se per caso l'ha già caricata
-                Event event = this.idToEventObject.get(id);
-
-                if (event == null) {
+                    Event event = this.idToEventObject.get(id);
                     event = new Event(name);
+                    ret.add(event);
+                    this.eventObjects.put(event, id);
+                    this.idToEventObject.put(id, event);
 
-                    if (event != null) {
-                        ret.add(event);
-                        this.eventObjects.put(event, id);
-                        this.idToEventObject.put(id, event);
-                    }
                 }
             }
         } catch (SQLException exc) {
