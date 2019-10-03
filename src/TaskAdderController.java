@@ -1,14 +1,12 @@
 import classfiles.Recipe;
 import classfiles.Task;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -17,7 +15,7 @@ import java.util.ResourceBundle;
 
 public class TaskAdderController implements Initializable {
 
-    public Stage stage;
+    private Stage stage;
 
     private Recipe tempRecipe;
 
@@ -36,7 +34,7 @@ public class TaskAdderController implements Initializable {
         initializeButtons();
     }
 
-    public void setStage(Stage stage) {
+    void setStage(Stage stage) {
         this.stage = stage;
     }
     public Stage getStage(){
@@ -56,21 +54,17 @@ public class TaskAdderController implements Initializable {
 
         recipeListView.setMinWidth(500);
 
-        recipeListView.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent keyEvent) {
-                if (keyEvent.getCode() == KeyCode.ENTER) {
-                    selectRecipe();
-                }
+        recipeListView.setOnKeyPressed(keyEvent -> {
+            if (keyEvent.getCode() == KeyCode.ENTER) {
+                selectRecipe();
             }
         });
     }
 
     private void initializeButtons() {
 
-        selectRecipe.setOnAction((ActionEvent e) -> {
-            selectRecipe();
-        });
+        selectRecipe.setOnAction((ActionEvent e) -> selectRecipe());
+
         /*bindToCook.setOnAction((ActionEvent e) -> {
             tempRecipe = Model.getModel().getCurrentRecipe();
             System.out.println("Add new task and then open binder");
@@ -82,7 +76,7 @@ public class TaskAdderController implements Initializable {
         Task newTask = new Task(tempRecipe);
         // Model.getModel().getCurrentEvent().addTask(newTask);
 //            System.out.println("Added a new task with selected recipe");
-        Stage stage = (Stage) selectRecipe.getScene().getWindow();
+        stage = (Stage) selectRecipe.getScene().getWindow();
 //            System.out.println(stage);
         Model.getModel().addTaskToEvent(newTask);
         stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));

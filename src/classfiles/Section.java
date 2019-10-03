@@ -1,22 +1,17 @@
 package classfiles;
 
-import classfiles.Recipe;
-
 import java.util.ArrayList;
 
 public class Section {
 
-    private String name;
-
     private ArrayList<MenuItem> items;
 
-    public Section(String name) {
-        this.name = name;
+    Section(String name) {
 
         items = new ArrayList<>();
     }
 
-    public boolean addItem(Recipe recipe, String description) {
+    boolean addItem(Recipe recipe, String description) {
 
         MenuItem menuItem = new MenuItem(recipe, description);
 
@@ -25,7 +20,7 @@ public class Section {
         return true;
     }
 
-    public ArrayList<MenuItem> getItems() {
+    ArrayList<MenuItem> getItems() {
         return items;
     }
 }

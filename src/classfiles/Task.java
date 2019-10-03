@@ -5,7 +5,6 @@ import java.util.Objects;
 public class Task {
 
     private Recipe recipe;
-    private boolean assigned;
     private Cook cook; //TODO maybe more cooks?
     private String startTime;
     private String endTime;
@@ -35,7 +34,6 @@ public class Task {
     public Task(Recipe recipe, Cook cook) {
         this.recipe = recipe;
         this.cook = cook;
-        this.assigned = true;
         this.estimatedTime = "00:00";
 
     }
@@ -53,7 +51,6 @@ public class Task {
         this.cook = cook;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.assigned = true;
         this.estimatedTime = "00:00";
     }
 
@@ -62,8 +59,12 @@ public class Task {
     }
 
 
-    public boolean isAssigned() {
-        return this.assigned;
+    /**
+     * verifica se un evento ha cuochi assegnati
+     * @return vero se ha cuochi assegnati
+     */
+    private boolean isAssigned() {
+        return this.cook != null;
     }
 
     public Cook getCook() {
@@ -112,8 +113,4 @@ public class Task {
                 Objects.equals(getCook(), task.getCook());
     }
 
-//    @Override
-//    public int hashCode() {
-//        return Objects.hash(getRecipe(), isAssigned());
-//    }
 }

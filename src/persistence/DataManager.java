@@ -130,11 +130,9 @@ public class DataManager {
                 if (cook == null) {
                     cook = new Cook(name);
 
-                    if (cook != null) {
-                        ret.add(cook);
-                        this.cookObjects.put(cook, id);
-                        this.idToCookObject.put(id, cook);
-                    }
+                    ret.add(cook);
+                    this.cookObjects.put(cook, id);
+                    this.idToCookObject.put(id, cook);
                 }
             }
         } catch (SQLException e) {
@@ -158,7 +156,7 @@ public class DataManager {
     public List<Task> loadTasks(Event event) {
         Statement st = null;
         String query = "SELECT Tasks.id, Recipes.name as \"ricetta\", C.name, start_time, end_time from Tasks inner join Events E on Tasks.evento = E.id inner join Recipes on Tasks.ricetta = Recipes.id left outer join Cooks C on Tasks.cuoco = C.id where E.name=\'" + event.getName() + "\'";
-        PreparedStatement preparedStatement = null;
+        PreparedStatement preparedStatement;
         List<Task> ret = new ArrayList<>();
 
         try {
@@ -238,8 +236,8 @@ public class DataManager {
 
     /**
      *
-     * @param cook
-     * @param task
+     * @param cook cuoco a cui assegnare il task
+     * @param task il task da assegnare al cuoco
      */
     public void bindCookToTask(Cook cook, Task task) {
 //        System.out.println("\n");
