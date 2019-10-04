@@ -25,7 +25,7 @@ public class SummaryEditorController implements Initializable {
     private ListView<String> taskListView;
 
     @FXML
-    private Button bindTask, removeTask, addNewTask, orderTasks, backToMain;
+    private Button bindTask, removeTask, addNewTask, orderTasks, backToMain, viewTask;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -71,7 +71,6 @@ public class SummaryEditorController implements Initializable {
             taskRemover(tempTask);
         });
         addNewTask.setOnAction((ActionEvent e) -> {
-            tempTask = Model.getModel().getCurrentEvent().getCurrentTask();
             taskAdder();
         });
         orderTasks.setOnAction((ActionEvent e) -> {
@@ -81,6 +80,27 @@ public class SummaryEditorController implements Initializable {
         backToMain.setOnAction((ActionEvent e) -> {
             stage.close();
         });
+        viewTask.setOnAction((ActionEvent e) -> {
+            tempTask = Model.getModel().getCurrentEvent().getCurrentTask();
+            taskWindow(tempTask);
+        });
+    }
+
+    private void taskWindow(Task tempTask) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("TaskWindow.fxml"));
+            Parent root = fxmlLoader.load();
+            Scene scene = new Scene(root, 400, 400);
+            Stage stage = new Stage();
+            TaskWindowController taskWindowController = fxmlLoader.getController();
+            taskWindowController.setStage(stage);
+            stage.setTitle("Task View: " + Model.getModel().getCurrentEvent().getCurrentTask().getName());
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void taskBinder() {
