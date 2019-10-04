@@ -1,5 +1,6 @@
+package controller;
+
 import classfiles.Task;
-import com.sun.webkit.Timer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +12,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
+import model.Model;
 
 import java.io.IOException;
 import java.net.URL;
@@ -45,7 +47,7 @@ public class SummaryEditorController implements Initializable {
             if (!taskListView.getSelectionModel().isEmpty()) {
 //                System.out.println("New task selected" + newIndex);
                 Model.getModel().getCurrentEvent().setCurrentTask(Model.getModel().getCurrentEvent().getCurrentTaskByIndex(newIndex));
-//                System.out.println("Current task: " + Model.getModel().getCurrentEvent().getCurrentTaskByIndex(newIndex).getName());
+//                System.out.println("Current task: " + model.Model.getModel().getCurrentEvent().getCurrentTaskByIndex(newIndex).getName());
             }
         }));
 
@@ -89,7 +91,7 @@ public class SummaryEditorController implements Initializable {
     private void taskWindow(Task tempTask) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("TaskWindow.fxml"));
+            fxmlLoader.setLocation(getClass().getResource("view/TaskWindow.fxml"));
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root, 400, 400);
             Stage stage = new Stage();
@@ -106,7 +108,7 @@ public class SummaryEditorController implements Initializable {
     private void taskBinder() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("TaskBinder.fxml"));
+            fxmlLoader.setLocation(getClass().getResource("view/TaskBinder.fxml"));
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root, 600, 400);
             Stage stage = new Stage();
@@ -123,9 +125,9 @@ public class SummaryEditorController implements Initializable {
 
     private void taskRemover(Task task) {
         if(Model.getModel().getCurrentEvent().getCurrentTask() != null) {
-//        Model.getModel().removeTaskFromView(task);
+//        model.Model.getModel().removeTaskFromView(task);
             Model.getModel().getCurrentEvent().deleteTask(task);
-//        taskListView.setItems(Model.getModel().getTaskObservableList());
+//        taskListView.setItems(model.Model.getModel().getTaskObservableList());
             taskListView.setItems(Model.getModel().getCurrentEvent().getTaskListAsString());
             Model.getModel().removeTask(task);
 //        System.out.println("remove that task" + task.getName());
@@ -138,7 +140,7 @@ public class SummaryEditorController implements Initializable {
     private void taskAdder() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("TaskAdder.fxml"));
+            fxmlLoader.setLocation(getClass().getResource("view/TaskAdder.fxml"));
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root, 600, 400);
             Stage stage = new Stage();

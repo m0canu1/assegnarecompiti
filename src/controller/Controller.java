@@ -1,3 +1,5 @@
+package controller;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +11,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
+import model.Model;
 
 import java.io.IOException;
 import java.net.URL;
@@ -59,7 +62,7 @@ public class Controller implements Initializable {
     private void openSummary() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("SummaryEditor.fxml"));
+            fxmlLoader.setLocation(getClass().getResource("view/SummaryEditor.fxml"));
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root, 600, 400);
             Stage stage = new Stage();

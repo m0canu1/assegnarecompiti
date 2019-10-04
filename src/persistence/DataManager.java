@@ -169,6 +169,7 @@ public class DataManager {
                 int id = rs.getInt(1);
                 String ricetta = rs.getString(2);
                 String cuoco = rs.getString(3);
+                    System.out.println(cuoco);
                 String startTime = rs.getString(4);
                 String endTime = rs.getString(5);
                 String estimatedTime = rs.getString(6);

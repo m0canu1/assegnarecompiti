@@ -1,9 +1,4 @@
-import classfiles.*;
-
-import java.sql.*;
-import java.util.*;
-
-public class DataManagerprofessori {
+/*public class DataManagerprofessori {
     private final String userName = "root";
     private final String password = "root";
     private final String serverName = "localhost";
@@ -28,13 +23,6 @@ public class DataManagerprofessori {
     private Map<Integer, Cook> idToCookObject;
 
 
-
-    private Map<Section, Integer> sectionObjects;
-    private Map<Integer, Section> idToSectionObject;
-
-    private Map<MenuItem, Integer> itemObjects;
-    private Map<Integer, MenuItem> idToItemObject;
-
     public DataManagerprofessori() {
 
         this.eventObjects = new HashMap<>();
@@ -47,10 +35,6 @@ public class DataManagerprofessori {
         this.idToRecipeObject = new HashMap<>();
 
 
-        this.sectionObjects = new HashMap<>();
-        this.idToSectionObject = new HashMap<>();
-        this.itemObjects = new HashMap<>();
-        this.idToItemObject = new HashMap<>();
 
 
     }
@@ -215,93 +199,7 @@ public class DataManagerprofessori {
 //        });
     }
 
-    /**
-     * @return all the events of the database
-     */
-    public List<Event> loadEvents() {
-        Statement st = null;
-        String query = "SELECT * FROM Events";
-        List<Event> ret = new ArrayList<>();
-
-        try {
-            st = this.connection.createStatement();
-            ResultSet rs = st.executeQuery(query);
-            while (rs.next()) {
-                String name = rs.getString("name");
-                int id = rs.getInt("id");
-
-                // Verifica se per caso l'ha già caricata
-                Event event = this.idToEventObject.get(id);
-
-                if (event == null) {
-                    event = new Event(name);
-
-                    ret.add(event);
-                    this.eventObjects.put(event, id);
-                    this.idToEventObject.put(id, event);
-                }
-            }
-        } catch (SQLException exc) {
-            exc.printStackTrace();
-        } finally {
-            try {
-                if (st != null) st.close();
-            } catch (SQLException exc2) {
-                exc2.printStackTrace();
-            }
-        }
-        return ret;
-    }
-
-    /**
-     * Carica tutti i cuochi del database
-     * @return List<Cook>
-     */
-    public List<Cook> loadCooks() {
-        Statement st = null;
-        String query ="SELECT * FROM Cooks";
-        List<Cook> ret = new ArrayList<>();
-
-        try {
-            st = connection.createStatement();
-            ResultSet rs = st.executeQuery(query);
-            while (rs.next()) {
-                String name = rs.getString("name");
-                int id = rs.getInt("id");
-
-                //Verifico se è già stato caricato
-                Cook cook = idToCookObject.get(id);
-
-                if (cook == null) {
-                    cook = new Cook(name);
-
-                    if (cook != null) {
-                        ret.add(cook);
-                        this.cookObjects.put(cook, id);
-                        this.idToCookObject.put(id, cook);
-                    }
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (st != null)
-                    st.close();
-            } catch (SQLException e2) {
-                e2.printStackTrace();
-            }
-        }
-        return ret;
-    }
-
-    /**
-     *
-     * @param event è l'evento da cui prendere i task
-     * @return ritorna una lista di task dell'evento
-     */
-
-    private void removeItem(MenuItem it) {
+    /*private void removeItem(MenuItem it) {
         int iId = itemObjects.get(it);
         String sqlItems = "DELETE FROM MenuItems WHERE id=?";
         PreparedStatement pstItems = null;
@@ -320,7 +218,7 @@ public class DataManagerprofessori {
             }
 
         }
-    }
+    }*/
 
 //    private int writeNewMenu(Menu m) {
 //
@@ -491,7 +389,7 @@ public class DataManagerprofessori {
 
 //    }
 
-    private void removeSection(Section s) {
+    /*private void removeSection(Section s) {
         int sId = sectionObjects.get(s);
         String sqlItems = "DELETE FROM MenuItems WHERE section=?";
         String sqlSection = "DELETE FROM Sections WHERE id=?";
@@ -929,4 +827,5 @@ public class DataManagerprofessori {
 //        }
 //    }
 }
+*/
 

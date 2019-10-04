@@ -10,7 +10,7 @@
 
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="TaskWindowController"
+      fx:controller="controller.TaskWindowController"
       prefHeight="400.0" prefWidth="400.0"
       alignment="CENTER">
     <stylesheets>
