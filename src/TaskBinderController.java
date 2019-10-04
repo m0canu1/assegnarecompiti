@@ -72,7 +72,10 @@ public class TaskBinderController implements Initializable {
 
     private void initializeButtons() {
         assignCook.setOnAction((ActionEvent e) -> assignCook());
-        cancel.setOnAction((ActionEvent e) -> stage.close());
+        cancel.setOnAction((ActionEvent e) -> {
+            Model.getModel().setCurrentCook(null);
+            stage.close();
+        });
     }
 
     private void assignCook() {

@@ -179,7 +179,12 @@ public class DataManager {
 
                 if (task == null) {
 
-                    task = new Task(new Recipe(ricetta), new Cook(cuoco), startTime, endTime, estimatedTime, doses);
+                    if(cuoco == null){
+                        task = new Task(new Recipe(ricetta), null, startTime, endTime, estimatedTime, doses);
+                    }else{
+                        task = new Task(new Recipe(ricetta), new Cook(cuoco), startTime, endTime, estimatedTime, doses);
+                    }
+
 
                     ret.add(task);
                     this.taskObjects.put(task, id);
