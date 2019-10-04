@@ -34,7 +34,7 @@ public class DataManager {
     public DataManager() {
         serverName = "localhost";
         portNumber = "3306";
-        password = "RedPanth3r!";
+        password = "root";
         userName = "root";
 
         this.eventObjects = new HashMap<>();

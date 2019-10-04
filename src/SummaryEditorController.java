@@ -122,12 +122,16 @@ public class SummaryEditorController implements Initializable {
     }
 
     private void taskRemover(Task task) {
+        if(Model.getModel().getCurrentEvent().getCurrentTask() != null) {
 //        Model.getModel().removeTaskFromView(task);
-        Model.getModel().getCurrentEvent().deleteTask(task);
+            Model.getModel().getCurrentEvent().deleteTask(task);
 //        taskListView.setItems(Model.getModel().getTaskObservableList());
-        taskListView.setItems(Model.getModel().getCurrentEvent().getTaskListAsString());
-        Model.getModel().removeTask(task);
+            taskListView.setItems(Model.getModel().getCurrentEvent().getTaskListAsString());
+            Model.getModel().removeTask(task);
 //        System.out.println("remove that task" + task.getName());
+        }else{
+            System.out.println("Cannot remove inexistent task");
+        }
         Model.getModel().getCurrentEvent().setCurrentTask(null);
     }
 

@@ -17,10 +17,13 @@ import java.util.ResourceBundle;
 public class Controller implements Initializable {
 
     @FXML
-    private Button openSummary;
+    private Button openSummary, closeEverything;
 
     @FXML
     private ListView<String> eventListView;
+
+    @FXML
+    Stage stage;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -47,6 +50,10 @@ public class Controller implements Initializable {
 
     private void initializeButtons() {
         openSummary.setOnAction((ActionEvent e) -> openSummary());
+        closeEverything.setOnAction((ActionEvent e) -> {
+            stage = (Stage) closeEverything.getScene().getWindow();
+            stage.close();
+        });
     }
 
     private void openSummary() {

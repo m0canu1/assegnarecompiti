@@ -16,20 +16,25 @@
     <stylesheets>
         <URL value="@design.css"/>
     </stylesheets>
-
-    <Text fx:id="task" styleClass="tasktitle"></Text>
+    <Label text="Compito: " styleClass="description-section"></Label>
+    <TextField fx:id="task" styleClass="tasktitle"></TextField>
     <Label styleClass="separator"></Label>
-    <Text fx:id="cook" styleClass="taskcook"></Text>
+    <Label text="Cuoco assegnato:" styleClass="description-section"></Label>
+    <TextField fx:id="cook" styleClass="taskcook"></TextField>
     <Label styleClass="separator"></Label>
-    <HBox alignment="CENTER">
-        <Text fx:id="start" styleClass="header-section"></Text>
-        <Label styleClass="hsep"></Label>
-        <Text fx:id="end" styleClass="header-section"></Text>
-    </HBox>
+ <!--   <HBox alignment="CENTER"> -->
+        <Label text="Inizio: " styleClass="description-section"></Label>
+        <TextField fx:id="start" styleClass="header-section"></TextField>
+ <!--       <Label styleClass="hsep"></Label> -->
+        <Label text="Fine:" styleClass="description-section"></Label>
+        <TextField fx:id="end" styleClass="header-section"></TextField>
+<!--    </HBox> -->
     <Label styleClass="separator"></Label>
-    <Text fx:id="estTime" styleClass="description-section"></Text>
-    <Label styleClass="separator"></Label>
-    <Text fx:id="doses" styleClass="description-section"></Text>
+    <Label text="Tempo stimato (in minuti):" styleClass="description-section"></Label>
+    <TextField fx:id="estTime" styleClass="description-section" alignment="CENTER"></TextField>
+    <Label styleClass="separator" ></Label>
+    <Label text="Porzioni:" styleClass="description-section"></Label>
+    <TextField fx:id="doses" styleClass="description-section" alignment="CENTER"></TextField>
     <Label styleClass="separator"></Label>
     <Button fx:id="back" text="BACK"></Button>
 </VBox>

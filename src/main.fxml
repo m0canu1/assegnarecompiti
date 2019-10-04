@@ -22,7 +22,11 @@
         <Label styleClass="hsep"></Label>
     </HBox>
     <Label styleClass="separator"></Label>
-    <Button fx:id="openSummary" text="Open Summary" styleClass="button"/>
+    <HBox alignment="CENTER">
+        <Button fx:id="openSummary" text="Open Summary" styleClass="button"/>
+        <Button fx:id="closeEverything" text="Exit" styleClass="button"/>
+    </HBox>
+
     <Label styleClass="separator"></Label>
 
 </VBox>
