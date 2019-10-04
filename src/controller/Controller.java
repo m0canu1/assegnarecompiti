@@ -62,7 +62,7 @@ public class Controller implements Initializable {
     private void openSummary() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("view/SummaryEditor.fxml"));
+            fxmlLoader.setLocation(getClass().getResource("/view/SummaryEditor.fxml"));
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root, 600, 400);
             Stage stage = new Stage();

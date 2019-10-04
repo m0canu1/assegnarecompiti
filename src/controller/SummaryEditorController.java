@@ -91,7 +91,7 @@ public class SummaryEditorController implements Initializable {
     private void taskWindow(Task tempTask) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("view/TaskWindow.fxml"));
+            fxmlLoader.setLocation(getClass().getResource("/view/TaskWindow.fxml"));
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root, 400, 400);
             Stage stage = new Stage();
@@ -108,7 +108,7 @@ public class SummaryEditorController implements Initializable {
     private void taskBinder() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("view/TaskBinder.fxml"));
+            fxmlLoader.setLocation(getClass().getResource("/view/TaskBinder.fxml"));
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root, 600, 400);
             Stage stage = new Stage();
@@ -140,7 +140,7 @@ public class SummaryEditorController implements Initializable {
     private void taskAdder() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("view/TaskAdder.fxml"));
+            fxmlLoader.setLocation(getClass().getResource("/view/TaskAdder.fxml"));
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root, 600, 400);
             Stage stage = new Stage();
