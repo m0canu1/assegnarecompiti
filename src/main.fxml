@@ -13,12 +13,12 @@
         <URL value="@design.css" />
     </stylesheets>
 
-    <Label text="Select your event" styleClass="description-section"></Label>
     <Label text="HOME" styleClass="header-section"></Label>
+    <Label text="Select your event" styleClass="description-section"></Label>
     <Label styleClass="separator"></Label>
     <HBox alignment="CENTER">
         <Label styleClass="hsep"></Label>
-        <ListView fx:id="eventListView" styleClass="list-section"/>
+        <ListView prefWidth="400" fx:id="eventListView" styleClass="list-section"/>
         <Label styleClass="hsep"></Label>
     </HBox>
     <Label styleClass="separator"></Label>

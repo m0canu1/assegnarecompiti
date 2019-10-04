@@ -10,6 +10,10 @@ public class Event {
     private ObservableList<Task> taskObservableList = FXCollections.observableArrayList();
     private Task currentTask;
 
+    public ObservableList<Task> getTaskObservableList() {
+        return taskObservableList;
+    }
+
     public Task getCurrentTask() {
         return currentTask;
     }
@@ -42,9 +46,16 @@ public class Event {
         if(taskObservableList != null) {
             for (Task e : taskObservableList) {
                 if (e.getCook() != null) {
-                    observableList.add(e.getName() + "; Assigned to: " + e.getCook().getName());
+                    observableList.add(e.getStartTime() + "-" + e.getEndTime() + "\t" +
+                            e.getName() + "; Assigned to: " + e.getCook().getName());
                 } else {
-                    observableList.add(e.getName() + "; Not assigned.");
+                    if (e.getStartTime() != null) {
+                        observableList.add(e.getStartTime() + "-" + e.getEndTime() + "\t" +
+                                e.getName() + "; Not assigned.");
+                    } else {
+                        observableList.add("-----NA-----" + "\t" +
+                                e.getName() + "; Not assigned.");
+                    }
                 }
             }
         }

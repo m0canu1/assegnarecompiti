@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<?import javafx.scene.text.Text?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="TaskWindowController"
+      prefHeight="400.0" prefWidth="400.0"
+      alignment="CENTER">
+    <stylesheets>
+        <URL value="@design.css"/>
+    </stylesheets>
+
+    <Text fx:id="task" styleClass="tasktitle"></Text>
+    <Label styleClass="separator"></Label>
+    <Text fx:id="cook" styleClass="taskcook"></Text>
+    <Label styleClass="separator"></Label>
+    <HBox alignment="CENTER">
+        <Text fx:id="start" styleClass="header-section"></Text>
+        <Label styleClass="hsep"></Label>
+        <Text fx:id="end" styleClass="header-section"></Text>
+    </HBox>
+    <Label styleClass="separator"></Label>
+    <Text fx:id="estTime" styleClass="description-section"></Text>
+    <Label styleClass="separator"></Label>
+    <Text fx:id="doses" styleClass="description-section"></Text>
+    <Label styleClass="separator"></Label>
+    <Button fx:id="back" text="BACK"></Button>
+</VBox>

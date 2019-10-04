@@ -1,4 +1,5 @@
 import classfiles.Task;
+import com.sun.webkit.Timer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,12 +21,11 @@ public class SummaryEditorController implements Initializable {
     private Stage stage;
     private Task tempTask;
 
-
     @FXML
     private ListView<String> taskListView;
 
     @FXML
-    private Button bindTask, removeTask, addNewTask;
+    private Button bindTask, removeTask, addNewTask, orderTasks, backToMain, viewTask;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -49,8 +49,6 @@ public class SummaryEditorController implements Initializable {
             }
         }));
 
-        taskListView.setMinWidth(500);
-
         taskListView.setOnKeyPressed(keyEvent -> {
             if (keyEvent.getCode() == KeyCode.DELETE) {
                 taskRemover(Model.getModel().getCurrentEvent().getCurrentTask());
@@ -73,10 +71,36 @@ public class SummaryEditorController implements Initializable {
             taskRemover(tempTask);
         });
         addNewTask.setOnAction((ActionEvent e) -> {
-            tempTask = Model.getModel().getCurrentEvent().getCurrentTask();
             taskAdder();
         });
-//        System.out.print("Initialized SEC Buttons!");
+        orderTasks.setOnAction((ActionEvent e) -> {
+            Model.getModel().putTasksInOrder();
+            taskListView.setItems(Model.getModel().getCurrentEvent().getTaskListAsString());
+        });
+        backToMain.setOnAction((ActionEvent e) -> {
+            stage.close();
+        });
+        viewTask.setOnAction((ActionEvent e) -> {
+            tempTask = Model.getModel().getCurrentEvent().getCurrentTask();
+            taskWindow(tempTask);
+        });
+    }
+
+    private void taskWindow(Task tempTask) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("TaskWindow.fxml"));
+            Parent root = fxmlLoader.load();
+            Scene scene = new Scene(root, 400, 400);
+            Stage stage = new Stage();
+            TaskWindowController taskWindowController = fxmlLoader.getController();
+            taskWindowController.setStage(stage);
+            stage.setTitle("Task View: " + Model.getModel().getCurrentEvent().getCurrentTask().getName());
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void taskBinder() {
@@ -84,7 +108,7 @@ public class SummaryEditorController implements Initializable {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("TaskBinder.fxml"));
             Parent root = fxmlLoader.load();
-            Scene scene = new Scene(root, 350, 400);
+            Scene scene = new Scene(root, 600, 400);
             Stage stage = new Stage();
             TaskBinderController taskBinderController = fxmlLoader.getController();
             taskBinderController.setStage(stage);
@@ -92,7 +116,6 @@ public class SummaryEditorController implements Initializable {
             stage.setScene(scene);
             stage.show();
             stage.setOnCloseRequest(windowEvent -> taskListView.setItems(Model.getModel().getCurrentEvent().getTaskListAsString()));
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -105,6 +128,7 @@ public class SummaryEditorController implements Initializable {
         taskListView.setItems(Model.getModel().getCurrentEvent().getTaskListAsString());
         Model.getModel().removeTask(task);
 //        System.out.println("remove that task" + task.getName());
+        Model.getModel().getCurrentEvent().setCurrentTask(null);
     }
 
     private void taskAdder() {
@@ -112,8 +136,8 @@ public class SummaryEditorController implements Initializable {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("TaskAdder.fxml"));
             Parent root = fxmlLoader.load();
-            Scene scene = new Scene(root, 350, 400);
-            stage = new Stage();
+            Scene scene = new Scene(root, 600, 400);
+            Stage stage = new Stage();
             TaskAdderController taskAdderController = fxmlLoader.getController();
             taskAdderController.setStage(stage);
             stage.setTitle("Add New Task");

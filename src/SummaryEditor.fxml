@@ -16,17 +16,23 @@
     <Label styleClass="separator"></Label>
     <HBox alignment="CENTER">
         <Label styleClass="hsep"></Label>
-        <ListView fx:id="taskListView" styleClass="list-section"></ListView>
+        <ListView prefWidth="400" fx:id="taskListView" styleClass="list-section"></ListView>
         <Label styleClass="separator"></Label>
         <Label styleClass="hsep"></Label>
     </HBox>
     <Label styleClass="separator"></Label>
     <HBox alignment="CENTER">
+        <Button fx:id="backToMain" text="BACK" styleClass="button"></Button>
+        <Label styleClass="hsep"></Label>
         <Button fx:id="addNewTask" text="ADD" styleClass="button"></Button>
         <Label styleClass="hsep"></Label>
         <Button fx:id="bindTask" text="BIND" styleClass="button"></Button>
         <Label styleClass="hsep"></Label>
         <Button fx:id="removeTask" text="REMOVE" styleClass="button"></Button>
+        <Label styleClass="hsep"></Label>
+        <Button fx:id="orderTasks" text="ORDER" styleClass="button"></Button>
+        <Label styleClass="hsep"></Label>
+        <Button fx:id="viewTask" text="VIEW" styleClass="button"></Button>
     </HBox>
     <Label styleClass="separator"></Label>
 </VBox>

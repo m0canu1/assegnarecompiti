@@ -20,13 +20,16 @@
     <Label styleClass="separator"></Label>
     <HBox alignment="CENTER">
         <Label styleClass="hsep"></Label>
-        <ListView fx:id="recipeListView" styleClass="list-section"></ListView>
+        <ListView prefWidth="400" fx:id="recipeListView" styleClass="list-section"></ListView>
         <Label styleClass="hsep"></Label>
     </HBox>
     <Label styleClass="separator"></Label>
     <HBox alignment="CENTER">
+        <Label styleClass="hsep"></Label>
+        <Button fx:id="cancel" text="CANCEL" styleClass="button"></Button>
+        <Label styleClass="hsep"></Label>
         <Button fx:id="selectRecipe" text="ADD" styleClass="button"></Button>
-      <!--  <Button fx:id="bindToCook" text="BIND" styleClass="button"></Button> -->
+        <Label styleClass="hsep"></Label>
     </HBox>
     <Label styleClass="separator"></Label>
 </VBox>

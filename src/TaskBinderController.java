@@ -21,24 +21,34 @@ public class TaskBinderController implements Initializable {
     private ListView<String> cookListView;
 
     @FXML
-    private Button assignCook;
+    private Button assignCook, cancel;
 
     @FXML
     private ChoiceBox<String> startShiftHour = new ChoiceBox<>();
 
     @FXML
+    private ChoiceBox<String> estimatedTime = new ChoiceBox<>();
+
+    @FXML
     private ChoiceBox<String> endShiftHour = new ChoiceBox<>();
+
+    @FXML
+    private ChoiceBox<String> doses = new ChoiceBox<>();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         startShiftHour.getItems().addAll(null, "00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00",
                 "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00",
                 "19:00", "20:00", "21:00", "22:00", "23:00");
-        startShiftHour.setValue(null);
+        startShiftHour.setValue("12:00");
         endShiftHour.getItems().addAll(null, "00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00",
                 "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00",
                 "19:00", "20:00", "21:00", "22:00", "23:00");
-        endShiftHour.setValue(null);
+        endShiftHour.setValue("13:00");
+        doses.getItems().addAll(null, "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "15", "20", "25", "30", "40", "50", "60");
+        doses.setValue(null);
+        estimatedTime.getItems().addAll(null,"5", "10", "15", "20", "25", "30", "45", "60", "75", "90", "105", "120");
+        estimatedTime.setValue(null);
         initializeList();
         initializeButtons();
     }
@@ -53,9 +63,6 @@ public class TaskBinderController implements Initializable {
             }
         }));
 
-        cookListView.setMinWidth(500);
-
-
         cookListView.setOnKeyPressed(keyEvent -> {
             if (keyEvent.getCode() == KeyCode.ENTER) {
                 assignCook();
@@ -65,29 +72,34 @@ public class TaskBinderController implements Initializable {
 
     private void initializeButtons() {
         assignCook.setOnAction((ActionEvent e) -> assignCook());
+        cancel.setOnAction((ActionEvent e) -> stage.close());
     }
 
     private void assignCook() {
         if (((endShiftHour.getValue() != null && startShiftHour.getValue() != null) && endShiftHour.getValue().compareTo(startShiftHour.getValue()) > 0)) {
             Cook tempCook = Model.getModel().getCurrentCook();
-//                System.out.println("Assign the cook to the turn");
-            if (tempCook != null) {
-                if (Model.getModel().getCurrentEvent().getCurrentTask() != null) {
+            String start = startShiftHour.getValue();
+            String end = endShiftHour.getValue();
+            String estTime = estimatedTime.getValue();
+            if (estTime == null) estTime = "";
+            String nof_doses = doses.getValue();
+            if (nof_doses == null) nof_doses = "";
+            if (Model.getModel().getCurrentEvent().getCurrentTask() != null) {
+                if (tempCook != null) {
                     Model.getModel().getCurrentEvent().getCurrentTask().setCook(tempCook);
                     Model.getModel().bindCookToTask(tempCook);
-
                 }
+                Model.getModel().bindTimeToTask(start, end, estTime, nof_doses);
             }
             stage = (Stage) assignCook.getScene().getWindow();
             stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
         } else {
             System.out.println("MARIA SALVADOR ORARI SBALLATI");
         }
-
+        Model.getModel().setCurrentCook(null);
     }
 
     void setStage(Stage stage) {
         this.stage = stage;
     }
-
 }

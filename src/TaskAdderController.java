@@ -23,7 +23,7 @@ public class TaskAdderController implements Initializable {
     private ListView<String> recipeListView;
 
     @FXML
-    private Button selectRecipe;
+    private Button selectRecipe, cancel;
 
     @FXML
  //   private Button bindToCook;
@@ -47,12 +47,9 @@ public class TaskAdderController implements Initializable {
         recipeListView.getSelectionModel().selectedIndexProperty().addListener(((obsValue, oldValue, newValue) -> {
             int newIndex = (int) newValue;
             if (!recipeListView.getSelectionModel().isEmpty()) {
-//                System.out.println("Selected recipe");
                 Model.getModel().setCurrentRecipe(Model.getModel().getCurrentRecipeByIndex(newIndex));
             }
         }));
-
-        recipeListView.setMinWidth(500);
 
         recipeListView.setOnKeyPressed(keyEvent -> {
             if (keyEvent.getCode() == KeyCode.ENTER) {
@@ -62,22 +59,14 @@ public class TaskAdderController implements Initializable {
     }
 
     private void initializeButtons() {
-
         selectRecipe.setOnAction((ActionEvent e) -> selectRecipe());
-
-        /*bindToCook.setOnAction((ActionEvent e) -> {
-            tempRecipe = Model.getModel().getCurrentRecipe();
-            System.out.println("Add new task and then open binder");
-        });*/
+        cancel.setOnAction((ActionEvent e) -> stage.close());
     }
 
     private void selectRecipe() {
         tempRecipe = Model.getModel().getCurrentRecipe();
         Task newTask = new Task(tempRecipe);
-        // Model.getModel().getCurrentEvent().addTask(newTask);
-//            System.out.println("Added a new task with selected recipe");
         stage = (Stage) selectRecipe.getScene().getWindow();
-//            System.out.println(stage);
         Model.getModel().addTaskToEvent(newTask);
         stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
     }

@@ -22,6 +22,24 @@
     -fx-text-fill: antiquewhite;
 }
 
+.tasktitle {
+    -fx-alignment: center;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-padding: 15px;
+    -fx-background-color: background;
+    -fx-text-fill: antiquewhite;
+}
+
+.taskcook {
+    -fx-alignment: center;
+    -fx-font-size: 15px;
+    -fx-font-weight: normal;
+    -fx-padding: 15px;
+    -fx-background-color: background;
+    -fx-text-fill: antiquewhite;
+}
+
 .separator {
     -fx-min-height: 10;
     -fx-max-height: 20;

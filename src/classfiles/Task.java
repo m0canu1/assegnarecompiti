@@ -7,9 +7,11 @@ public class Task {
     private Recipe recipe;
     private Cook cook; //TODO maybe more cooks?
     private String startTime;
+    private String startTimeForInt;
+    private int startTimeInt;
     private String endTime;
     private String estimatedTime;
-    private int doses;
+    private String doses;
 
     public Task(Recipe recipe) {
         this.recipe = recipe;
@@ -17,6 +19,16 @@ public class Task {
 
     public String getStartTime() {
         return startTime;
+    }
+
+    public int getStartTimeInt() {
+        if (startTime != null) {
+            startTimeForInt = startTime.replace(":", "");
+            startTimeInt = Integer.parseInt(startTimeForInt);
+            return startTimeInt;
+        } else {
+            return 0;
+        }
     }
 
     public void setStartTime(String startTime) {
@@ -34,7 +46,7 @@ public class Task {
     public Task(Recipe recipe, Cook cook) {
         this.recipe = recipe;
         this.cook = cook;
-        this.estimatedTime = "00:00";
+        this.estimatedTime = "0";
 
     }
 
@@ -42,7 +54,7 @@ public class Task {
         this.recipe = recipe;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.estimatedTime = "00:00";
+        this.estimatedTime = "0";
 
     }
 
@@ -51,7 +63,7 @@ public class Task {
         this.cook = cook;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.estimatedTime = "00:00";
+        this.estimatedTime = "0";
     }
 
     public Recipe getRecipe() {
@@ -84,11 +96,11 @@ public class Task {
         this.estimatedTime = time;
     }
 
-    public int getDoses() {
+    public String getDoses() {
         return doses;
     }
 
-    public void setDoses(int doses) {
+    public void setDoses(String doses) {
         this.doses = doses;
     }
 
