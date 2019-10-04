@@ -27,7 +27,7 @@ public class TaskBinderController implements Initializable {
     private ChoiceBox<String> startShiftHour = new ChoiceBox<>();
 
     @FXML
-    private ChoiceBox<Integer> estimatedTime = new ChoiceBox<>();
+    private ChoiceBox<String> estimatedTime = new ChoiceBox<>();
 
     @FXML
     private ChoiceBox<String> endShiftHour = new ChoiceBox<>();
@@ -42,8 +42,8 @@ public class TaskBinderController implements Initializable {
                 "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00",
                 "19:00", "20:00", "21:00", "22:00", "23:00");
         endShiftHour.setValue(null);
-        estimatedTime.getItems().addAll(5, 10, 15, 20, 25, 30, 45, 60, 75, 90, 105, 120);
-        estimatedTime.setValue(0);
+        estimatedTime.getItems().addAll(null,"5", "10", "15", "20", "25", "30", "45", "60", "75", "90", "105", "120");
+        estimatedTime.setValue(null);
         initializeList();
         initializeButtons();
     }
@@ -78,7 +78,7 @@ public class TaskBinderController implements Initializable {
                 if (Model.getModel().getCurrentEvent().getCurrentTask() != null) {
                     Model.getModel().getCurrentEvent().getCurrentTask().setCook(tempCook);
                     Model.getModel().bindCookToTask(tempCook);
-                    Model.getModel().bindTimeToTask(startShiftHour.getValue(), endShiftHour.getValue());
+                    Model.getModel().bindTimeToTask(startShiftHour.getValue(), endShiftHour.getValue(), estimatedTime.getValue());
                 }
             }
             stage = (Stage) assignCook.getScene().getWindow();

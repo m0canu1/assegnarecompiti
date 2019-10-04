@@ -46,7 +46,7 @@ public class Task {
     public Task(Recipe recipe, Cook cook) {
         this.recipe = recipe;
         this.cook = cook;
-        this.estimatedTime = "00:00";
+        this.estimatedTime = "0";
 
     }
 
@@ -54,7 +54,7 @@ public class Task {
         this.recipe = recipe;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.estimatedTime = "00:00";
+        this.estimatedTime = "0";
 
     }
 
@@ -63,7 +63,7 @@ public class Task {
         this.cook = cook;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.estimatedTime = "00:00";
+        this.estimatedTime = "0";
     }
 
     public Recipe getRecipe() {

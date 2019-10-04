@@ -175,8 +175,9 @@ class Model {
 
     }
 
-    public void bindTimeToTask(String sTime, String eTime) {
+    public void bindTimeToTask(String sTime, String eTime, String stimeTime) {
         getCurrentEvent().getCurrentTask().setStartTime(sTime);
         getCurrentEvent().getCurrentTask().setEndTime(eTime);
+        getCurrentEvent().getCurrentTask().setEstimatedTime(stimeTime);
     }
 }
