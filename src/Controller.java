@@ -72,7 +72,7 @@ public class Controller implements Initializable {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("SummaryEditor.fxml"));
             Parent root = fxmlLoader.load();
-            Scene scene = new Scene(root, 350, 400);
+            Scene scene = new Scene(root, 600, 400);
             Stage stage = new Stage();
             SummaryEditorController summaryEditorController = fxmlLoader.getController();
             summaryEditorController.setStage(stage);

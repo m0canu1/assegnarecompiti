@@ -20,7 +20,7 @@
     <Label styleClass="separator"></Label>
     <HBox alignment="CENTER">
         <Label styleClass="hsep"></Label>
-        <ListView fx:id="recipeListView" styleClass="list-section"></ListView>
+        <ListView prefWidth="400" fx:id="recipeListView" styleClass="list-section"></ListView>
         <Label styleClass="hsep"></Label>
     </HBox>
     <Label styleClass="separator"></Label>

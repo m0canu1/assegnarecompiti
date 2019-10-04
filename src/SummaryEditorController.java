@@ -86,7 +86,7 @@ public class SummaryEditorController implements Initializable {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("TaskBinder.fxml"));
             Parent root = fxmlLoader.load();
-            Scene scene = new Scene(root, 350, 400);
+            Scene scene = new Scene(root, 600, 400);
             Stage stage = new Stage();
             TaskBinderController taskBinderController = fxmlLoader.getController();
             taskBinderController.setStage(stage);
@@ -115,7 +115,7 @@ public class SummaryEditorController implements Initializable {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("TaskAdder.fxml"));
             Parent root = fxmlLoader.load();
-            Scene scene = new Scene(root, 350, 400);
+            Scene scene = new Scene(root, 600, 400);
             stage = new Stage();
             TaskAdderController taskAdderController = fxmlLoader.getController();
             taskAdderController.setStage(stage);
