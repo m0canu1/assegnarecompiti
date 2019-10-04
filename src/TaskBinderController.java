@@ -47,7 +47,7 @@ public class TaskBinderController implements Initializable {
         endShiftHour.setValue("13:00");
         doses.getItems().addAll(null, "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "15", "20", "25", "30", "40", "50", "60");
         doses.setValue(null);
-        estimatedTime.getItems().addAll(null,"5", "10", "15", "20", "25", "30", "45", "60", "75", "90", "105", "120");
+        estimatedTime.getItems().addAll(null,"00:05", "00:10", "00:15", "00:20", "00:25", "00:30", "00:45", "01:00", "01:15", "01:30", "01:45", "02:00");
         estimatedTime.setValue(null);
         initializeList();
         initializeButtons();

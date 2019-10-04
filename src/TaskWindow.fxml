@@ -30,7 +30,7 @@
         <TextField fx:id="end" styleClass="header-section"></TextField>
 <!--    </HBox> -->
     <Label styleClass="separator"></Label>
-    <Label text="Tempo stimato (in minuti):" styleClass="description-section"></Label>
+    <Label text="Tempo stimato (in ore):" styleClass="description-section"></Label>
     <TextField fx:id="estTime" styleClass="description-section" alignment="CENTER"></TextField>
     <Label styleClass="separator" ></Label>
     <Label text="Porzioni:" styleClass="description-section"></Label>
