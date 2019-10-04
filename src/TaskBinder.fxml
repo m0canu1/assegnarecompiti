@@ -26,6 +26,8 @@
             <ChoiceBox fx:id="startShiftHour"></ChoiceBox>
             <Label>Select end of shift: </Label>
             <ChoiceBox fx:id="endShiftHour"></ChoiceBox>
+            <Label>Select estimated time for the task: </Label>
+            <ChoiceBox fx:id="estimatedTime"></ChoiceBox>
         </VBox>
         <Label styleClass="hsep"></Label>
     </HBox>
