@@ -1,3 +1,5 @@
+package model;
+
 import classfiles.Cook;
 import classfiles.Event;
 import classfiles.Recipe;
@@ -9,7 +11,7 @@ import persistence.DataManager;
 import java.sql.SQLException;
 import java.util.Comparator;
 
-class Model {
+public class Model {
     private static final Model model = new Model();
     private DataManager dataManager = new DataManager();
     private ObservableList<Event> eventObservableList = FXCollections.observableArrayList();
@@ -30,7 +32,7 @@ class Model {
         /*Carica tutte le liste*/
     }
 
-    ObservableList<String> getEventObservableList() {
+    public ObservableList<String> getEventObservableList() {
         ObservableList<String> eventListName = FXCollections.observableArrayList();
         for (Event e : eventObservableList) {
             eventListName.add(e.getName());
@@ -38,21 +40,7 @@ class Model {
         return eventListName;
     }
 
-//    public ObservableList<String> getTaskObservableList() {
-////        if (!taskObservableList.isEmpty()){
-////        taskObservableList.removeAll();
-////        updateTaskObservableList();
-//            ObservableList<String> taskListName = FXCollections.observableArrayList();
-//            for (Task t : taskObservableList) {
-//                taskListName.add(t.getName());
-//                currentEvent.addTask(t);
-//            }
-//            return taskListName;
-////        }
-////        else return null;
-//    }
-
-    ObservableList<String> getCookObservableList() {
+    public ObservableList<String> getCookObservableList() {
         ObservableList<String> cookListName = FXCollections.observableArrayList();
         for (Cook c : cookObservableList) {
             cookListName.add(c.getName());
@@ -60,7 +48,7 @@ class Model {
         return cookListName;
     }
 
-    ObservableList<String> getRecipeObservableList() {
+    public ObservableList<String> getRecipeObservableList() {
         ObservableList<String> recipeListName = FXCollections.observableArrayList();
         for (Recipe r : recipeObservableList) {
             recipeListName.add(r.getName());
@@ -68,73 +56,46 @@ class Model {
         return recipeListName;
     }
 
-//    public void updateTaskObservableList() {
-//        if (taskObservableList.isEmpty())
-//            System.out.println("\n1. taskObservableList VUOTA");
-//        else
-//            System.out.println("1. taskObservableList PIENA");
-//
-//        taskObservableList.removeAll();
-//
-//        if (taskObservableList.isEmpty())
-//            System.out.println("2. taskObservableList VUOTA");
-//        else
-//            System.out.println("2. taskObservableList PIENA");
-////        taskObservableList.notify();
-//        if (!currentEvent.getTaskListAsString().isEmpty())
-//            taskObservableList.addAll((Task) currentEvent.getTaskListAsString());
-//
-//        if (taskObservableList.isEmpty())
-//            System.out.println("3. taskObservableList VUOTA");
-//        else
-//            System.out.println("3. taskObservableList PIENA");
-//
-//
-//    }
-
-    Event getCurrentEvent() {
+    public Event getCurrentEvent() {
         return currentEvent;
     }
 
-//    Task getCurrentTask() {
-//        return currentTask;
-//    }
 
-    Cook getCurrentCook() {
+    public Cook getCurrentCook() {
         return currentCook;
     }
 
-    Recipe getCurrentRecipe() {
+    public Recipe getCurrentRecipe() {
         return currentRecipe;
     }
 
 
-    void setCurrentEvent(Event event) {
+    public void setCurrentEvent(Event event) {
         currentEvent = event;
     }
 
 
-    void setCurrentCook(Cook currentCook) {
+    public void setCurrentCook(Cook currentCook) {
         this.currentCook = currentCook;
     }
 
-    void setCurrentRecipe(Recipe currentRecipe) {
+    public void setCurrentRecipe(Recipe currentRecipe) {
         this.currentRecipe = currentRecipe;
     }
 
-    Event getCurrentEventByIndex(int newIndex) {
+    public Event getCurrentEventByIndex(int newIndex) {
         return eventObservableList.get(newIndex);
     }
 
-    Cook getCurrentCookByIndex(int newIndex) {
+    public Cook getCurrentCookByIndex(int newIndex) {
         return cookObservableList.get(newIndex);
     }
 
-    Recipe getCurrentRecipeByIndex(int newIndex) {
+    public Recipe getCurrentRecipeByIndex(int newIndex) {
         return recipeObservableList.get(newIndex);
     }
 
-    static Model getModel() {
+    public static Model getModel() {
         return model;
     }
 
@@ -143,28 +104,26 @@ class Model {
         recipeObservableList.addAll(dataManager.loadRecipes());
 
         /* CARICAMENTO DELLA LISTA EVENTI E DEI PROPRI TASK */
-//        System.out.println("LISTA EVENTI:\n");
         for (Event e : dataManager.loadEvents()) {
             eventObservableList.add(e);
             for (Task t : dataManager.loadTasks(e)) {
                 e.addTask(t);
             }
-//            System.out.println(e.getName());
         }
 
         cookObservableList.addAll(dataManager.loadCooks());
     }
 
-    void bindCookToTask(Cook tempCook) {
+    public void bindCookToTask(Cook tempCook) {
         currentEvent.getCurrentTask().setCook(tempCook);
         dataManager.bindCookToTask(tempCook, currentEvent.getCurrentTask());
     }
 
-    void removeTask(Task task) {
+    public void removeTask(Task task) {
         dataManager.removeTask(task);
     }
 
-    void addTaskToEvent(Task t){
+    public void addTaskToEvent(Task t){
         currentEvent.addTask(t);
         dataManager.addTask(t, currentEvent);
     }

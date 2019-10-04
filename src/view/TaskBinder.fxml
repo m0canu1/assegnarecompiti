@@ -9,7 +9,7 @@
 
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="TaskBinderController"
+      fx:controller="controller.TaskBinderController"
       prefHeight="400.0" prefWidth="600.0" alignment="CENTER">
     <stylesheets>
         <URL value="@design.css" />

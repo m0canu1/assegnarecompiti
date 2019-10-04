@@ -1,3 +1,5 @@
+package controller;
+
 import classfiles.Recipe;
 import classfiles.Task;
 import javafx.event.ActionEvent;
@@ -9,6 +11,7 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import model.Model;
 
 import java.net.URL;
 import java.util.ResourceBundle;
