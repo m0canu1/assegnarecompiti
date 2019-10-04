@@ -11,7 +11,7 @@ public class Task {
     private int startTimeInt;
     private String endTime;
     private String estimatedTime;
-    private int doses;
+    private String doses;
 
     public Task(Recipe recipe) {
         this.recipe = recipe;
@@ -96,11 +96,11 @@ public class Task {
         this.estimatedTime = time;
     }
 
-    public int getDoses() {
+    public String getDoses() {
         return doses;
     }
 
-    public void setDoses(int doses) {
+    public void setDoses(String doses) {
         this.doses = doses;
     }
 

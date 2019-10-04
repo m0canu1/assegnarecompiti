@@ -34,20 +34,9 @@ public class Controller implements Initializable {
         eventListView.getSelectionModel().selectedIndexProperty().addListener(((obsValue, oldValue, newValue) -> {
             int newIndex = (int) newValue;
             if (!eventListView.getSelectionModel().isEmpty()) {
-//                System.out.println("New event selected" + newIndex);
                 Model.getModel().setCurrentEvent(Model.getModel().getCurrentEventByIndex(newIndex));
-//                System.out.println("Current selected event: " + Model.getModel().getCurrentEventByIndex(newIndex).getName());
             }
         }));
-
-        /*eventListView.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent keyEvent) {
-                if (keyEvent.getCode() == KeyCode.ENTER) {
-                    openSummary();
-                }
-            }
-        });*/
 
         eventListView.setOnKeyPressed(keyEvent -> {
             if (keyEvent.getCode() == KeyCode.ENTER) {
@@ -56,17 +45,10 @@ public class Controller implements Initializable {
         });
     }
 
-    /**
-     *
-     */
-    //TODO quando clicco su openSummary devo sapere qual era l'evento selezionato
     private void initializeButtons() {
         openSummary.setOnAction((ActionEvent e) -> openSummary());
     }
 
-    /**
-     *
-     */
     private void openSummary() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();

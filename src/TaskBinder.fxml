@@ -26,12 +26,20 @@
             <ChoiceBox fx:id="startShiftHour"></ChoiceBox>
             <Label>Select end of shift: </Label>
             <ChoiceBox fx:id="endShiftHour"></ChoiceBox>
-            <Label>Select estimated time for the task: </Label>
+            <Label>Select estimated time for task: </Label>
             <ChoiceBox fx:id="estimatedTime"></ChoiceBox>
+            <Label>Number of doses: </Label>
+            <ChoiceBox fx:id="doses"></ChoiceBox>
         </VBox>
         <Label styleClass="hsep"></Label>
     </HBox>
     <Label styleClass="separator"></Label>
-    <Button fx:id="assignCook" text="ASSIGN TO TASK"></Button>
+    <HBox>
+        <Label styleClass="hsep"></Label>
+        <Button fx:id="cancel" text="CANCEL"></Button>
+        <Label styleClass="hsep"></Label>
+        <Button fx:id="assignCook" text="ASSIGN TO TASK"></Button>
+        <Label styleClass="hsep"></Label>
+    </HBox>
     <Label styleClass="separator"></Label>
 </VBox>

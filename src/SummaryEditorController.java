@@ -21,12 +21,11 @@ public class SummaryEditorController implements Initializable {
     private Stage stage;
     private Task tempTask;
 
-
     @FXML
     private ListView<String> taskListView;
 
     @FXML
-    private Button bindTask, removeTask, addNewTask, orderTasks;
+    private Button bindTask, removeTask, addNewTask, orderTasks, backToMain;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -79,6 +78,9 @@ public class SummaryEditorController implements Initializable {
             Model.getModel().putTasksInOrder();
             taskListView.setItems(Model.getModel().getCurrentEvent().getTaskListAsString());
         });
+        backToMain.setOnAction((ActionEvent e) -> {
+            stage.close();
+        });
     }
 
     private void taskBinder() {
@@ -94,7 +96,6 @@ public class SummaryEditorController implements Initializable {
             stage.setScene(scene);
             stage.show();
             stage.setOnCloseRequest(windowEvent -> taskListView.setItems(Model.getModel().getCurrentEvent().getTaskListAsString()));
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -116,7 +117,7 @@ public class SummaryEditorController implements Initializable {
             fxmlLoader.setLocation(getClass().getResource("TaskAdder.fxml"));
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root, 600, 400);
-            stage = new Stage();
+            Stage stage = new Stage();
             TaskAdderController taskAdderController = fxmlLoader.getController();
             taskAdderController.setStage(stage);
             stage.setTitle("Add New Task");

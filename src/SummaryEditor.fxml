@@ -22,6 +22,8 @@
     </HBox>
     <Label styleClass="separator"></Label>
     <HBox alignment="CENTER">
+        <Button fx:id="backToMain" text="BACK" styleClass="button"></Button>
+        <Label styleClass="hsep"></Label>
         <Button fx:id="addNewTask" text="ADD" styleClass="button"></Button>
         <Label styleClass="hsep"></Label>
         <Button fx:id="bindTask" text="BIND" styleClass="button"></Button>

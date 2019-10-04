@@ -13,8 +13,8 @@
         <URL value="@design.css" />
     </stylesheets>
 
-    <Label text="Select your event" styleClass="description-section"></Label>
     <Label text="HOME" styleClass="header-section"></Label>
+    <Label text="Select your event" styleClass="description-section"></Label>
     <Label styleClass="separator"></Label>
     <HBox alignment="CENTER">
         <Label styleClass="hsep"></Label>
