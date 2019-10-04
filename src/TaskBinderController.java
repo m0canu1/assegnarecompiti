@@ -53,8 +53,6 @@ public class TaskBinderController implements Initializable {
             }
         }));
 
-        cookListView.setMinWidth(500);
-
 
         cookListView.setOnKeyPressed(keyEvent -> {
             if (keyEvent.getCode() == KeyCode.ENTER) {
@@ -75,7 +73,7 @@ public class TaskBinderController implements Initializable {
                 if (Model.getModel().getCurrentEvent().getCurrentTask() != null) {
                     Model.getModel().getCurrentEvent().getCurrentTask().setCook(tempCook);
                     Model.getModel().bindCookToTask(tempCook);
-
+                    Model.getModel().bindTimeToTask(startShiftHour.getValue(), endShiftHour.getValue());
                 }
             }
             stage = (Stage) assignCook.getScene().getWindow();

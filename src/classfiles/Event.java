@@ -10,6 +10,10 @@ public class Event {
     private ObservableList<Task> taskObservableList = FXCollections.observableArrayList();
     private Task currentTask;
 
+    public ObservableList<Task> getTaskObservableList() {
+        return taskObservableList;
+    }
+
     public Task getCurrentTask() {
         return currentTask;
     }

@@ -52,8 +52,6 @@ public class TaskAdderController implements Initializable {
             }
         }));
 
-        recipeListView.setMinWidth(500);
-
         recipeListView.setOnKeyPressed(keyEvent -> {
             if (keyEvent.getCode() == KeyCode.ENTER) {
                 selectRecipe();

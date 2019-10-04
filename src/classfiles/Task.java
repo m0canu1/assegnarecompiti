@@ -7,6 +7,8 @@ public class Task {
     private Recipe recipe;
     private Cook cook; //TODO maybe more cooks?
     private String startTime;
+    private String startTimeForInt;
+    private int startTimeInt;
     private String endTime;
     private String estimatedTime;
     private int doses;
@@ -17,6 +19,16 @@ public class Task {
 
     public String getStartTime() {
         return startTime;
+    }
+
+    public int getStartTimeInt() {
+        if (startTime != null) {
+            startTimeForInt = startTime.replace(":", "");
+            startTimeInt = Integer.parseInt(startTimeForInt);
+            return startTimeInt;
+        } else {
+            return 0;
+        }
     }
 
     public void setStartTime(String startTime) {

@@ -1,4 +1,5 @@
 import classfiles.Task;
+import com.sun.webkit.Timer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,7 +26,7 @@ public class SummaryEditorController implements Initializable {
     private ListView<String> taskListView;
 
     @FXML
-    private Button bindTask, removeTask, addNewTask;
+    private Button bindTask, removeTask, addNewTask, orderTasks;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -48,8 +49,6 @@ public class SummaryEditorController implements Initializable {
 //                System.out.println("Current task: " + Model.getModel().getCurrentEvent().getCurrentTaskByIndex(newIndex).getName());
             }
         }));
-
-        taskListView.setMinWidth(500);
 
         taskListView.setOnKeyPressed(keyEvent -> {
             if (keyEvent.getCode() == KeyCode.DELETE) {
@@ -76,7 +75,10 @@ public class SummaryEditorController implements Initializable {
             tempTask = Model.getModel().getCurrentEvent().getCurrentTask();
             taskAdder();
         });
-//        System.out.print("Initialized SEC Buttons!");
+        orderTasks.setOnAction((ActionEvent e) -> {
+            Model.getModel().putTasksInOrder();
+            taskListView.setItems(Model.getModel().getCurrentEvent().getTaskListAsString());
+        });
     }
 
     private void taskBinder() {
@@ -105,6 +107,7 @@ public class SummaryEditorController implements Initializable {
         taskListView.setItems(Model.getModel().getCurrentEvent().getTaskListAsString());
         Model.getModel().removeTask(task);
 //        System.out.println("remove that task" + task.getName());
+        Model.getModel().getCurrentEvent().setCurrentTask(null);
     }
 
     private void taskAdder() {

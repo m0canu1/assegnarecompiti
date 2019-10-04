@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import persistence.DataManager;
 
 import java.sql.SQLException;
+import java.util.Comparator;
 
 class Model {
     private static final Model model = new Model();
@@ -14,6 +15,7 @@ class Model {
     private ObservableList<Event> eventObservableList = FXCollections.observableArrayList();
     private ObservableList<Cook> cookObservableList = FXCollections.observableArrayList();
     private ObservableList<Recipe> recipeObservableList = FXCollections.observableArrayList();
+    private Comparator<Task> taskComparator = Comparator.comparingInt(Task::getStartTimeInt);
     private Event currentEvent;
     private Cook currentCook;
     private Recipe currentRecipe;
@@ -165,5 +167,16 @@ class Model {
     void addTaskToEvent(Task t){
         currentEvent.addTask(t);
         dataManager.addTask(t, currentEvent);
+    }
+
+    public void putTasksInOrder() {
+        System.out.println("Sorting the tasks based on start time...");
+        FXCollections.sort(currentEvent.getTaskObservableList(), taskComparator);
+
+    }
+
+    public void bindTimeToTask(String sTime, String eTime) {
+        getCurrentEvent().getCurrentTask().setStartTime(sTime);
+        getCurrentEvent().getCurrentTask().setEndTime(eTime);
     }
 }
