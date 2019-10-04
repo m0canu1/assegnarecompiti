@@ -1,6 +1,9 @@
 package persistence;
 
-import classfiles.*;
+import classfiles.Cook;
+import classfiles.Event;
+import classfiles.Recipe;
+import classfiles.Task;
 
 import java.sql.*;
 import java.util.*;
@@ -155,7 +158,7 @@ public class DataManager {
      */
     public List<Task> loadTasks(Event event) {
         Statement st = null;
-        String query = "SELECT Tasks.id, Recipes.name as \"ricetta\", C.name, start_time, end_time from Tasks inner join Events E on Tasks.evento = E.id inner join Recipes on Tasks.ricetta = Recipes.id left outer join Cooks C on Tasks.cuoco = C.id where E.name=\'" + event.getName() + "\'";
+        String query = "SELECT Tasks.id, Recipes.name as \"ricetta\", C.name, DATE_FORMAT(start_time, \"%H:%i\"), DATE_FORMAT(end_time, \"%H:%i\"), DATE_FORMAT(estimated_time, \"%H:%i\"), doses from Tasks inner join Events E on Tasks.evento = E.id inner join Recipes on Tasks.ricetta = Recipes.id left outer join Cooks C on Tasks.cuoco = C.id where E.name=\'" + event.getName() + "\'";
         PreparedStatement preparedStatement;
         List<Task> ret = new ArrayList<>();
 
@@ -166,17 +169,17 @@ public class DataManager {
                 int id = rs.getInt(1);
                 String ricetta = rs.getString(2);
                 String cuoco = rs.getString(3);
-//                System.out.println(cuoco);
                 String startTime = rs.getString(4);
                 String endTime = rs.getString(5);
+                String estimatedTime = rs.getString(6);
+                int doses = rs.getInt(7);
 
                 // Verifica se per caso l'ha già caricata
                 Task task = this.idToTaskObject.get(id);
 
                 if (task == null) {
 
-                    if (cuoco == null) task = new Task(new Recipe(ricetta), startTime, endTime);
-                    else task = new Task(new Recipe(ricetta), new Cook(cuoco), startTime, endTime);
+                    task = new Task(new Recipe(ricetta), new Cook(cuoco), startTime, endTime, estimatedTime, doses);
 
                     ret.add(task);
                     this.taskObjects.put(task, id);
@@ -292,30 +295,22 @@ public class DataManager {
         int eId = eventObjects.get(e);
         int rId = recipeObjects.get(tempR);
 
-        String query = "INSERT INTO Tasks (ricetta,evento) VALUES (?, ?)";
+        String query = "INSERT INTO Tasks (ricetta, evento) VALUES (?, ?)";
         PreparedStatement pstmt = null;
         String querona = "SELECT MAX(id) as id FROM Tasks";
         Statement pstmt2 = null;
         try {
             pstmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             pstmt.setInt(1, rId);
-         //   pstmt.setInt(2, cId);
             pstmt.setInt(2, eId);
-          //  pstmt.setTime(3, Time.valueOf(t.getStartTime()));
-          //  pstmt.setTime(4, Time.valueOf(t.getEndTime()));
-          //  pstmt.setTime(5, Time.valueOf(t.getEstimatedTime()));
-
 
             pstmt.executeUpdate();
             pstmt2 = connection.createStatement();
             ResultSet rs = pstmt2.executeQuery(querona);
-//            System.out.println("BARABBA BABBEO" + 1);
             if(rs.next()){
                 int newId = rs.getInt("id");
                 taskObjects.put(t, newId);
             }
-
-
 
         } catch (SQLException exc) {
             exc.printStackTrace();
@@ -323,6 +318,37 @@ public class DataManager {
             try {
                 if (pstmt != null) pstmt.close();
                 if (pstmt2 != null) pstmt2.close();
+            } catch (SQLException exc2) {
+                exc2.printStackTrace();
+            }
+        }
+    }
+
+    public void bindTimeToTask(Task task) {
+        int tId = taskObjects.get(task);
+        String sTime = task.getStartTime();
+//            System.out.println("TIME " + sTime);
+        String eTime = task.getEndTime();
+        String estTime = task.getEstimatedTime();
+        int doses = Integer.parseInt(task.getDoses());
+
+        String query = "UPDATE Tasks SET start_time = ?, end_time = ?, estimated_time = ?, doses = ? WHERE id = ?";
+        PreparedStatement pstmt = null;
+
+        try {
+            pstmt = connection.prepareStatement(query);
+            pstmt.setString(1, sTime);
+            pstmt.setString(2, eTime);
+            pstmt.setString(3, estTime);
+            pstmt.setInt(4, doses);
+            pstmt.setInt(5, tId);
+            pstmt.executeUpdate();
+
+        } catch (SQLException exc) {
+            exc.printStackTrace();
+        } finally {
+            try {
+                if (pstmt != null) pstmt.close();
             } catch (SQLException exc2) {
                 exc2.printStackTrace();
             }

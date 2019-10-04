@@ -180,5 +180,6 @@ class Model {
         getCurrentEvent().getCurrentTask().setEndTime(eTime);
         getCurrentEvent().getCurrentTask().setEstimatedTime(estTime);
         getCurrentEvent().getCurrentTask().setDoses(doses);
+        dataManager.bindTimeToTask(getCurrentEvent().getCurrentTask());
     }
 }

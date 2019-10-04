@@ -300,50 +300,6 @@ public class DataManagerprofessori {
      * @param event è l'evento da cui prendere i task
      * @return ritorna una lista di task dell'evento
      */
-    public List<Task> loadTasks(Event event) {
-        int eventId = eventObjects.get(event);
-        Statement st = null;
-        String query = "SELECT Tasks.id, Recipes.name as \"ricetta\", C.name, start_time, end_time from Tasks inner join Events E on Tasks.evento = E.id inner join Recipes on Tasks.ricetta = Recipes.id left outer join Cooks C on Tasks.cuoco = C.id where E.name=\'" + event.getName() + "\'";
-        PreparedStatement preparedStatement = null;
-        List<Task> ret = new ArrayList<>();
-
-        try {
-            preparedStatement = connection.prepareStatement(query);
-            ResultSet rs = preparedStatement.executeQuery(query);
-            while (rs.next()) {
-                int id = rs.getInt(1);
-                String ricetta = rs.getString(2);
-                String cuoco = rs.getString(3);
-                System.out.println(cuoco);
-                String startTime = rs.getString(4);
-                String endTime = rs.getString(5);
-
-                // Verifica se per caso l'ha già caricata
-                Task task = this.idToTaskObject.get(id);
-
-                if (task == null) {
-
-                    if (cuoco == null) task = new Task(new Recipe(ricetta), startTime, endTime);
-                    else task = new Task(new Recipe(ricetta), new Cook(cuoco), startTime, endTime);
-
-                    if (task != null) {
-                        ret.add(task);
-                        this.taskObjects.put(task, id);
-                        this.idToTaskObject.put(id, task);
-                    }
-                }
-            }
-        } catch (SQLException exc) {
-            exc.printStackTrace();
-        } finally {
-            try {
-                if (st != null) st.close();
-            } catch (SQLException exc2) {
-                exc2.printStackTrace();
-            }
-        }
-        return ret;
-    }
 
     private void removeItem(MenuItem it) {
         int iId = itemObjects.get(it);
