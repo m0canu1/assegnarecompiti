@@ -1,14 +1,9 @@
 *{
-
-    /*background: #78909c;*/
     -common-back-color: #009688;
     -common-text-fill: white;
     -common-border-fill: white;
     -enveloped-back-color: #00645e;
-
-
 }
-/*#1e88e5*/
 
 .root {
      -fx-font-family: sans-serif;
@@ -17,10 +12,6 @@
      -fx-background-image: url("26-png-1.png") ;
  }
 
-/*.list-view {*/
-/*    -fx-padding: 10 3 5 2;*/
-/*    -fx-background-color: transparent;*/
-/*}*/
 
 .list-view {
     -fx-padding: 10 3 5 2;
@@ -56,7 +47,6 @@
     -fx-font-size: 40px;
     -fx-font-weight: bold;
     -fx-padding: 15px;
-    /*-fx-background-color: background;*/
     -fx-background-color: -common-back-color;
     -fx-text-fill: -common-text-fill;
 }
@@ -64,7 +54,6 @@
 .description-section {
     -fx-font-size: 25px;
     -fx-font-family: "Times New Roman";
-/*-fx-background-color: background;*/
     -fx-background-color: -common-back-color;
 
 }
@@ -72,22 +61,9 @@
 .separator {
     -fx-min-height: 10;
     -fx-max-height: 20;
-    /*-fx-background-color: background;*/
     -fx-background-color: -common-back-color;
 
 }
-
-/*.button {*/
-/*    -fx-padding: 4px;*/
-/*    -fx-font-size: 15px;*/
-/*    -fx-background-color:*/
-/*            linear-gradient(#a7c0cd, #748f9c),*/
-/*            radial-gradient(center 50% -40%, radius 200%, #a7c0cd 45%, #a5becb 50%);*/
-/*    -fx-background-radius: 6, 5;*/
-/*    -fx-background-insets: 0, 1;*/
-/*    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 );*/
-/*    -fx-text-fill: #395306;*/
-/*}*/
 
 .button {
     -fx-border-color: white;
@@ -106,15 +82,10 @@
 }
 
 #error {
-    /*-fx-background-color: red;*/
     -fx-font-size: 30px;
     -fx-text-fill: black;
 }
 
-/*.label {*/
-/*    -fx-font-size: 20pt;*/
-/*    -fx-text-fill: black;*/
-/*}*/
 
 .taskViewData {
     -fx-font-size: 35px;

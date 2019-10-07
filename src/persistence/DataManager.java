@@ -53,7 +53,7 @@ public class DataManager {
 
 
     public void initialize() throws SQLException {
-        Connection conn = null;
+        Connection conn;
         Properties connectionProps = new Properties();
         connectionProps.put("user", this.userName);
         connectionProps.put("password", this.password);
