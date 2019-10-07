@@ -18,13 +18,14 @@ public class Task {
         this.recipe = recipe;
     }
 
-    public Task(Recipe recipe, Cook cook, String startTime, String endTime, String estimatedTime, int doses) {
+    public Task(Recipe recipe, Cook cook, String startTime, String endTime, String estimatedTime, int doses, String alreadyPreparedDoses) {
         this.recipe = recipe;
         if (cook != null) this.cook = cook;
         if (startTime != null) this.startTime = startTime;
         if (endTime != null) this.endTime = endTime;
         if (estimatedTime != null) this.estimatedTime = estimatedTime;
-        this.preparedDoses = "0";
+        if (alreadyPreparedDoses != null) this.preparedDoses = alreadyPreparedDoses;
+                else this.preparedDoses = "0";
         this.doses = String.valueOf(doses);
     }
 

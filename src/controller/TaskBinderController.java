@@ -98,16 +98,16 @@ public class TaskBinderController implements Initializable {
             String nof_doses = doses.getValue();
             if (nof_doses == null) nof_doses = "0";
 
-            if((Integer.parseInt(dosesPrepared) > Integer.parseInt(nof_doses))){
+            if ((Integer.parseInt(dosesPrepared) > Integer.parseInt(nof_doses))) {
                 System.out.println("Prepared doses maggiori delle dosi da preparare!");
-            }else{
+            } else {
                 if (Model.getModel().getCurrentEvent().getCurrentTask() != null) {
                     if (tempCook != null) {
                         Model.getModel().getCurrentEvent().getCurrentTask().setCook(tempCook);
                         Model.getModel().bindCookToTask(tempCook);
                     }
-                    Model.getModel().getCurrentEvent().getCurrentTask().setPreparedDoses(dosesPrepared);
-                    Model.getModel().bindTimeToTask(start, end, estTime, nof_doses);
+//                    Model.getModel().getCurrentEvent().getCurrentTask().setPreparedDoses(dosesPrepared);
+                    Model.getModel().bindTimeToTask(start, end, estTime, nof_doses, dosesPrepared);
                 }
                 stage = (Stage) assignCook.getScene().getWindow();
                 stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));

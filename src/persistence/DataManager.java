@@ -158,7 +158,7 @@ public class DataManager {
      */
     public List<Task> loadTasks(Event event) {
         Statement st = null;
-        String query = "SELECT Tasks.id, Recipes.name as \"ricetta\", C.name, DATE_FORMAT(start_time, \"%H:%i\"), DATE_FORMAT(end_time, \"%H:%i\"), DATE_FORMAT(estimated_time, \"%H:%i\"), doses from Tasks inner join Events E on Tasks.evento = E.id inner join Recipes on Tasks.ricetta = Recipes.id left outer join Cooks C on Tasks.cuoco = C.id where E.name=\'" + event.getName() + "\'";
+        String query = "SELECT Tasks.id, Recipes.name as \"ricetta\", C.name, DATE_FORMAT(start_time, \"%H:%i\"), DATE_FORMAT(end_time, \"%H:%i\"), DATE_FORMAT(estimated_time, \"%H:%i\"), doses, already_prepared_doses from Tasks inner join Events E on Tasks.evento = E.id inner join Recipes on Tasks.ricetta = Recipes.id left outer join Cooks C on Tasks.cuoco = C.id where E.name=\'" + event.getName() + "\'";
         PreparedStatement preparedStatement;
         List<Task> ret = new ArrayList<>();
 
@@ -169,21 +169,22 @@ public class DataManager {
                 int id = rs.getInt(1);
                 String ricetta = rs.getString(2);
                 String cuoco = rs.getString(3);
-                    System.out.println(cuoco);
+//                    System.out.println(cuoco);
                 String startTime = rs.getString(4);
                 String endTime = rs.getString(5);
                 String estimatedTime = rs.getString(6);
                 int doses = rs.getInt(7);
+                String alreadyPreparedDoses = rs.getString(8);
 
                 // Verifica se per caso l'ha già caricata
                 Task task = this.idToTaskObject.get(id);
 
                 if (task == null) {
 
-                    if(cuoco == null){
-                        task = new Task(new Recipe(ricetta), null, startTime, endTime, estimatedTime, doses);
-                    }else{
-                        task = new Task(new Recipe(ricetta), new Cook(cuoco), startTime, endTime, estimatedTime, doses);
+                    if (cuoco == null) {
+                        task = new Task(new Recipe(ricetta), null, startTime, endTime, estimatedTime, doses, alreadyPreparedDoses);
+                    } else {
+                        task = new Task(new Recipe(ricetta), new Cook(cuoco), startTime, endTime, estimatedTime, doses, alreadyPreparedDoses);
                     }
 
 
@@ -337,8 +338,9 @@ public class DataManager {
         String eTime = task.getEndTime();
         String estTime = task.getEstimatedTime();
         int doses = Integer.parseInt(task.getDoses());
+        int alreadyPreparedDoses = Integer.valueOf(task.getPreparedDoses());
 
-        String query = "UPDATE Tasks SET start_time = ?, end_time = ?, estimated_time = ?, doses = ? WHERE id = ?";
+        String query = "UPDATE Tasks SET start_time = ?, end_time = ?, estimated_time = ?, doses = ?, already_prepared_doses = ? WHERE id = ?";
         PreparedStatement pstmt = null;
 
         try {
@@ -347,7 +349,8 @@ public class DataManager {
             pstmt.setString(2, eTime);
             pstmt.setString(3, estTime);
             pstmt.setInt(4, doses);
-            pstmt.setInt(5, tId);
+            pstmt.setInt(5, alreadyPreparedDoses);
+            pstmt.setInt(6, tId);
             pstmt.executeUpdate();
 
         } catch (SQLException exc) {

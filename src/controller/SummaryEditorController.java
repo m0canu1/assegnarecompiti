@@ -51,6 +51,8 @@ public class SummaryEditorController implements Initializable {
             }
         }));
 
+        taskListView.setMinWidth(500);
+
         taskListView.setOnKeyPressed(keyEvent -> {
             if (keyEvent.getCode() == KeyCode.DELETE) {
                 taskRemover(Model.getModel().getCurrentEvent().getCurrentTask());

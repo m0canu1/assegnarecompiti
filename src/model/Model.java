@@ -134,11 +134,12 @@ public class Model {
 
     }
 
-    public void bindTimeToTask(String sTime, String eTime, String estTime, String doses) {
+    public void bindTimeToTask(String sTime, String eTime, String estTime, String doses, String preparedDoses) {
         getCurrentEvent().getCurrentTask().setStartTime(sTime);
         getCurrentEvent().getCurrentTask().setEndTime(eTime);
         getCurrentEvent().getCurrentTask().setEstimatedTime(estTime);
         getCurrentEvent().getCurrentTask().setDoses(doses);
+        getCurrentEvent().getCurrentTask().setPreparedDoses(preparedDoses);
         dataManager.bindTimeToTask(getCurrentEvent().getCurrentTask());
     }
 }
