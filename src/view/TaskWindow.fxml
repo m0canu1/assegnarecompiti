@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.VBox?>
 <?import java.net.URL?>
-<?import javafx.scene.text.Text?>
-
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="controller.TaskWindowController"
@@ -16,25 +11,25 @@
     <stylesheets>
         <URL value="@design.css"/>
     </stylesheets>
-    <Label text="Compito: " styleClass="description-section"></Label>
-    <TextField fx:id="task" styleClass="tasktitle"></TextField>
-    <Label styleClass="separator"></Label>
-    <Label text="Cuoco assegnato:" styleClass="description-section"></Label>
-    <TextField fx:id="cook" styleClass="taskcook"></TextField>
-    <Label styleClass="separator"></Label>
+    <Label text="Compito: " styleClass="description-section"/>
+    <TextField fx:id="task" styleClass="tasktitle"/>
+    <Label styleClass="separator"/>
+    <Label text="Cuoco assegnato:" styleClass="description-section"/>
+    <TextField fx:id="cook" styleClass="taskcook"/>
+    <Label styleClass="separator"/>
  <!--   <HBox alignment="CENTER"> -->
-        <Label text="Inizio: " styleClass="description-section"></Label>
-        <TextField fx:id="start" styleClass="header-section"></TextField>
+    <Label text="Inizio: " styleClass="description-section"/>
+    <TextField fx:id="start" styleClass="header-section"/>
  <!--       <Label styleClass="hsep"></Label> -->
-        <Label text="Fine:" styleClass="description-section"></Label>
-        <TextField fx:id="end" styleClass="header-section"></TextField>
+    <Label text="Fine:" styleClass="description-section"/>
+    <TextField fx:id="end" styleClass="header-section"/>
 <!--    </HBox> -->
-    <Label styleClass="separator"></Label>
-    <Label text="Tempo stimato (in ore):" styleClass="description-section"></Label>
-    <TextField fx:id="estTime" styleClass="description-section" alignment="CENTER"></TextField>
-    <Label styleClass="separator" ></Label>
-    <Label text="Porzioni:" styleClass="description-section"></Label>
-    <TextField fx:id="doses" styleClass="description-section" alignment="CENTER"></TextField>
-    <Label styleClass="separator"></Label>
-    <Button fx:id="back" text="BACK"></Button>
+    <Label styleClass="separator"/>
+    <Label text="Tempo stimato (in ore):" styleClass="description-section"/>
+    <TextField fx:id="estTime" styleClass="description-section" alignment="CENTER"/>
+    <Label styleClass="separator"/>
+    <Label text="Porzioni:" styleClass="description-section"/>
+    <TextField fx:id="doses" styleClass="description-section" alignment="CENTER"/>
+    <Label styleClass="separator"/>
+    <Button fx:id="back" text="BACK"/>
 </VBox>
