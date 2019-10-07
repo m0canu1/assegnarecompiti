@@ -174,7 +174,7 @@ public class DataManager {
                 String endTime = rs.getString(5);
                 String estimatedTime = rs.getString(6);
                 int doses = rs.getInt(7);
-                String alreadyPreparedDoses = rs.getString(8);
+                int alreadyPreparedDoses = rs.getInt(8);
 
                 // Verifica se per caso l'ha già caricata
                 Task task = this.idToTaskObject.get(id);
@@ -337,7 +337,8 @@ public class DataManager {
 //            System.out.println("TIME " + sTime);
         String eTime = task.getEndTime();
         String estTime = task.getEstimatedTime();
-        int doses = Integer.parseInt(task.getDoses());
+//        int doses = Integer.parseInt(task.getDoses());
+        int doses = task.getDoses();
         int alreadyPreparedDoses = Integer.valueOf(task.getPreparedDoses());
 
         String query = "UPDATE Tasks SET start_time = ?, end_time = ?, estimated_time = ?, doses = ?, already_prepared_doses = ? WHERE id = ?";

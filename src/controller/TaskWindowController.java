@@ -38,18 +38,19 @@ public class TaskWindowController implements Initializable {
         else start.setText("Da specificare.");
         if (currentTask.getEndTime() != null) end.setText(currentTask.getEndTime());
         else end.setText("Da specificare.");
-        if (currentTask.getEstimatedTime() != null && (currentTask.getEstimatedTime().compareTo("0") == 0) ) estTime.setText(currentTask.getEstimatedTime());
+        if (currentTask.getEstimatedTime() != null || (currentTask.getEstimatedTime().compareTo("0") == 0) ) estTime.setText(currentTask.getEstimatedTime());
         else estTime.setText("Non specificato.");
-        if (currentTask.getDoses() != null){
-            int intDoses = Integer.parseInt(currentTask.getDoses()) - Integer.parseInt(currentTask.getPreparedDoses());
-            String finalDoses = Integer.toString(intDoses);
-            if(finalDoses.compareTo("0") == 0){
-                doses.setText("Non specificato.");
-            }else {
-                doses.setText(finalDoses);
-            }
-        }
-        else doses.setText("Non specificato.");
+//        if (currentTask.getDoses() != null){
+//            int intDoses = Integer.parseInt(currentTask.getDoses()) - Integer.parseInt(currentTask.getPreparedDoses());
+//            String finalDoses = Integer.toString(intDoses);
+//            if(finalDoses.compareTo("0") == 0){
+//                doses.setText("Non specificato.");
+//            }else {
+//                doses.setText(finalDoses);
+//            }
+//        }
+//        else doses.setText("Non specificato.");
+        doses.setText(String.valueOf(currentTask.getDoses()));
     }
 
     private void initializeButtons() {

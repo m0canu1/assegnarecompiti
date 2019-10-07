@@ -131,10 +131,9 @@ public class Model {
     public void putTasksInOrder() {
         System.out.println("Sorting the tasks based on start time...");
         FXCollections.sort(currentEvent.getTaskObservableList(), taskComparator);
-
     }
 
-    public void bindTimeToTask(String sTime, String eTime, String estTime, String doses, String preparedDoses) {
+    public void bindTimeToTask(String sTime, String eTime, String estTime, int doses, int preparedDoses) {
         getCurrentEvent().getCurrentTask().setStartTime(sTime);
         getCurrentEvent().getCurrentTask().setEndTime(eTime);
         getCurrentEvent().getCurrentTask().setEstimatedTime(estTime);

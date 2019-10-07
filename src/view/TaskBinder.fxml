@@ -11,33 +11,35 @@
         <URL value="@design.css" />
     </stylesheets>
 
-    <Label text="TASK BINDER" styleClass="header-section"></Label>
-    <Label text="Select a cook" styleClass="description-section"></Label>
-    <Label styleClass="separator"></Label>
+    <Label text="TASK BINDER" styleClass="header-section"/>
+    <Label text="Select a cook" styleClass="description-section"/>
+    <Label styleClass="separator"/>
     <HBox alignment="CENTER">
-        <Label styleClass="hsep"></Label>
-        <ListView prefWidth="500" fx:id="cookListView" styleClass="list-section"></ListView>
+        <Label styleClass="hsep"/>
+        <ListView prefWidth="500" fx:id="cookListView" styleClass="list-section"/>
         <VBox alignment="CENTER">
             <Label>Select start of shift: </Label>
-            <ChoiceBox fx:id="startShiftHour"></ChoiceBox>
+            <ChoiceBox fx:id="startShiftHour"/>
             <Label>Select end of shift: </Label>
-            <ChoiceBox fx:id="endShiftHour"></ChoiceBox>
+            <ChoiceBox fx:id="endShiftHour"/>
             <Label>Select estimated time for task: </Label>
-            <ChoiceBox fx:id="estimatedTime"></ChoiceBox>
+            <ChoiceBox fx:id="estimatedTime"/>
             <Label>Number of doses: </Label>
-            <ChoiceBox fx:id="doses"></ChoiceBox>
+            <ChoiceBox fx:id="doses"/>
             <Label>Prepared doses:</Label>
-            <ChoiceBox fx:id="prepDoses"></ChoiceBox>
+            <ChoiceBox fx:id="prepDoses"/>
         </VBox>
-        <Label styleClass="hsep"></Label>
+        <Label styleClass="hsep"/>
     </HBox>
-    <Label styleClass="separator"></Label>
-    <HBox>
-        <Label styleClass="hsep"></Label>
-        <Button fx:id="cancel" text="CANCEL"></Button>
-        <Label styleClass="hsep"></Label>
-        <Button fx:id="assignCook" text="ASSIGN TO TASK"></Button>
-        <Label styleClass="hsep"></Label>
+    <Label styleClass="separator"/>
+    <HBox alignment="CENTER">
+        <Label styleClass="hsep"/>
+        <Button fx:id="cancel" text="CANCEL"/>
+        <Label styleClass="hsep"/>
+        <Button fx:id="assignCook" text="ASSIGN TO TASK"/>
+        <Label styleClass="hsep"/>
     </HBox>
-    <Label styleClass="separator"></Label>
+    <Label styleClass="separator"/>
+    <Label fx:id="error" styleClass="error"/>
+    <Label styleClass="separator"/>
 </VBox>

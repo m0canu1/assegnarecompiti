@@ -11,22 +11,21 @@ public class Task {
     private int startTimeInt;
     private String endTime;
     private String estimatedTime;
-    private String doses;
-    private String preparedDoses;
+    private int doses;
+    private int preparedDoses;
 
     public Task(Recipe recipe) {
         this.recipe = recipe;
     }
 
-    public Task(Recipe recipe, Cook cook, String startTime, String endTime, String estimatedTime, int doses, String alreadyPreparedDoses) {
+    public Task(Recipe recipe, Cook cook, String startTime, String endTime, String estimatedTime, int doses, int alreadyPreparedDoses) {
         this.recipe = recipe;
         if (cook != null) this.cook = cook;
         if (startTime != null) this.startTime = startTime;
         if (endTime != null) this.endTime = endTime;
         if (estimatedTime != null) this.estimatedTime = estimatedTime;
-        if (alreadyPreparedDoses != null) this.preparedDoses = alreadyPreparedDoses;
-                else this.preparedDoses = "0";
-        this.doses = String.valueOf(doses);
+        this.preparedDoses = alreadyPreparedDoses;
+        this.doses = doses;
     }
 
     public String getStartTime() {
@@ -43,11 +42,11 @@ public class Task {
         }
     }
 
-    public String getPreparedDoses() {
+    public int getPreparedDoses() {
         return preparedDoses;
     }
 
-    public void setPreparedDoses(String preparedDoses) {
+    public void setPreparedDoses(int preparedDoses) {
         this.preparedDoses = preparedDoses;
     }
 
@@ -94,11 +93,11 @@ public class Task {
         this.estimatedTime = time;
     }
 
-    public String getDoses() {
+    public int getDoses() {
         return doses;
     }
 
-    public void setDoses(String doses) {
+    public void setDoses(int doses) {
         this.doses = doses;
     }
 
@@ -108,8 +107,8 @@ public class Task {
 
     @Override
     public String toString() {
-        return "Task{" +
-                "recipe=" + recipe.getName() +
+        return "Task {" +
+                "recipe= " + recipe.getName() +
                 '}';
     }
 

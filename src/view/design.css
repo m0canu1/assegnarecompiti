@@ -62,3 +62,9 @@
     -fx-min-width: 10px;
     -fx-max-width: 20px;
 }
+
+.error {
+    -fx-background-color: red;
+    -fx-font-size: 30px;
+    -fx-text-fill: white;
+}
