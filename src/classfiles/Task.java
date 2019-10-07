@@ -5,7 +5,7 @@ import java.util.Objects;
 public class Task {
 
     private Recipe recipe;
-    private Cook cook; //TODO maybe more cooks?
+    private Cook cook;
     private String startTime;
     private String startTimeForInt;
     private int startTimeInt;

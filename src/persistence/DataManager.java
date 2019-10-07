@@ -250,10 +250,8 @@ public class DataManager {
      * @param task il task da assegnare al cuoco
      */
     public void bindCookToTask(Cook cook, Task task) {
-//        System.out.println("\n");
         int tId = taskObjects.get(task);
         int cId = cookObjects.get(cook);
-//        System.out.println(tId);
         String sql = "UPDATE Tasks SET cuoco = ? where id = ?";
         PreparedStatement pstmt = null;
 
@@ -334,10 +332,8 @@ public class DataManager {
     public void bindTimeToTask(Task task) {
         int tId = taskObjects.get(task);
         String sTime = task.getStartTime();
-//            System.out.println("TIME " + sTime);
         String eTime = task.getEndTime();
         String estTime = task.getEstimatedTime();
-//        int doses = Integer.parseInt(task.getDoses());
         int doses = task.getDoses();
         int alreadyPreparedDoses = Integer.valueOf(task.getPreparedDoses());
 
