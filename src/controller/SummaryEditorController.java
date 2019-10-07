@@ -84,7 +84,12 @@ public class SummaryEditorController implements Initializable {
         });
         viewTask.setOnAction((ActionEvent e) -> {
             tempTask = Model.getModel().getCurrentEvent().getCurrentTask();
-            taskWindow(tempTask);
+            if(tempTask != null){
+                taskWindow(tempTask);
+            }else{
+                System.out.println("Select a task!");
+            }
+
         });
     }
 

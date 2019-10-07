@@ -11,7 +11,8 @@ public class Task {
     private int startTimeInt;
     private String endTime;
     private String estimatedTime;
-    private String doses; //TODO cambiare in INT
+    private String doses;
+    private String preparedDoses;
 
     public Task(Recipe recipe) {
         this.recipe = recipe;
@@ -23,6 +24,7 @@ public class Task {
         if (startTime != null) this.startTime = startTime;
         if (endTime != null) this.endTime = endTime;
         if (estimatedTime != null) this.estimatedTime = estimatedTime;
+        this.preparedDoses = "0";
         this.doses = String.valueOf(doses);
     }
 
@@ -38,6 +40,14 @@ public class Task {
         } else {
             return 0;
         }
+    }
+
+    public String getPreparedDoses() {
+        return preparedDoses;
+    }
+
+    public void setPreparedDoses(String preparedDoses) {
+        this.preparedDoses = preparedDoses;
     }
 
     public void setStartTime(String startTime) {
