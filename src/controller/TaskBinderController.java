@@ -87,9 +87,9 @@ public class TaskBinderController implements Initializable {
             String start = startShiftHour.getValue();
             String end = endShiftHour.getValue();
             String estTime = estimatedTime.getValue();
-            if (estTime == null) estTime = "";
+            if (estTime == null) estTime = "0";
             String nof_doses = doses.getValue();
-            if (nof_doses == null) nof_doses = "";
+            if (nof_doses == null) nof_doses = "0";
             if (Model.getModel().getCurrentEvent().getCurrentTask() != null) {
                 if (tempCook != null) {
                     Model.getModel().getCurrentEvent().getCurrentTask().setCook(tempCook);
