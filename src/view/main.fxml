@@ -24,6 +24,7 @@
     <Label styleClass="separator"></Label>
     <HBox alignment="CENTER">
         <Button fx:id="openSummary" text="Open Summary" styleClass="button"/>
+        <Label styleClass="hsep"></Label>
         <Button fx:id="closeEverything" text="Exit" styleClass="button"/>
     </HBox>
 

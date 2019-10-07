@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import java.net.URL?>
@@ -30,6 +26,8 @@
             <ChoiceBox fx:id="estimatedTime"></ChoiceBox>
             <Label>Number of doses: </Label>
             <ChoiceBox fx:id="doses"></ChoiceBox>
+            <Label>Prepared doses:</Label>
+            <ChoiceBox fx:id="prepDoses"></ChoiceBox>
         </VBox>
         <Label styleClass="hsep"></Label>
     </HBox>
