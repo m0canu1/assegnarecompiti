@@ -11,28 +11,28 @@
         <URL value="@design.css" />
     </stylesheets>
 
-    <Label text="SUMMARY" styleClass="header-section"></Label>
-    <Label text="List of current Tasks" styleClass="description-section"></Label>
-    <Label styleClass="separator"></Label>
+    <Label fx:id="title" text="SUMMARY" styleClass="header-section"/>
+    <Label text="List of current Tasks" styleClass="description-section"/>
+    <Label styleClass="separator"/>
     <HBox alignment="CENTER">
-        <Label styleClass="hsep"></Label>
-        <ListView prefWidth="400" fx:id="taskListView" styleClass="list-section"></ListView>
-        <Label styleClass="separator"></Label>
-        <Label styleClass="hsep"></Label>
+        <Label styleClass="hsep"/>
+        <ListView prefWidth="800" fx:id="taskListView"/>
+        <Label styleClass="separator"/>
+        <Label styleClass="hsep"/>
     </HBox>
-    <Label styleClass="separator"></Label>
+    <Label styleClass="separator"/>
     <HBox alignment="CENTER">
-        <Button fx:id="backToMain" text="BACK" styleClass="button"></Button>
-        <Label styleClass="hsep"></Label>
-        <Button fx:id="addNewTask" text="ADD" styleClass="button"></Button>
-        <Label styleClass="hsep"></Label>
-        <Button fx:id="bindTask" text="BIND" styleClass="button"></Button>
-        <Label styleClass="hsep"></Label>
-        <Button fx:id="removeTask" text="REMOVE" styleClass="button"></Button>
-        <Label styleClass="hsep"></Label>
-        <Button fx:id="orderTasks" text="ORDER" styleClass="button"></Button>
-        <Label styleClass="hsep"></Label>
-        <Button fx:id="viewTask" text="VIEW" styleClass="button"></Button>
+        <Button fx:id="backToMain" text="BACK" styleClass="button"/>
+        <Label styleClass="hsep"/>
+        <Button fx:id="addNewTask" text="ADD" styleClass="button"/>
+        <Label styleClass="hsep"/>
+        <Button fx:id="bindTask" text="BIND" styleClass="button"/>
+        <Label styleClass="hsep"/>
+        <Button fx:id="removeTask" text="REMOVE" styleClass="button"/>
+        <Label styleClass="hsep"/>
+        <Button fx:id="orderTasks" text="ORDER" styleClass="button"/>
+        <Label styleClass="hsep"/>
+        <Button fx:id="viewTask" text="VIEW" styleClass="button"/>
     </HBox>
-    <Label styleClass="separator"></Label>
+    <Label styleClass="separator"/>
 </VBox>

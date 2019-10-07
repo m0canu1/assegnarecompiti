@@ -2,15 +2,18 @@ package controller;
 
 import classfiles.Task;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import model.Model;
 
@@ -20,6 +23,7 @@ import java.util.ResourceBundle;
 
 public class SummaryEditorController implements Initializable {
 
+    public Label title;
     private Stage stage;
     private Task tempTask;
 
@@ -31,6 +35,7 @@ public class SummaryEditorController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        title.setText("SUMMARY: " + Model.getModel().getCurrentEvent().getName());
         initializeButtons();
         initializeList();
     }
@@ -51,12 +56,11 @@ public class SummaryEditorController implements Initializable {
             }
         }));
 
-        taskListView.setMinWidth(500);
-
         taskListView.setOnKeyPressed(keyEvent -> {
             if (keyEvent.getCode() == KeyCode.DELETE) {
                 taskRemover(Model.getModel().getCurrentEvent().getCurrentTask());
-            } else if (keyEvent.getCode() == KeyCode.ENTER) {
+            }
+            if (keyEvent.getCode() == KeyCode.ENTER) {
                 if (!taskListView.getSelectionModel().isEmpty())
                     taskBinder();
                 else
@@ -86,9 +90,9 @@ public class SummaryEditorController implements Initializable {
         });
         viewTask.setOnAction((ActionEvent e) -> {
             tempTask = Model.getModel().getCurrentEvent().getCurrentTask();
-            if(tempTask != null){
+            if (tempTask != null) {
                 taskWindow(tempTask);
-            }else{
+            } else {
                 System.out.println("Select a task!");
             }
 
@@ -131,14 +135,14 @@ public class SummaryEditorController implements Initializable {
     }
 
     private void taskRemover(Task task) {
-        if(Model.getModel().getCurrentEvent().getCurrentTask() != null) {
+        if (Model.getModel().getCurrentEvent().getCurrentTask() != null) {
 //        model.Model.getModel().removeTaskFromView(task);
             Model.getModel().getCurrentEvent().deleteTask(task);
 //        taskListView.setItems(model.Model.getModel().getTaskObservableList());
             taskListView.setItems(Model.getModel().getCurrentEvent().getTaskListAsString());
             Model.getModel().removeTask(task);
 //        System.out.println("remove that task" + task.getName());
-        }else{
+        } else {
             System.out.println("Cannot remove inexistent task");
         }
         Model.getModel().getCurrentEvent().setCurrentTask(null);

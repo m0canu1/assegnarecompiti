@@ -7,27 +7,27 @@
 <?import java.net.URL?>
 
 <?import javafx.scene.layout.HBox?>
-<VBox prefHeight="800" prefWidth="400" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller"
+<VBox prefHeight="800" prefWidth="800" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller"
       alignment="CENTER">
     <stylesheets>
         <URL value="@design.css" />
     </stylesheets>
 
-    <Label text="HOME" styleClass="header-section"></Label>
-    <Label text="Select your event" styleClass="description-section"></Label>
-    <Label styleClass="separator"></Label>
+    <Label text="ASSIGN TASKS - Home" styleClass="header-section"/>
+    <Label text="Select your event" styleClass="description-section"/>
+    <Label styleClass="separator"/>
     <HBox alignment="CENTER">
-        <Label styleClass="hsep"></Label>
-        <ListView prefWidth="400" fx:id="eventListView" styleClass="list-section"/>
-        <Label styleClass="hsep"></Label>
+        <Label styleClass="hsep"/>
+        <ListView prefWidth="400" fx:id="eventListView"/>
+        <Label styleClass="hsep"/>
     </HBox>
-    <Label styleClass="separator"></Label>
+    <Label styleClass="separator"/>
     <HBox alignment="CENTER">
         <Button fx:id="openSummary" text="Open Summary" styleClass="button"/>
-        <Label styleClass="hsep"></Label>
+        <Label styleClass="hsep"/>
         <Button fx:id="closeEverything" text="Exit" styleClass="button"/>
     </HBox>
 
-    <Label styleClass="separator"></Label>
+    <Label styleClass="separator"/>
 
 </VBox>

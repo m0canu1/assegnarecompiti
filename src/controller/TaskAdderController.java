@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.input.KeyCode;
@@ -18,6 +19,7 @@ import java.util.ResourceBundle;
 
 public class TaskAdderController implements Initializable {
 
+    public Label header;
     private Stage stage;
 
     private Recipe tempRecipe;
@@ -33,6 +35,7 @@ public class TaskAdderController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        header.setText("Add Task to " + Model.getModel().getCurrentEvent().getName());
         initializeList();
         initializeButtons();
     }

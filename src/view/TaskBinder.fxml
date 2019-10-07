@@ -11,12 +11,12 @@
         <URL value="@design.css" />
     </stylesheets>
 
-    <Label text="TASK BINDER" styleClass="header-section"/>
+    <Label fx:id="header" text="TASK BINDER" styleClass="header-section"/>
     <Label text="Select a cook" styleClass="description-section"/>
     <Label styleClass="separator"/>
     <HBox alignment="CENTER">
         <Label styleClass="hsep"/>
-        <ListView prefWidth="500" fx:id="cookListView" styleClass="list-section"/>
+        <ListView prefWidth="500" fx:id="cookListView"/>
         <VBox alignment="CENTER">
             <Label>Select start of shift: </Label>
             <ChoiceBox fx:id="startShiftHour"/>
@@ -39,6 +39,7 @@
         <Button fx:id="assignCook" text="ASSIGN TO TASK"/>
         <Label styleClass="hsep"/>
     </HBox>
+    <Label styleClass="separator"/>
     <Label styleClass="separator"/>
     <Label fx:id="error"/>
     <Label styleClass="separator"/>

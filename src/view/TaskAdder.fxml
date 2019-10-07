@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import java.net.URL?>
-
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="controller.TaskAdderController"
@@ -15,21 +12,21 @@
     <stylesheets>
         <URL value="@design.css" />
     </stylesheets>
-    <Label text="TASK ADDER" styleClass="header-section"></Label>
-    <Label text="Select a task to add" styleClass="description-section"></Label>
-    <Label styleClass="separator"></Label>
+    <Label fx:id="header" text="TASK ADDER" styleClass="header-section"/>
+    <Label text="Select a task to add" styleClass="description-section"/>
+    <Label styleClass="separator"/>
     <HBox alignment="CENTER">
-        <Label styleClass="hsep"></Label>
-        <ListView prefWidth="400" fx:id="recipeListView" styleClass="list-section"></ListView>
-        <Label styleClass="hsep"></Label>
+        <Label styleClass="hsep"/>
+        <ListView prefWidth="400" fx:id="recipeListView"/>
+        <Label styleClass="hsep"/>
     </HBox>
-    <Label styleClass="separator"></Label>
+    <Label styleClass="separator"/>
     <HBox alignment="CENTER">
-        <Label styleClass="hsep"></Label>
-        <Button fx:id="cancel" text="CANCEL" styleClass="button"></Button>
-        <Label styleClass="hsep"></Label>
-        <Button fx:id="selectRecipe" text="ADD" styleClass="button"></Button>
-        <Label styleClass="hsep"></Label>
+        <Label styleClass="hsep"/>
+        <Button fx:id="cancel" text="CANCEL" styleClass="button"/>
+        <Label styleClass="hsep"/>
+        <Button fx:id="selectRecipe" text="ADD" styleClass="button"/>
+        <Label styleClass="hsep"/>
     </HBox>
-    <Label styleClass="separator"></Label>
+    <Label styleClass="separator"/>
 </VBox>

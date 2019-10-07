@@ -18,6 +18,7 @@ import java.util.ResourceBundle;
 public class TaskBinderController implements Initializable {
 
     public Label error;
+    public Label header;
     private Stage stage;
 
     private final List<String> shiftHours = Arrays.asList(
@@ -49,6 +50,7 @@ public class TaskBinderController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        header.setText("TASK BINDER: " + Model.getModel().getCurrentEvent().getCurrentTask().getName());
         error.setVisible(false);
         startShiftHour.getItems().addAll(shiftHours);
         startShiftHour.setValue(Model.getModel().getCurrentEvent().getCurrentTask().getStartTime());
