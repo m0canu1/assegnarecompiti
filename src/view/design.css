@@ -85,6 +85,10 @@
     -fx-font-size: 30px;
     -fx-text-fill: black;
 }
+#info {
+     -fx-font-size: 10px;
+     -fx-text-fill: black;
+ }
 
 
 .taskViewData {

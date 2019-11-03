@@ -19,6 +19,7 @@ public class TaskBinderController implements Initializable {
 
     public Label error;
     public Label header;
+    public Label info;
     private Stage stage;
 
     private final List<String> shiftHours = Arrays.asList(
@@ -95,6 +96,7 @@ public class TaskBinderController implements Initializable {
 
     private void assignCook() {
         error.setVisible(false);
+        info.setVisible(false);
         if (((endShiftHour.getValue() != null && startShiftHour.getValue() != null) && endShiftHour.getValue().compareTo(startShiftHour.getValue()) > 0)) {
             Cook tempCook = Model.getModel().getCurrentCook();
             String start = startShiftHour.getValue();
@@ -103,10 +105,16 @@ public class TaskBinderController implements Initializable {
             int dosesPrepared = prepDoses.getValue();
             if (estTime == null) estTime = "0";
             int nof_doses = doses.getValue();
-            if ((dosesPrepared > nof_doses)) {
-                error.setText("Errore! Controlla le dosi.");
+            if (!tempCook.isCookAvailable(start, end)) {
+                error.setText("Error! Cook not available.");
                 error.setVisible(true);
-                System.out.println("Prepared doses maggiori delle dosi da preparare!");
+                info.setText(Model.getModel().getCurrentCook().showAvailability());
+                info.setVisible(true);
+            }
+            else if ((dosesPrepared > nof_doses)) {
+                error.setText("Error! Check the doses.");
+                error.setVisible(true);
+                System.out.println("Prepared doses greater than doses to be prepared!");
             } else {
                 if (Model.getModel().getCurrentEvent().getCurrentTask() != null) {
                     if (tempCook != null) {
@@ -118,13 +126,16 @@ public class TaskBinderController implements Initializable {
                 stage = (Stage) assignCook.getScene().getWindow();
                 stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
             }
-        } else {
-            error.setText("Errore! Controlla gli orari.");
+        }
+        else {
+            error.setText("Error! Check the shift hours.");
             error.setVisible(true);
-//            System.out.println("MARIA SALVADOR ORARI SBALLATI");
         }
 
-        Model.getModel().setCurrentCook(null);
+        //TODO rimosso perché causava NullPointerException dopo aver
+        // dato un orario in cui il cuoco non era disponibile e averlo corretto con l'orario giusto
+//        Model.getModel().setCurrentCook(null);
+
     }
 
     void setStage(Stage stage) {

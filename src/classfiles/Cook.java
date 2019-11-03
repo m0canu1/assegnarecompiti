@@ -13,11 +13,28 @@ public class Cook {
         availability.addAll(cs);
     }
 
-    public void showAvailability() {
-        System.out.println("\n\n" + this.name + "\nDisponibile:");
+    public String showAvailability() {
+        String ret = "\nAvailability:";
+//        System.out.println("\n\n" + this.name + "\nAvailability:");
         for (CookAvailability cs : availability) {
-            System.out.println(cs.toString());
+            ret = ret + "\n" + cs.toString();
+//            System.out.println(cs.toString());
         }
+        return ret;
+    }
+
+    public boolean isCookAvailable(String start, String end) {
+        boolean available = false;
+        for (CookAvailability ca : availability) {
+//            System.out.println(start + "e" + ca.getStartTime());
+//            System.out.println(start.compareTo(ca.getStartTime()));
+//            System.out.println(end + "e" + ca.getEndTime());
+//            System.out.println(end.compareTo(ca.getEndTime()));
+            if (!available && start.compareTo(ca.getStartTime()) >= 0 && end.compareTo(ca.getEndTime()) <= 0) {
+                available = true;
+            }
+        }
+        return available;
     }
 
     public Cook(String n) {

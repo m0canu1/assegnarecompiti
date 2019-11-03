@@ -35,6 +35,6 @@ public class CookAvailability {
 
     @Override
     public String toString() {
-        return day + " dalle " + startTime + " alle " + endTime;
+        return startTime + " -> " + endTime;
     }
 }

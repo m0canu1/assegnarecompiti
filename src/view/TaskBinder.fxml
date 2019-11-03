@@ -40,7 +40,6 @@
         <Label styleClass="hsep"/>
     </HBox>
     <Label styleClass="separator"/>
-    <Label styleClass="separator"/>
     <Label fx:id="error"/>
-    <Label styleClass="separator"/>
+    <Label fx:id="info"/>
 </VBox>
