@@ -42,7 +42,7 @@ public class Event {
     }
 
     public void deleteAllTasks() {
-        this.taskObservableList.removeAll();
+        this.taskObservableList.clear();
         System.out.println("Rimossi tutti i task!");
     }
 
@@ -63,8 +63,7 @@ public class Event {
                     }
                 }
             }
-        }
-
+        } else observableList.removeAll();
         return observableList;
     }
 }

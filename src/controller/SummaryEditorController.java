@@ -126,7 +126,7 @@ public class SummaryEditorController implements Initializable {
             Stage stage = new Stage();
             TaskBinderController taskBinderController = fxmlLoader.getController();
             taskBinderController.setStage(stage);
-            stage.setTitle("Task Binder per " + Model.getModel().getCurrentEvent().getCurrentTask().getName());
+            stage.setTitle("Task Binder for " + Model.getModel().getCurrentEvent().getCurrentTask().getName());
             stage.setScene(scene);
             stage.show();
             stage.setOnCloseRequest(windowEvent -> taskListView.setItems(Model.getModel().getCurrentEvent().getTaskListAsString()));
@@ -137,11 +137,10 @@ public class SummaryEditorController implements Initializable {
 
     /*Elimina tutti i task dell'evento corrente*/
     private void deleteAllTasks() {
-        if (Model.getModel().getCurrentEvent() != null) {
+        if (Model.getModel().getCurrentEvent().getTaskListAsString() != null) {
             Model.getModel().getCurrentEvent().deleteAllTasks();
             taskListView.setItems(Model.getModel().getCurrentEvent().getTaskListAsString());
             Model.getModel().deleteAllTasks(Model.getModel().getCurrentEvent());
-            //TODO PORCODIO NON SI AGGIORNA LA VIEW
         } else {
             System.out.println("Cannot remove. There are no tasks");
         }

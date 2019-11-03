@@ -117,7 +117,7 @@ public class Model {
         for (Cook c : dataManager.loadCooks()) {
             cookObservableList.add(c);
             c.addAvailability(dataManager.loadCookAvailability(c));
-            c.showAvailability();
+//            c.showAvailability();
         }
     }
 

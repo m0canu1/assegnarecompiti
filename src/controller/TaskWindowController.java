@@ -28,13 +28,13 @@ public class TaskWindowController implements Initializable {
         if (task != null) task.setText(currentTask.getName());
 
         if (currentTask.getCook() != null) cook.setText(currentTask.getCook().getName());
-        else cook.setText("Non specificato.");
+        else cook.setText("Not specified.");
         if (currentTask.getStartTime() != null) start.setText(currentTask.getStartTime());
-        else start.setText("Da specificare.");
+        else start.setText("Not specified.");
         if (currentTask.getEndTime() != null) end.setText(currentTask.getEndTime());
-        else end.setText("Da specificare.");
-        if (currentTask.getEstimatedTime() != null && (currentTask.getEstimatedTime().compareTo("0") == 0)) estTime.setText(currentTask.getEstimatedTime());
-        else estTime.setText("Non specificato.");
+        else end.setText("Not specified.");
+        if (currentTask.getEstimatedTime() != null && (currentTask.getEstimatedTime().compareTo("0") != 0)) estTime.setText(currentTask.getEstimatedTime());
+        else estTime.setText("Not specified.");
 
         doses.setText(String.valueOf(currentTask.getDoses() - currentTask.getPreparedDoses()));
     }
