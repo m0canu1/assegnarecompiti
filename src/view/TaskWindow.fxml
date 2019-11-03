@@ -11,24 +11,24 @@
     <stylesheets>
         <URL value="@design.css"/>
     </stylesheets>
-    <Label text="Compito: " styleClass="taskViewTitles"/>
+    <Label text="Task: " styleClass="taskViewTitles"/>
     <Label fx:id="task" styleClass="taskViewData"/>
     <Label styleClass="separator"/>
-    <Label text="Cuoco assegnato:" styleClass="taskViewTitles"/>
+    <Label text="Assigned cook:" styleClass="taskViewTitles"/>
     <Label fx:id="cook" styleClass="taskViewData"/>
     <Label styleClass="separator"/>
  <!--   <HBox alignment="CENTER"> -->
-    <Label text="Inizio: " styleClass="taskViewTitles"/>
+    <Label text="Start: " styleClass="taskViewTitles"/>
     <Label fx:id="start" styleClass="taskViewData"/>
  <!--       <Label styleClass="hsep"></Label> -->
-    <Label text="Fine:" styleClass="taskViewTitles"/>
+    <Label text="End:" styleClass="taskViewTitles"/>
     <Label fx:id="end" styleClass="taskViewData"/>
 <!--    </HBox> -->
     <Label styleClass="separator"/>
-    <Label text="Tempo stimato (in ore):" styleClass="taskViewTitles"/>
+    <Label text="Estimated timed (in hours):" styleClass="taskViewTitles"/>
     <Label fx:id="estTime" styleClass="taskViewData" alignment="CENTER"/>
     <Label styleClass="separator"/>
-    <Label text="Porzioni ancora da preparare:" styleClass="taskViewTitles"/>
+    <Label text="Portion still to be prepared:" styleClass="taskViewTitles"/>
     <Label fx:id="doses" styleClass="taskViewData" alignment="CENTER"/>
     <Label styleClass="separator"/>
     <Button fx:id="back" text="BACK"/>
