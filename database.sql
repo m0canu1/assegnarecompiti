@@ -1,8 +1,8 @@
--- MariaDB dump 10.17  Distrib 10.4.7-MariaDB, for Linux (x86_64)
+-- MariaDB dump 10.17  Distrib 10.4.8-MariaDB, for Linux (x86_64)
 --
 -- Host: 127.0.0.1    Database: catering
 -- ------------------------------------------------------
--- Server version	10.4.7-MariaDB
+-- Server version	10.4.8-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -216,7 +216,8 @@ CREATE TABLE `Tasks` (
   `doses` int(11) DEFAULT NULL,
   `start_time` time DEFAULT NULL,
   `end_time` time DEFAULT NULL,
-  `estimaedTime` time DEFAULT NULL,
+  `estimated_time` time DEFAULT NULL,
+  `already_prepared_doses` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `recipe_id` (`ricetta`),
   KEY `cook_id` (`cuoco`),
@@ -224,7 +225,7 @@ CREATE TABLE `Tasks` (
   CONSTRAINT `Tasks_Events_id_fk` FOREIGN KEY (`evento`) REFERENCES `Events` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `cook_id` FOREIGN KEY (`cuoco`) REFERENCES `Cooks` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `recipe_id` FOREIGN KEY (`ricetta`) REFERENCES `Recipes` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -233,7 +234,7 @@ CREATE TABLE `Tasks` (
 
 LOCK TABLES `Tasks` WRITE;
 /*!40000 ALTER TABLE `Tasks` DISABLE KEYS */;
-INSERT INTO `Tasks` VALUES (1,1,1,1,NULL,'08:00:00','10:00:00',NULL),(2,3,NULL,1,NULL,NULL,NULL,NULL),(3,4,2,1,NULL,'08:00:00','10:00:00',NULL),(4,5,NULL,2,NULL,NULL,NULL,NULL);
+INSERT INTO `Tasks` VALUES (25,6,1,1,0,'06:00:00','11:00:00','00:20:00',0),(26,9,1,2,40,'12:00:00','13:00:00','00:10:00',25),(27,1,1,1,50,'12:00:00','14:00:00','00:20:00',30),(29,3,NULL,1,NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `Tasks` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -284,6 +285,33 @@ LOCK TABLES `Users` WRITE;
 INSERT INTO `Users` VALUES (1,'Marco'),(2,'Tony'),(3,'Viola'),(4,'Anna'),(5,'Giovanni');
 /*!40000 ALTER TABLE `Users` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `cooks_availability`
+--
+
+DROP TABLE IF EXISTS `cooks_availability`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `cooks_availability` (
+  `cook_id` int(11) DEFAULT NULL,
+  `day` date DEFAULT NULL,
+  `start` time DEFAULT NULL,
+  `end` time DEFAULT NULL,
+  KEY `cooks_availability_Cooks_id_fk` (`cook_id`),
+  CONSTRAINT `cooks_availability_Cooks_id_fk` FOREIGN KEY (`cook_id`) REFERENCES `Cooks` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cooks_availability`
+--
+
+LOCK TABLES `cooks_availability` WRITE;
+/*!40000 ALTER TABLE `cooks_availability` DISABLE KEYS */;
+INSERT INTO `cooks_availability` VALUES (1,'2019-11-06','09:00:00','17:00:00'),(3,'2019-11-06','12:00:00','18:00:00'),(3,'2019-11-07','08:00:00','13:00:00');
+/*!40000 ALTER TABLE `cooks_availability` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -294,4 +322,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-03  0:36:14
+-- Dump completed on 2019-11-03 14:03:13
