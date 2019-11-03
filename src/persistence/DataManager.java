@@ -1,9 +1,6 @@
 package persistence;
 
-import classfiles.Cook;
-import classfiles.Event;
-import classfiles.Recipe;
-import classfiles.Task;
+import classfiles.*;
 
 import java.sql.*;
 import java.util.*;
@@ -31,7 +28,6 @@ public class DataManager {
 
     private Map<Cook, Integer> cookObjects;
     private Map<Integer, Cook> idToCookObject;
-
 
 
     public DataManager() {
@@ -136,6 +132,7 @@ public class DataManager {
                     ret.add(cook);
                     this.cookObjects.put(cook, id);
                     this.idToCookObject.put(id, cook);
+
                 }
             }
         } catch (SQLException e) {
@@ -146,6 +143,35 @@ public class DataManager {
                     st.close();
             } catch (SQLException e2) {
                 e2.printStackTrace();
+            }
+        }
+        return ret;
+    }
+
+    public List<CookAvailability> loadCookAvailability(Cook cook) {
+        Statement st = null;
+        String query = "SELECT day, DATE_FORMAT(start, \"%H:%i\"), DATE_FORMAT(end, \"%H:%i\") from Cooks join cooks_availability ca on Cooks.id = ca.cook_id where name=\'" + cook.getName() + "\'";
+        PreparedStatement preparedStatement;
+        List<CookAvailability> ret = new ArrayList<>();
+
+        try {
+            preparedStatement = connection.prepareStatement(query);
+            ResultSet rs = preparedStatement.executeQuery(query);
+            while (rs.next()) {
+                String day = rs.getString(1);
+                String start = rs.getString(2);
+                String end = rs.getString(3);
+
+                CookAvailability shift = new CookAvailability(day, start, end);
+                ret.add(shift);
+            }
+        } catch (SQLException exc) {
+            exc.printStackTrace();
+        } finally {
+            try {
+                if (st != null) st.close();
+            } catch (SQLException exc2) {
+                exc2.printStackTrace();
             }
         }
         return ret;
@@ -294,6 +320,7 @@ public class DataManager {
             }
         }
     }
+
     public void addTask(Task t, Event e){
         Cook tempC = t.getCook();
         Recipe tempR = t.getRecipe();

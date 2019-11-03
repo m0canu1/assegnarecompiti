@@ -111,7 +111,14 @@ public class Model {
             }
         }
 
-        cookObservableList.addAll(dataManager.loadCooks());
+//        cookObservableList.addAll(dataManager.loadCooks());
+
+        /*CARICA LA DISPONIBILITÀ DI OGNI CHEF e li aggiunge alla lista degli osservabili*/
+        for (Cook c : dataManager.loadCooks()) {
+            cookObservableList.add(c);
+            c.addAvailability(dataManager.loadCookAvailability(c));
+            c.showAvailability();
+        }
     }
 
     public void bindCookToTask(Cook tempCook) {
