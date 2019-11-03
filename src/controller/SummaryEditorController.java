@@ -29,7 +29,7 @@ public class SummaryEditorController implements Initializable {
     private ListView<String> taskListView;
 
     @FXML
-    private Button bindTask, removeTask, addNewTask, orderTasks, backToMain, viewTask;
+    private Button bindTask, removeTask, addNewTask, orderTasks, backToMain, viewTask, deleteAll;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -78,6 +78,9 @@ public class SummaryEditorController implements Initializable {
         });
         addNewTask.setOnAction((ActionEvent e) -> {
             taskAdder();
+        });
+        deleteAll.setOnAction((ActionEvent e) ->{
+            deleteAllTasks();
         });
         orderTasks.setOnAction((ActionEvent e) -> {
             Model.getModel().putTasksInOrder();
@@ -130,6 +133,19 @@ public class SummaryEditorController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    /*Elimina tutti i task dell'evento corrente*/
+    private void deleteAllTasks() {
+        if (Model.getModel().getCurrentEvent() != null) {
+            Model.getModel().getCurrentEvent().deleteAllTasks();
+            taskListView.setItems(Model.getModel().getCurrentEvent().getTaskListAsString());
+            Model.getModel().deleteAllTasks(Model.getModel().getCurrentEvent());
+            //TODO PORCODIO NON SI AGGIORNA LA VIEW
+        } else {
+            System.out.println("Cannot remove. There are no tasks");
+        }
+        Model.getModel().getCurrentEvent().setCurrentTask(null);
     }
 
     private void taskRemover(Task task) {

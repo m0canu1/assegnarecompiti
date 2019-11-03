@@ -33,6 +33,8 @@
         <Button fx:id="orderTasks" text="ORDER" styleClass="button"/>
         <Label styleClass="hsep"/>
         <Button fx:id="viewTask" text="VIEW" styleClass="button"/>
+        <Label styleClass="hsep"/>
+        <Button fx:id="deleteAll" text="DELETE ALL TASKS" styleClass="button"/>
     </HBox>
     <Label styleClass="separator"/>
 </VBox>

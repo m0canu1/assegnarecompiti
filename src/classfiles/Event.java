@@ -41,6 +41,11 @@ public class Event {
         this.taskObservableList.remove(task);
     }
 
+    public void deleteAllTasks() {
+        this.taskObservableList.removeAll();
+        System.out.println("Rimossi tutti i task!");
+    }
+
     public ObservableList<String> getTaskListAsString() {
         ObservableList<String> observableList = FXCollections.observableArrayList();
         if(taskObservableList != null) {

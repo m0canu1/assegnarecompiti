@@ -231,6 +231,27 @@ public class DataManager {
         return ret;
     }
 
+    public void deleteAllTasks(Event event) {
+        Statement st = null;
+//        System.out.println(eventObjects.get(event));
+        String query = "DELETE from Tasks where evento=\'" + eventObjects.get(event) + "\'";
+        PreparedStatement preparedStatement;
+
+        try {
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException exc) {
+            exc.printStackTrace();
+        } finally {
+            try {
+                if (st != null) st.close();
+            } catch (SQLException exc2) {
+                exc2.printStackTrace();
+            }
+        }
+    }
+
     /**
      * Carica tutte le ricette del database
      * @return List<Recipe>

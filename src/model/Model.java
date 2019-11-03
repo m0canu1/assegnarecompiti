@@ -130,6 +130,10 @@ public class Model {
         dataManager.removeTask(task);
     }
 
+    public void deleteAllTasks(Event event) {
+        dataManager.deleteAllTasks(event);
+    }
+
     public void addTaskToEvent(Task t){
         currentEvent.addTask(t);
         dataManager.addTask(t, currentEvent);
