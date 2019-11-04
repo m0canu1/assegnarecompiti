@@ -90,9 +90,7 @@ public class TaskBinderController implements Initializable {
     }
 
     private void initializeButtons() {
-        assignCook.setOnAction((ActionEvent e) -> {
-            assignCook();
-        });
+        assignCook.setOnAction((ActionEvent e) -> assignCook());
         cancel.setOnAction((ActionEvent e) -> {
             Model.getModel().setCurrentCook(null);
             stage.close();
@@ -117,8 +115,7 @@ public class TaskBinderController implements Initializable {
                 error.setVisible(true);
                 info.setText(tempCook.showAvailability());
                 info.setVisible(true);
-            }
-            else if ((dosesPrepared > nof_doses)) {
+            } else if ((dosesPrepared > nof_doses)) {
                 error.setText("Error! Check the doses.");
                 error.setVisible(true);
                 System.out.println("Prepared doses greater than doses to be prepared!");
@@ -133,16 +130,10 @@ public class TaskBinderController implements Initializable {
                 stage = (Stage) assignCook.getScene().getWindow();
                 stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
             }
-        }
-        else {
+        } else {
             error.setText("Error! Check the shift hours.");
             error.setVisible(true);
         }
-
-        //TODO rimosso perché causava NullPointerException dopo aver
-        // dato un orario in cui il cuoco non era disponibile e averlo corretto con l'orario giusto
-//        Model.getModel().setCurrentCook(null);
-
     }
 
     void setStage(Stage stage) {
