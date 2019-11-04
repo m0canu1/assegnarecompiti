@@ -64,6 +64,7 @@ public class TaskBinderController implements Initializable {
         estimatedTime.getItems().addAll(null, "00:05", "00:10", "00:15", "00:20", "00:25", "00:30", "00:45", "01:00", "01:15", "01:30", "01:45", "02:00");
         estimatedTime.setValue(Model.getModel().getCurrentEvent().getCurrentTask().getEstimatedTime());
         initializeList();
+        Model.getModel().setCurrentCook(null);
         initializeButtons();
     }
 
@@ -99,24 +100,23 @@ public class TaskBinderController implements Initializable {
     }
 
     private void assignCook() {
-        Model.getModel().setCurrentCook(null);
         error.setVisible(false);
         info.setVisible(false);
-        if (((endShiftHour.getValue() != null && startShiftHour.getValue() != null) && endShiftHour.getValue().compareTo(startShiftHour.getValue()) > 0)) {
-            Cook tempCook = Model.getModel().getCurrentCook();
-            String start = startShiftHour.getValue();
-            String end = endShiftHour.getValue();
-            String estTime = estimatedTime.getValue();
-            int dosesPrepared = prepDoses.getValue();
-            if (estTime == null) estTime = "0";
-            int nof_doses = doses.getValue();
-            if(tempCook != null) {
-                if (tempCook.isCookAvailable(start, end)) {
-                    error.setText("Error! Cook not available.");
-                    error.setVisible(true);
-                    info.setText(Model.getModel().getCurrentCook().showAvailability());
-                    info.setVisible(true);
-                }
+
+        Cook tempCook = Model.getModel().getCurrentCook();
+        String start = startShiftHour.getValue();
+        String end = endShiftHour.getValue();
+        String estTime = estimatedTime.getValue();
+        if (estTime == null) estTime = "0";
+        int dosesPrepared = prepDoses.getValue();
+        int nof_doses = doses.getValue();
+
+        if (((end != null && start != null) && end.compareTo(start) > 0)) {
+            if (tempCook != null && !tempCook.isCookAvailable(start, end)) {
+                error.setText("Error! Cook not available.");
+                error.setVisible(true);
+                info.setText(tempCook.showAvailability());
+                info.setVisible(true);
             }
             else if ((dosesPrepared > nof_doses)) {
                 error.setText("Error! Check the doses.");
@@ -141,6 +141,7 @@ public class TaskBinderController implements Initializable {
 
         //TODO rimosso perché causava NullPointerException dopo aver
         // dato un orario in cui il cuoco non era disponibile e averlo corretto con l'orario giusto
+//        Model.getModel().setCurrentCook(null);
 
     }
 
