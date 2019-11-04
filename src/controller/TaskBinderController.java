@@ -68,12 +68,16 @@ public class TaskBinderController implements Initializable {
     }
 
     private void initializeList() {
+        info.setVisible(false);
         cookListView.setItems(Model.getModel().getCookObservableList());
         cookListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         cookListView.getSelectionModel().selectedIndexProperty().addListener(((obsValue, oldValue, newValue) -> {
             int newIndex = (int) newValue;
             if (!cookListView.getSelectionModel().isEmpty()) {
                 Model.getModel().setCurrentCook(Model.getModel().getCurrentCookByIndex(newIndex));
+                info.setText(Model.getModel().getCurrentCook().showAvailability());
+                info.setVisible(true);
+                error.setVisible(false);
             }
         }));
 

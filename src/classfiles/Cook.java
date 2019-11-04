@@ -20,7 +20,11 @@ public class Cook {
             ret = ret + "\n" + cs.toString();
 //            System.out.println(cs.toString());
         }
-        return ret;
+
+        if(ret.compareTo("\nAvailability:") == 0)
+            return "Cook not available for this event.";
+        else
+            return ret;
     }
 
     public boolean isCookAvailable(String start, String end) {
