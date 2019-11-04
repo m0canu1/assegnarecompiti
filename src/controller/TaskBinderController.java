@@ -99,6 +99,7 @@ public class TaskBinderController implements Initializable {
     }
 
     private void assignCook() {
+        Model.getModel().setCurrentCook(null);
         error.setVisible(false);
         info.setVisible(false);
         if (((endShiftHour.getValue() != null && startShiftHour.getValue() != null) && endShiftHour.getValue().compareTo(startShiftHour.getValue()) > 0)) {
@@ -109,11 +110,13 @@ public class TaskBinderController implements Initializable {
             int dosesPrepared = prepDoses.getValue();
             if (estTime == null) estTime = "0";
             int nof_doses = doses.getValue();
-            if (!tempCook.isCookAvailable(start, end)) {
-                error.setText("Error! Cook not available.");
-                error.setVisible(true);
-                info.setText(Model.getModel().getCurrentCook().showAvailability());
-                info.setVisible(true);
+            if(tempCook != null) {
+                if (tempCook.isCookAvailable(start, end)) {
+                    error.setText("Error! Cook not available.");
+                    error.setVisible(true);
+                    info.setText(Model.getModel().getCurrentCook().showAvailability());
+                    info.setVisible(true);
+                }
             }
             else if ((dosesPrepared > nof_doses)) {
                 error.setText("Error! Check the doses.");
@@ -138,7 +141,6 @@ public class TaskBinderController implements Initializable {
 
         //TODO rimosso perché causava NullPointerException dopo aver
         // dato un orario in cui il cuoco non era disponibile e averlo corretto con l'orario giusto
-//        Model.getModel().setCurrentCook(null);
 
     }
 
